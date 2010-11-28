@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="favicon.ico" />
+<title>Ponto On-Line</title>
+
+<script language="JavaScript">
+function do_Relogio(){
+    momentoAtual = new Date()
+	var hora = momentoAtual.getHours()
+	if(hora<10) hora = "0"+hora;
+	var minuto = momentoAtual.getMinutes()
+	if(minuto<10) minuto = "0"+minuto;
+	var segundo = momentoAtual.getSeconds()
+	if(segundo<10) segundo = "0"+segundo;
+	horaImprimivel = hora + " : " + minuto + " : " + segundo
+    document.form_relogio.relogio.value = horaImprimivel
+    setTimeout("do_Relogio()",1000)
+}
+
+
+function do_Contador(){
+
+    momentoAtual = new Date();
+    momentoAtual2 = new Date(document.form_contador.milissegundos.value*1);
+	contMinutos = 0;
+	contHoras = 0;
+	
+	var segundo2 = momentoAtual.getSeconds() - momentoAtual2.getSeconds()
+	if(segundo2 < 0){
+		segundo2 = (momentoAtual.getSeconds() + 60) - momentoAtual2.getSeconds()
+		contMinutos = 1; 
+	}
+	if(segundo2<10) segundo2 = "0"+segundo2;
+	
+	var minuto2 = (momentoAtual.getMinutes()-contMinutos) - momentoAtual2.getMinutes()
+	if(minuto2 < 0){
+		minuto2 = (momentoAtual.getMinutes() + 60) - momentoAtual2.getMinutes()
+		contHoras = 1; 
+	}
+	if(minuto2<10) minuto2 = "0"+minuto2;
+	var hora2 = (momentoAtual.getHours()-contHoras) - momentoAtual2.getHours() 
+	if(hora2<10) hora2 = "0"+hora2;
+	
+	horaImprimivel2 = hora2 + " : " + minuto2 + " : " + segundo2
+	
+	if(document.form_contador.milissegundos.value != ""){
+		document.form_contador.contador.value = horaImprimivel2
+	}else{
+		document.form_contador.contador.value = "00:00:00"
+	}
+    setTimeout("do_Contador()",1000)
+}
+</script>
+
+</HEAD>
+<BODY onload="do_Relogio();do_Contador();">
+
+<img wicket:id="wallpaper" src="imagens/wallpapers/wallpaper07.jpg" class="bg" />
+
+<div id="menu_div">&nbsp;
+	<font color="000000">&nbsp;Sistema de Ponto On-Line&nbsp</font>
+	<font size="1" color="CC0000">0.9.0 beta&nbsp;&nbsp;</font>
+	<font size="1" color="000000">|&nbsp;&nbsp;MENU:</font>
+	<A class="menu" wicket:id="lkmnCadUsuario" href="http://127.0.0.1:8080/ponto/pages/lista_usuarios.jsp">&nbsp;Cadastro de Usuários </A>
+	<A class="menu" wicket:id="lkmnMeusDados" href="http://127.0.0.1:8080/ponto/pages/lista_usuarios.jsp">&nbsp;Meus Dados </A>
+	<A class="menu" wicket:id="lkmnRelPeriodo" href="http://127.0.0.1:8080/ponto/pages/relatorioPeriodo_.jsp">&nbsp;Relatorio do Periodo </A>
+	<A class="menu" wicket:id="lkmnRelDia" href="http://127.0.0.1:8080/ponto/pages/relatorioDia_.jsp">&nbsp;Relatorio do Dia </A>
+	<A class="menu" wicket:id="lkmnPonto" href="http://127.0.0.1:8080/ponto/pages/relatorioDia_.jsp">&nbsp;Efetuar o Ponto&nbsp;</A>
+	<A class="menu" wicket:id="lkmnSobre" href="">&nbsp;Sobre&nbsp;</A>
+</div>
+<div id="relogio_div">
+		<form name="form_relogio" style="margin:0px; padding:0px;">
+		<input type="text" name="relogio" size="09" readonly="true" style="color:#000000; border: 0px solid; font-size: 8pt;"/>
+		</form>
+</div>
+
+<div id="presentes_div">
+<table>
+	<tr>
+		<th>
+			Presentes
+		</th>
+	</tr>	
+	<TR wicket:id="listaPonto" >
+		<TD wicket:id="nome" >Tassio Virginio</TD>
+	</TR>
+</table>
+</div>
+
+<div id="contador_div">
+<table>
+	<tr>
+		<td>
+		<form wicket:id="form_contador" name="form_contador" style="margin:0px; padding:0px;">
+		<input type="text" name="contador" size="10" readonly="true" style="color:#000000; background-color: transparent !important; border: 0px solid; font-size: 8pt;"/>
+		<input type="hidden" wicket:id="milissegundos" name="milissegundos" value="0"/>
+		</form>
+		</td>
+	</tr>
+</table>
+</div>
+<div id="status_div">
+	<span class="labelusuario" wicket:id="labelusuario"></span>
+	<A class="menu" wicket:id="lkmnSair" href="http://127.0.0.1:8080/ponto/pages/sair.jsp">&nbsp;Sair&nbsp;</A>
+</div>
+
+<wicket:child/>
+</BODY>
+</HTML>

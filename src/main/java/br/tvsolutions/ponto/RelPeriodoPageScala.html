@@ -1,0 +1,27 @@
+<wicket:extend>
+<BR><BR><BR><BR><BR><BR><BR>
+<TABLE border="1" align="center" bgcolor="#FFFFFF">
+<TBODY>
+<TR>
+<TH>
+Relatório do Périodo
+</TH>
+</TR>
+<TR>
+	<TD style="text-align: left;">
+	<FORM wicket:id="form">
+			Usuario:
+			<SELECT wicket:id="listaUsuario" name="id">
+				<OPTION value="1">Tassio Virginio</OPTION>
+				<OPTION value="2">Awdryn</OPTION>
+				<OPTION value="11">Teste</OPTION>
+			</SELECT>
+			<BR>
+			Data Inicio:<INPUT wicket:id="dataPesquisaInicio" type="text" name="data_inicio" value=""><BR>
+			Data  Fim:<INPUT wicket:id="dataPesquisaFim" type="text" name="data_fim" value=""><BR>
+			<INPUT type="submit" value="Gerar">
+	</FORM>
+	</TD>
+</TR>
+</TBODY></TABLE>
+</wicket:extend>

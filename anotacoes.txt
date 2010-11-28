@@ -1,0 +1,9 @@
+Alerta para o Gtalk.
+Pagina de perda de sessão.
+Cadastro de Ponto (Criação por outro usuario).
+Mudar o Papel de parede pelo usuário.
+Usar como comunicador. (Receber e Mandar MSG por ele)(Entre os usuarios)
+Fazer a Pagina de minhas configurações.
+Bater o ponto pelo Gtalk. (só aceita quem tem a função ativa e o cadastro no sistema gmail).
+(help envia os comando existentes.)
+Colocar a função de Mascara no Sistema. (127.0.0.*)

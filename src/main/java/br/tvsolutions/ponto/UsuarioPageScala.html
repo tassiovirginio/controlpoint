@@ -1,0 +1,30 @@
+<wicket:extend>
+<BR><BR><BR><BR><BR><BR><BR>
+<TABLE border="1" align="center" bgcolor="#FFFFFF" wicket:id="container" >
+<TBODY><TR>
+	<TH>
+		Lista de Usuarios - <A class="escuro" wicket:id="linkNovoUsuario" href="http://127.0.0.1:8080/ponto/pages/usuario.jsp?id=0">Novo Usuario</A>
+	</TH>
+</TR>
+<TR>
+	<TD>
+	<span wicket:id="feedback"></span>
+	<FORM wicket:id="form">
+			Usuario:
+			<SELECT wicket:id="listaUsuario" name="id">
+				<OPTION value="1">Tassio Virginio</OPTION>
+				<OPTION value="2">Awdryn</OPTION>
+				<OPTION value="11">Teste</OPTION>
+			</SELECT>
+			<BR>
+			<center>
+			<INPUT type="submit" value="Selecionar">
+			</center>
+	</FORM>
+	
+	</TD>
+</TR>
+</TBODY></TABLE>
+
+<div wicket:id="usuarioPanel"></div>
+</wicket:extend>

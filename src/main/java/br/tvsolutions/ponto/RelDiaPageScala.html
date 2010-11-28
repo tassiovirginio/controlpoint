@@ -1,0 +1,30 @@
+<wicket:extend>
+<BR><BR><BR><BR><BR><BR><BR>
+<TABLE border="1" align="center" bgcolor="#FFFFFF">
+<TBODY>
+<TR>
+<TH>
+Relatório do Dia
+</TH>
+</TR>
+<TR>
+	<TD>
+	<FORM wicket:id="form" >
+			<SELECT wicket:id="listaUsuario" name="id">
+				<OPTION value="1">Tassio Virginio</OPTION>
+				<OPTION value="2">Awdryn</OPTION>
+				<OPTION value="11">Teste</OPTION>
+			</SELECT>
+			Data:<INPUT wicket:id="dataPesquisa" type="text" name="data" value=""><BR>
+			<INPUT type="submit" value="Gerar">
+	</FORM>
+	</TD>
+</TR>
+</TBODY>
+</TABLE>
+<br>
+<div wicket:id="containerPanel"></div>
+</wicket:extend>	
+
+
+

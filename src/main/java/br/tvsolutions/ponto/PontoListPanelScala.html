@@ -1,0 +1,33 @@
+<wicket:panel>
+<div wicket:id="modalEditPonto"></div>
+	<TABLE border="1" align="center" bgcolor="#FFFFFF">
+	<TR>
+		<TH>Data/Hora Entra</TH>
+		<TH>Data/Hora Saida</TH>
+		<TH>Total</TH>
+		<TH>
+		<form wicket:id="formAdd" action="" method="post">
+			<INPUT wicket:id="btAdd" type="submit" value="+"/>
+		</form>
+		</TH>
+	</TR>
+	<TR wicket:id="listaPonto" >
+		<TD><a wicket:id="dataInicio"><span wicket:id="label">n</span></a></TD>
+		<TD><a wicket:id="dataFim"><span wicket:id="label">n</span></a></TD>	
+		<TD wicket:id="total" >00:00:03</TD>
+		<TD><a wicket:id="del"><span wicket:id="label">n</span></a></TD>
+	</TR>
+	<TR>
+		<TH colspan="2">TOTAL.</TH>
+		<TH wicket:id="periodTotal">00:00:03</TH>
+	</TR>
+	<TR>
+	<TD wicket:id="container" colspan="3" align="center"><BR>
+	<FORM wicket:id="formEntrada" action="" method="post">
+		<INPUT wicket:id="btEntrada" type="submit" value="Bater Entrada"/>
+		<INPUT wicket:id="btSaida" type="submit" value="Bater Saida"/>
+	</FORM>
+	</TD>
+	</TR>
+    </TABLE>
+</wicket:panel>

@@ -1,0 +1,60 @@
+<wicket:panel>
+<br>
+<TABLE border="1" align="center" bgcolor="#FFFFFF">
+<TBODY><TR>
+	<TH colspan="2">
+		Cadastro de Usuario
+	</TH>
+</TR>
+<FORM wicket:id="form">
+<TR>
+<td colspan="2">
+	<span wicket:id="feedback"></span>
+</td>
+</TR>
+<TR>
+	<TD style="text-align: left;">
+			<INPUT type="hidden" name="id" value="1"/>
+			Nome:<BR><INPUT wicket:id="textFieldNome" type="text" name="nome" value="Tassio Virginio"/><BR>
+			Senha:<BR><INPUT wicket:id="textFieldSenha" type="password" name="senha" value="123"/><BR>
+			Login:<BR><INPUT wicket:id="textFieldLogin" type="text" name="login" value="tassio"/><BR>
+			Email:<BR><INPUT wicket:id="textFieldEmail" type="text" name="email" value="tassiovirginio@gmail.com"/><BR>
+	</TD>
+	<TD style="text-align: left;">
+			Hora Entrada:<div wicket:id="textFieldHoraEntrada" /><BR>
+			Hora Saida:<div wicket:id="textFieldHoraSaida" /><BR>
+			Hora Jornada:<div wicket:id="textFieldJornada" /><BR>
+	</TD>
+</TR>			
+<TR>
+	<TD colspan="2" style="text-align: left;">
+			Admin:<INPUT wicket:id="checkBoxAdmin" type="checkbox" />
+			Externo:<INPUT wicket:id="checkBoxExterno" type="checkbox" />
+			Acesso:<INPUT wicket:id="checkBoxAcesso" type="checkbox" />
+	</TD>
+</TR>	
+<TR>
+	<TD colspan="2" style="text-align: left;">
+	Wallpaper:
+			<SELECT wicket:id="listaWallpaper" name="id">
+				<OPTION value="1">Tassio Virginio</OPTION>
+				<OPTION value="2">Awdryn</OPTION>
+				<OPTION value="11">Teste</OPTION>
+			</SELECT>		
+	</TD>
+</TR>	
+<TR>
+	<TD colspan="2" style="text-align: left;">
+			IP´s: <textarea rows="3" cols="60" wicket:id="textFieldIPs"></textarea>
+	</TD>
+</TR>			
+<TR>
+	<TD style="text-align: left;">
+			<INPUT type="submit" value="Salvar"/>
+			
+	</TD>
+</TR>
+</FORM>
+</TBODY>
+</TABLE>
+</wicket:panel>

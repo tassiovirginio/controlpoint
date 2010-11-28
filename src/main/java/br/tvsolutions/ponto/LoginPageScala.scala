@@ -1,0 +1,62 @@
+package br.tvsolutions.ponto
+
+import org.apache.wicket.markup.html.WebPage
+import org.apache.wicket.markup.html.form.Form
+import org.apache.wicket.markup.html.form.PasswordTextField
+import org.apache.wicket.markup.html.form.TextField
+import org.apache.wicket.markup.html.panel.FeedbackPanel
+import org.apache.wicket.model.PropertyModel
+import org.apache.wicket.request.ClientInfo
+import org.apache.wicket.spring.injection.annot.SpringBean
+import org.apache.wicket.protocol.http.request.WebClientInfo
+
+import br.tvsolutions.ponto.entities.Usuario
+import br.tvsolutions.ponto.mediators.TUsuarioMediatorScala
+import javax.annotation.Resource
+
+class LoginPageScala extends WebPage {
+
+  val serialVersionUID = 1L;
+
+  @SpringBean
+  var usuarioMediatorScala: TUsuarioMediatorScala = _
+
+  var info2: WebClientInfo = _
+
+  getSession().clear()
+  info2 = getSession.getClientInfo.asInstanceOf[WebClientInfo]
+  var usuario = new Usuario()
+  var form = new Form[Usuario]("form") {
+    val serialVersionUID = 1L
+    override protected def onSubmit() {
+      var usuarioLogado = usuarioMediatorScala.fazerLogin(usuario)
+      if (usuarioLogado != null) {
+        var teste = info2.getProperties().getRemoteAddress()
+        var teste2 = teste.replace("."," ").split(" ")
+        teste = teste2(0) + "." + teste2(1) + "." + teste2(2) + "."
+        if (usuarioLogado.getIps().contains(teste)) {
+          setResponsePage(new PontoPageScala(usuarioLogado,true))
+        } else {
+          info("Você não tem acesso desse ip!")
+        }
+      } else {
+        info("Login Incorretor!")
+      }
+    }
+  }
+
+  var login = new TextField[String]("login",
+    new PropertyModel[String](usuario, "login"))
+  login.setRequired(true)
+  form.add(login)
+
+  var senha = new PasswordTextField("senha",
+    new PropertyModel[String](usuario, "senha"))
+  form.add(senha)
+
+  var feedbackPanel = new FeedbackPanel("feedback")
+  form.add(feedbackPanel)
+
+  this.add(form)
+
+}
