@@ -11,7 +11,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean
 import java.util.List
 
 import br.tvsolutions.ponto.entities.Usuario
-import br.tvsolutions.ponto.mediators.UsuarioMediator
+import br.tvsolutions.ponto.mediators.UsuarioMediatorScala
 
 class UsuarioPageScala(usuario:Usuario, direto:Boolean) extends PontoBasePageScala(usuario){
 	val serialVersionUID:Long = 1L;
