@@ -1,4 +1,5 @@
 package br.tvsolutions.ponto.mediators
+
 import br.tvsolutions.ponto.daos.{DaoUsuarioScala, DaoPontoScala}
 import br.tvsolutions.ponto.entities.{Usuario, Ponto};
 

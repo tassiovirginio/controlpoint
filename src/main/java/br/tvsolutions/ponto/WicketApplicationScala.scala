@@ -13,7 +13,7 @@ class WicketApplicationScala extends WebApplication{
 	@Autowired
 	@BeanProperty 
 	var usuarioMediatorScala:TUsuarioMediatorScala = _ 
-	
+
 	@Autowired
 	@BeanProperty
 	var pontoMediatorScala:TPontoMediatorScala = _ 
