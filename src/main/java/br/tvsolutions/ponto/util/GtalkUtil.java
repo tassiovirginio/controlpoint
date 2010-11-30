@@ -65,7 +65,7 @@
 //		try {
 //			System.out.println("Conectando ao Gtalk...");
 //			connection.connect();
-//			connection.login("pontoonline17Team@gmail.com", "512289573");
+//			connection.login("email@gmail.com", "senha");
 //			Presence presence = new Presence(Presence.Type.available);
 //			connection.sendPacket(presence);
 //			roster = connection.getRoster();
