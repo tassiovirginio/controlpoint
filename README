@@ -2,15 +2,18 @@ README
 
 Sistema de Ponto 0.9 Beta
 
-Sistema de ponto desenvolvido para facilitar o controle de horas para qualquer tipo de grupo de usuarios.
+Sistema de ponto para facilitar o controle de horas para qualquer tipo de grupo de usuarios.
+Desenvolvido com a linguagem Scala e os frameworks Wicket, Spring e Hibernate.
 
 Principais funções:
  - Controle de Acesso por login e IP.
  - Controle de Entrada e Saida.
  - Dois tipos de Ponto (Usuario Externo e Interno).
- - Usuarios Presentes (Trabalhando).
+ - Lista de usuários Presentes (Trabalhando).
  - Ponto pelo Gtalk (Inicio da implementação).
- - Relatorios pelo dia e periodo.
+ - Relatórios pelo dia e período.
+ - Exportação dos relatorio para xls. (Em melhoramento)
+ 
 
  
  Instalação:
