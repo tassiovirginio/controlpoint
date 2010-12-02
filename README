@@ -4,6 +4,7 @@ Sistema de Ponto 0.9 Beta
 
 Sistema de ponto para facilitar o controle de horas para qualquer tipo de grupo de usuarios.
 Desenvolvido com a linguagem Scala e os frameworks Wicket, Spring e Hibernate.
+A interface é em HTML/HTML5 e CSS2/CSS3.
 
 Principais funções:
  - Controle de Acesso por login e IP.
