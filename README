@@ -1,0 +1,21 @@
+README
+
+Sistema de Ponto 0.9 Beta
+
+Sistema de ponto desenvolvido para facilitar o controle de horas para qualquer tipo de grupo de usuarios.
+
+Principais funções:
+ - Controle de Acesso por login e IP.
+ - Controle de Entrada e Saida.
+ - Dois tipos de Ponto (Usuario Externo e Interno).
+ - Usuarios Presentes (Trabalhando).
+ - Ponto pelo Gtalk (Inicio da implementação).
+ - Relatorios pelo dia e periodo.
+
+ 
+ Instalação:
+  - Pré-requisitos: Java, Maven, Git
+  - Faça o Download pelo git: git clone git://github.com/tassiovirginio/s2whponto.git
+  - Execute o comando: mvn jetty:run
+  - Acesse no navegador: 127.0.0.1:8080/ponto
+  
