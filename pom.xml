@@ -300,7 +300,7 @@
     </repositories>
 	
 	<properties>
-		<wicket.version>1.4.14</wicket.version>
+		<wicket.version>1.4.17</wicket.version>
 		<jetty.version>6.1.4</jetty.version>
 	</properties>
 </project>
