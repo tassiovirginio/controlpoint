@@ -1,11 +1,11 @@
-//package br.tvsolutions.ponto.util;
+package br.tvsolutions.ponto.util;
 //import java.io.File;
 //import java.io.FileInputStream;
 //import java.io.FileNotFoundException;
 //import java.io.IOException;
 //import java.util.Iterator;
 //import java.util.List;
-//
+
 //import org.apache.poi.hssf.usermodel.HSSFSheet;
 //import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 //import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -18,10 +18,10 @@
 //import br.tvsolutions.ponto.entities.Ponto;
 //import br.tvsolutions.ponto.entities.Usuario;
 //import br.tvsolutions.ponto.mediators.TPontoMediatorScala;
-//
+
 //@Component
-//public class GerarXLS {
-//	
+public class GerarXLS {
+	
 //	@Autowired
 //	private TPontoMediatorScala pontoMediatorScala;
 //	
@@ -250,5 +250,5 @@
 //	public void setUri(String uri) {
 //		this.uri = uri;
 //	}
-//
-//}
+
+}
