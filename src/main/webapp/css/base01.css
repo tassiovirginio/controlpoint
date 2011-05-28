@@ -164,6 +164,7 @@ div.wicket-mask-dark {
 	position: fixed;
 	background-color: #009900;
 	color: #ffffff;
+	background-image: -moz-linear-gradient(100% 100% 90deg, #333, #efefef);
 	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#efefef),to(#999999) );
 	-moz-box-shadow: 0 10px 30px hsla(0, 0%, 0%, .8);
 	-webkit-box-shadow: 0 10px 30px hsla(0, 0%, 0%, .8);
@@ -182,6 +183,7 @@ a:link,a:visited,a:active {
 	background: #00C000;
 	font-weight: bolder;
 	border: solid 1px #ffffff;
+	background-image: -moz-linear-gradient(100% 100% 90deg, #333, #efefef);
 	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#efefef),to(#999999) );
 }
 
@@ -189,6 +191,7 @@ a:hover {
 	color: #000000;
 	background: #FF9900;
 	font-weight: bolder;
+	background-image: -moz-linear-gradient(100% 100% 90deg, #333, #efefef);
 	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#999999),to(#efefef) );
 }
 
@@ -199,6 +202,7 @@ a.menu:link,a.menu:visited,a.menu:active {
 	background: #00CC00;
 	font-weight: bolder;
 	border: solid 1px #ffffff;
+	background-image: -moz-linear-gradient(100% 100% 90deg, #333, #efefef);
 	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#efefef),to(#999999) );
 }
 
@@ -207,6 +211,7 @@ a.menu:hover {
 	color: #000000;
 	background: #FF9900;
 	font-weight: bolder;
+	background-image: -moz-linear-gradient(100% 100% 90deg, #333, #efefef);
 	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#999999),to(#efefef) ); /* para o webkit*/
 }
 
@@ -270,6 +275,7 @@ td,tr {
 
 .yui-calcontainer.withtitle {
 	border-radius: 10px !important;
+	background-image: -moz-linear-gradient(100% 100% 90deg, #333, #efefef);
 	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#efefef),
 		to(#999999) ) !important;
 }
@@ -339,33 +345,6 @@ input:hover,textarea:hover,select:hover,option:hover {
 	background-color: #EED2EE;
 }
 
-input,textarea,select {
-	background-color: #EEEEEE;
-}
-
-.feedbackPanelERROR {
-	color: #FF0000;
-}
-
-
-
-
-
-
-nelERROR {
-	color: #FF0000;
-}
-
-
-
-
-
-
-FFF;
-}
-
-: 1px solid black
-}
 
 input,textarea,select {
 	background-color: #EEEEEE;
@@ -373,15 +352,5 @@ input,textarea,select {
 
 .feedbackPanelERROR {
 	color: #FF0000;
-	*background: #FFFFFF;
-}
-color: #FF0000;
-	*background: #FFFFFF;
-}
-;
-	*background: #FFFFFF;
-}
-
-;
 	*background: #FFFFFF;
 }
