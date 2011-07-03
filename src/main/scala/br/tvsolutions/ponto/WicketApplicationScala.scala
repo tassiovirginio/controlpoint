@@ -7,16 +7,14 @@ import br.tvsolutions.ponto.entities.Usuario
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector
-import reflect._
 
 @Component
 class WicketApplicationScala extends WebApplication{
+
 	@Autowired
-	@BeanProperty 
 	var usuarioMediatorScala:TUsuarioMediatorScala = _ 
 
 	@Autowired
-	@BeanProperty
 	var pontoMediatorScala:TPontoMediatorScala = _ 
 	
 	def getHomePage() = classOf[LoginPageScala]
@@ -27,16 +25,16 @@ class WicketApplicationScala extends WebApplication{
 		
 		//Cadastro do Administrador do Sistema para Testes/Desenvolvimento
 		var usuario = new Usuario
-		usuario.setAdm(true)
-		usuario.setEmail("admin@email.com")
-		usuario.setLogin("admin")
-		usuario.setSenha("admin")
-		usuario.setNome("Admin")
-		usuario.setIps("127.0.0.1")
-		usuario.setWallpaper("wallpaper02")
+		usuario.adm = true
+		usuario.email = "admin@email.com"
+		usuario.login = "admin"
+		usuario.senha = "admin"
+		usuario.nome = "Admin"
+		usuario.ips = "127.0.0.1"
+		usuario.wallpaper = "wallpaper02"
 		usuarioMediatorScala.salvarUsuario(usuario)
 		
-		getApplicationSettings().setPageExpiredErrorPage(classOf[LoginPageScala])
+		getApplicationSettings().setPageExpiredErrorPage(getHomePage())
 		
 	}
 

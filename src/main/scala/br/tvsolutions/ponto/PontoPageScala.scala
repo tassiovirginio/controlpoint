@@ -14,6 +14,7 @@ import br.tvsolutions.ponto.util.GerarXLS
 class PontoPageScala(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInicio:DateTime, dateBuscaFim:DateTime, editavel:java.lang.Boolean) extends PontoBasePageScala(usuarioLogado) {
   val serialVersionUID: java.lang.Long = 1L
 
+
 //  @SpringBean
 //  var gerarXLS: GerarXLS = _
 

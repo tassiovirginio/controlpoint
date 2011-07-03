@@ -1,6 +1,6 @@
 package br.tvsolutions.ponto
+
 import br.tvsolutions.ponto.entities.Usuario
-import br.tvsolutions.ponto.mediators.TUsuarioMediatorScala
 import java.util.{ Date, ArrayList }
 import org.apache.wicket.extensions.markup.html.form.DateTextField
 import org.apache.wicket.extensions.yui.calendar.DatePicker
@@ -8,16 +8,13 @@ import org.apache.wicket.markup.html.WebMarkupContainer
 import org.apache.wicket.markup.html.form.{ ListChoice, Form, ChoiceRenderer }
 import org.apache.wicket.model.PropertyModel
 import org.joda.time.DateTime
-import scala.reflect.BeanProperty
 
 class RelDiaPageScala(usuario: Usuario) extends PontoBasePageScala(usuario) {
 
   val serialVersionUID = 1L
 
-  @BeanProperty
   var dataPesquisa: Date = _
 
-  @BeanProperty
   var usuarioSelecionado: Usuario = _
 
   var container: WebMarkupContainer = _
@@ -41,7 +38,7 @@ class RelDiaPageScala(usuario: Usuario) extends PontoBasePageScala(usuario) {
 
   var listaUsuario = new ArrayList[Usuario]()
 
-  if (getUsuarioLogado().getAdm().asInstanceOf[Boolean]) {
+  if (getUsuarioLogado().adm.asInstanceOf[Boolean]) {
     listaUsuario.addAll(usuarioMediatorScala.listaUsuarios)
   } else {
     listaUsuario.add(getUsuarioLogado())

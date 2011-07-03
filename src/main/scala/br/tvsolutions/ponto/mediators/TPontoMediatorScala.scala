@@ -1,5 +1,4 @@
 package br.tvsolutions.ponto.mediators
-import br.tvsolutions.ponto.daos._
 import br.tvsolutions.ponto.entities.{Usuario, Ponto}
 import java.util.List
 import org.joda.time.DateTime
@@ -10,11 +9,7 @@ trait TPontoMediatorScala {
 	
 	def deletePonto(ponto:Ponto):Unit
 	
-	def sizePonto():Long 
-
-	def getDaoPonto():DaoPontoScala 
-
-	def setDaoUsuario(daoPonto:DaoPontoScala):Unit 
+	def sizePonto():Long
 	
 	def listaPontoUsuario(usuario:Usuario, dataDiaInicio:DateTime):List[Ponto] 
 	

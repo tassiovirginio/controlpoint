@@ -25,7 +25,7 @@ import br.tvsolutions.ponto.mediators.TUsuarioMediatorScala;
 import scala.collection.JavaConversions._
 import reflect._
 
-class PontoBasePageScala(usuario: Usuario) extends WebPage {
+class PontoBasePageScala(usuario:Usuario) extends WebPage {
 
   @SpringBean
   var usuarioMediatorScala: TUsuarioMediatorScala = _
@@ -48,10 +48,10 @@ class PontoBasePageScala(usuario: Usuario) extends WebPage {
     getRequestCycle().setRedirect(true);
   }
 
-  usuarioLogado = usuarioMediatorScala.getUsuarioForId(usuario.getId())
+  usuarioLogado = usuarioMediatorScala.getUsuarioForId(usuario.id)
   this.add(CSSPackageResource.getHeaderContribution("css/base01.css"))
   var img = new Image("wallpaper")
-  img.add(new SimpleAttributeModifier("src", "imagens/wallpapers/" + usuarioLogado.getWallpaper() + ".jpg"))
+  img.add(new SimpleAttributeModifier("src", "imagens/wallpapers/" + usuarioLogado.wallpaper + ".jpg"))
   add(img);
 
   if (usuarioLogado == null) {
@@ -63,65 +63,56 @@ class PontoBasePageScala(usuario: Usuario) extends WebPage {
   getSession().setLocale(LOCALE_BR)
   this.usuarioLogado = usuarioLogado
 
-  var labelusuario = new Label("labelusuario", "(  " + usuarioLogado.getNome() + "  )")
-  add(labelusuario);
+  add(new Label("labelusuario", "(  " + usuarioLogado.nome + "  )"))
 
-  var lkSair = new Link("lkmnSair") {
+  add(new Link("lkmnSair") {
     def onClick() {
       usuarioLogado = null;
       getSession().invalidate();
       getRequestCycle().setRedirect(true);
-      //				setResponsePage(new LoginPageScala());
     }
-  };
-  add(lkSair);
+  })
 
-  var lkCadUsuario = new Link("lkmnCadUsuario") {
+
+  add(new Link("lkmnCadUsuario") {
     def onClick() {
-      setResponsePage(new UsuarioPageScala(usuarioLogado, false));
+      setResponsePage(new UsuarioPageScala(usuarioLogado, false))
     }
-  };
+    setVisible(usuarioLogado.adm.asInstanceOf[Boolean])
+  })
 
-  lkCadUsuario.setVisible(usuarioLogado.getAdm().asInstanceOf[Boolean]);
-  add(lkCadUsuario);
-
-  var lkmnMeusDados = new Link("lkmnMeusDados") {
+  add(new Link("lkmnMeusDados") {
     def onClick() {
       setResponsePage(new UsuarioPageScala(usuarioLogado, true));
     }
-  };
-  add(lkmnMeusDados);
+  })
 
-  var lkRelPeriodo = new Link("lkmnRelPeriodo") {
+  add(new Link("lkmnRelPeriodo") {
     def onClick() {
       setResponsePage(new RelPeriodoPageScala(usuarioLogado));
     }
-  };
-  add(lkRelPeriodo);
+  })
 
-  var lkRelDia = new Link("lkmnRelDia") {
+  add(new Link("lkmnRelDia") {
     def onClick() {
       setResponsePage(new RelDiaPageScala(usuarioLogado));
     }
-  };
-  add(lkRelDia);
+  })
 
-  var lkPonto = new Link("lkmnPonto") {
+  add(new Link("lkmnPonto") {
     def onClick() {
       setResponsePage(new PontoPageScala(usuarioLogado, true));
     }
-  };
-  add(lkPonto);
+  })
 
-  var lkmnSobre = new Link("lkmnSobre") {
+  add(new Link("lkmnSobre") {
     def onClick() {
       setResponsePage(new SobrePageScala(usuarioLogado));
     }
-  };
-  add(lkmnSobre);
+  })
 
   var dataBusca = new DateTime();
-  var listaPonto: java.util.List[Ponto] = pontoMediatorScala.listaPontoUsuario(usuarioLogado, dataBusca);
+  var listaPonto = pontoMediatorScala.listaPontoUsuario(usuarioLogado, dataBusca);
 
   for (val ponto <- listaPonto) {
     if (ponto.getDataInicio() != null && ponto.getDataFim() == null) {
@@ -138,7 +129,7 @@ class PontoBasePageScala(usuario: Usuario) extends WebPage {
     val serialVersionUID = 1L;
     def populateItem(item: ListItem[Ponto]) {
       var ponto = item.getModelObject();
-      item.add(new Label("nome", ponto.getUsuario().getNome()));
+      item.add(new Label("nome", ponto.getUsuario().nome));
     }
   });
 

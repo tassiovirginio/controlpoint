@@ -38,7 +38,7 @@ class DaoPontoScala extends DaoAbstractScala[Ponto,java.lang.Long]  with Seriali
 		.list().asInstanceOf[jList[Ponto]]
 		
 		for (ponto <- lista) {
-			ponto.getUsuario().getNome()
+			ponto.getUsuario().nome
 		}
 
 		return lista

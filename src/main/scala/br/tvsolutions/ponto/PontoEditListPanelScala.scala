@@ -14,16 +14,14 @@ import br.tvsolutions.ponto.entities.Ponto;
 import br.tvsolutions.ponto.entities.Usuario;
 import br.tvsolutions.ponto.mediators.TPontoMediatorScala;
 
-class PontoEditListPanelScala(usuario: Usuario, dateBuscaInicio: DateTime, dateBuscaFim: DateTime) extends Panel("PontoEditListPanel") {
+class PontoEditListPanelScala(usuario:Usuario, dateBuscaInicio:DateTime, dateBuscaFim:DateTime) extends Panel("PontoEditListPanel") {
 
   val serialVersionUID = 1L;
 
   @SpringBean
   var pontoMediatorScala: TPontoMediatorScala = _
 
-  var listData: List[Ponto] = _
-
-  listData = pontoMediatorScala.listaPontoUsuario(usuario, dateBuscaInicio, dateBuscaFim);
+  var listData = pontoMediatorScala.listaPontoUsuario(usuario, dateBuscaInicio, dateBuscaFim);
   
   var formEntrada = new Form("formEntrada") {
     override protected def onSubmit() {};

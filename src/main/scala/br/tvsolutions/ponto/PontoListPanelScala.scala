@@ -1,28 +1,26 @@
 package br.tvsolutions.ponto
 
-import java.util.List;
+import org.apache.wicket.ajax.AjaxRequestTarget
+import org.apache.wicket.ajax.markup.html.AjaxLink
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow
+import org.apache.wicket.markup.html.WebMarkupContainer
+import org.apache.wicket.markup.html.basic.Label
+import org.apache.wicket.markup.html.form.Button
+import org.apache.wicket.markup.html.form.Form
+import org.apache.wicket.markup.html.list.ListItem
+import org.apache.wicket.markup.html.list.ListView
+import org.apache.wicket.markup.html.panel.Panel
+import org.apache.wicket.model.Model
+import org.apache.wicket.protocol.http.request.WebClientInfo
+import org.apache.wicket.spring.injection.annot.SpringBean
+import org.joda.time.DateTime
+import org.joda.time.Period
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
-import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Button;
-import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.Model;
-import org.apache.wicket.protocol.http.request.WebClientInfo;
-import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
-import org.joda.time.format.PeriodFormatter;
-import org.joda.time.format.PeriodFormatterBuilder;
+import org.joda.time.format.PeriodFormatterBuilder
 
-import br.tvsolutions.ponto.entities.Ponto;
-import br.tvsolutions.ponto.entities.Usuario;
-import br.tvsolutions.ponto.mediators.TPontoMediatorScala;
+import br.tvsolutions.ponto.entities.Ponto
+import br.tvsolutions.ponto.entities.Usuario
+import br.tvsolutions.ponto.mediators.TPontoMediatorScala
 
 import java.io.Serializable
 
@@ -32,27 +30,18 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 
 	@SpringBean
 	var pontoMediatorScala:TPontoMediatorScala =_
-	
-	var btAdd:Button =_
-	var btEntrada:Button =_
-	var btSaida:Button =_
+
 	var pontoParaFechar:Ponto =_
-	var periodTotal:Period =_
-	var lbPeriodTotal:Label =_
-	var container:WebMarkupContainer =_
-	var listData:List[Ponto] =_
-	var editarPontoWinModal:ModalWindow =_
-	
 
 	var infoWeb:WebClientInfo = getSession().getClientInfo().asInstanceOf[WebClientInfo]
-	periodTotal = new Period();
-	lbPeriodTotal = new Label("periodTotal");
+	var periodTotal = new Period();
+	var lbPeriodTotal = new Label("periodTotal");
 	lbPeriodTotal.setOutputMarkupId(true);
 	add(lbPeriodTotal);
 		
-	listData = pontoMediatorScala.listaPontoUsuario(usuarioSelecionado, dateBuscaInicio, dateBuscaFim);
+	var listData = pontoMediatorScala.listaPontoUsuario(usuarioSelecionado, dateBuscaInicio, dateBuscaFim);
 	
-	btAdd = new Button("btAdd") {
+	var btAdd = new Button("btAdd") {
 		val serialVersionUID:Long = 1L
 		override def onSubmit() {
 			var novoPonto = new Ponto()
@@ -66,8 +55,12 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 	var formAdd = new Form("formAdd")
 	formAdd.add(btAdd)
 	add(formAdd)
-	formAdd.setVisible(usuarioLogado.getAdm().asInstanceOf[Boolean])
-		
+	formAdd.setVisible(usuarioLogado.adm.asInstanceOf[Boolean])
+
+
+  var btSaida: Button = _
+  var btEntrada: Button = _
+
 	btEntrada = new Button("btEntrada") {
 		val serialVersionUID:Long = 1L
 		override def onSubmit() {
@@ -76,7 +69,7 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 			novoPonto.setUsuario(usuarioLogado)
 			novoPonto.setIpInicio(infoWeb.getProperties().getRemoteAddress())
 			pontoMediatorScala.salvarPonto(novoPonto)
-			btEntrada.setVisible(false)
+			this.setVisible(false)
 			btSaida.setVisible(true)
 			setResponsePage(new PontoPageScala(usuarioLogado,editavel))
 		}
@@ -90,7 +83,7 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 			pontoMediatorScala.salvarPonto(pontoParaFechar)
 			pontoParaFechar = null
 			btEntrada.setVisible(true)
-			btSaida.setVisible(false)
+			this.setVisible(false)
 			setResponsePage(new PontoPageScala(usuarioLogado,editavel))
 		}
 	};
@@ -108,14 +101,14 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 
 		def populateItem(item:ListItem[Ponto]) = {
 			var ponto = item.getModelObject()
-			item.add(new LinkDate("dataInicio", ponto, usuarioLogado.getAdm(),LinkDate.ENTRADA))
+			item.add(new LinkDate("dataInicio", ponto, usuarioLogado.adm,LinkDate.ENTRADA))
 			if (ponto.getDataFim() == null) {
 				btEntrada.setVisible(false)
 				btSaida.setVisible(true)
 				pontoParaFechar = ponto;
 				item.add(new LinkDate("dataFim", ponto, false,LinkDate.BRANCO))
 			} else {
-				item.add(new LinkDate("dataFim", ponto, usuarioLogado.getAdm(),LinkDate.SAIDA))
+				item.add(new LinkDate("dataFim", ponto, usuarioLogado.adm,LinkDate.SAIDA))
 			}
 			if (ponto.getDataFim() == null) {
 				item.add(new Label("total", ""))
@@ -127,14 +120,14 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 				item.add(new Label("total", period.toString(getFormatter())))
 			}
 			//Regra para quando chegar no tamanho maximo travar o ponto max 2 por dia se for ext)
-			if(usuarioLogado.getExterno().asInstanceOf[Boolean]){
+			if(usuarioLogado.externo.asInstanceOf[Boolean]){
 				if(dateBuscaFim == null && listData.size() > 1 && ponto.getDataFim() != null){
 					container.setVisible(false)
 				}else{
 					container.setVisible(editavel)
 				}
 			}
-			item.add(new LinkDelete("del", ponto, usuarioLogado.getAdm()))
+			item.add(new LinkDelete("del", ponto, usuarioLogado.adm))
 		}
 	});
 	
@@ -142,13 +135,13 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 	formEntrada.add(btEntrada)
 	formEntrada.add(btSaida)
 		
-	container = new WebMarkupContainer("container")
+	var container = new WebMarkupContainer("container")
 	container.add(formEntrada)
 	add(container)
 	
 	container.setVisible(editavel)
     
-    editarPontoWinModal = new ModalWindow("modalEditPonto")
+    var editarPontoWinModal = new ModalWindow("modalEditPonto")
     editarPontoWinModal.setTitle("Editar Ponto")
     editarPontoWinModal.setCookieName("modalEditPonto")
     editarPontoWinModal.setPageMapName("modalEditPonto")

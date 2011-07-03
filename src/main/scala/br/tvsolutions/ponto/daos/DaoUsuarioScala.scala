@@ -19,15 +19,15 @@ class DaoUsuarioScala extends DaoAbstractScala[Usuario, java.lang.Long] with Ser
     var usuarioReturn: Usuario = null
     
     var usuarioBusca = getCurrentSession().createCriteria(classOf[Usuario])
-      .add(Restrictions.eq("login", usuario.getLogin()))
+      .add(Restrictions.eq("login", usuario.login))
       .uniqueResult().asInstanceOf[Usuario]
 
-    if (usuarioBusca != null && usuarioBusca.getSenha().length() < 15) {
-      usuarioBusca.setSenha(DaoUsuarioScala.codificarSenha(usuarioBusca.getLogin().trim() + usuarioBusca.getSenha().trim()))
+    if (usuarioBusca != null && usuarioBusca.senha.length() < 15) {
+      usuarioBusca.senha = (DaoUsuarioScala.codificarSenha(usuarioBusca.login.trim() + usuarioBusca.senha.trim()))
       this.save(usuarioBusca)
     }
     
-    if (usuarioBusca != null && usuarioBusca.getSenha().trim().equals(DaoUsuarioScala.codificarSenha(usuario.getLogin().trim() + usuario.getSenha().trim()))) {
+    if (usuarioBusca != null && usuarioBusca.senha.trim().equals(DaoUsuarioScala.codificarSenha(usuario.login.trim() + usuario.senha.trim()))) {
       usuarioReturn = usuarioBusca
     }
     

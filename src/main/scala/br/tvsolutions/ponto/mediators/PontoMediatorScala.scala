@@ -24,10 +24,6 @@ class PontoMediatorScala extends TPontoMediatorScala {
 	def deletePonto(ponto:Ponto):Unit = daoPontoScala.delete(ponto)
 	
 	def sizePonto():Long = daoPontoScala.getTotalCount()
-
-	def getDaoPonto():DaoPontoScala = daoPontoScala
-
-	def setDaoUsuario(daoPonto:DaoPontoScala):Unit = {this.daoPontoScala = daoPonto}
 	
 	def listaPontoUsuario(usuario:Usuario, dataDiaInicio:DateTime):List[Ponto] = {
 		var ponto = new Ponto()

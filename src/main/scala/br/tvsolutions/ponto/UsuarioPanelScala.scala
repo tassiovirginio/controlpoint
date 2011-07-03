@@ -22,57 +22,37 @@ import br.tvsolutions.ponto.entities.Usuario;
 import br.tvsolutions.ponto.mediators.TUsuarioMediatorScala;
 import br.tvsolutions.ponto.util.DateTimeField24h;
 
-class UsuarioPanelScala(pagePai: Page, usuario: Usuario, direto: java.lang.Boolean) extends Panel("usuarioPanel") {
+class UsuarioPanelScala(pagePai:Page, usuario:Usuario, direto:java.lang.Boolean) extends Panel("usuarioPanel") {
 
   var serialVersionUID = 1L
-
-  var usuarioSelecionado: Usuario = _
 
   @SpringBean
   var usuarioMediatorScala: TUsuarioMediatorScala = _
 
-  var form: Form[Usuario] = _
-
-  var textFieldNome: RequiredTextField[String] = _
-  var textFieldSenha: PasswordTextField = _
-  var textFieldLogin: RequiredTextField[String] = _
-  var textFieldEmail: RequiredTextField[String] = _
-  var textFieldHoraEntrada: DateTimeField24h = _
-  var textFieldHoraSaida: DateTimeField24h = _
-  var textFieldJornada: DateTimeField24h = _
-  var textFieldIPs: TextArea[String] = _
-  var checkBoxAdmin: CheckBox = _
-  var checkBoxExterno: CheckBox = _
-  var checkBoxAcesso: CheckBox = _
-  var listChoice: ListChoice[String] = _
-
-  var dateHoraEntrada: Date = _
-  var dateHoraSaida: Date = _
-  var dateJornada: Date = _
-
   def this(pagePai: Page) = this(pagePai, new Usuario(), false)
 
-  usuarioSelecionado = usuario;
+  var usuarioSelecionado = usuario;
 
-  if (usuario.getHoraEntrada() == null) {
-    usuario.setHoraEntrada(new DateTime());
+  if (usuario.horaEntrada == null) {
+    usuario.horaEntrada = (new DateTime());
   }
-  if (usuario.getHoraSaida() == null) {
-    usuario.setHoraSaida(new DateTime());
+  if (usuario.horaSaida == null) {
+    usuario.horaSaida = (new DateTime());
   }
-  if (usuario.getJornada() == null) {
-    usuario.setJornada(new DateTime());
+  if (usuario.jornada == null) {
+    usuario.jornada = (new DateTime());
   }
 
-  dateHoraEntrada = usuario.getHoraEntrada().toDate();
-  dateHoraSaida = usuario.getHoraSaida().toDate();
-  dateJornada = usuario.getJornada().toDate();
 
-  form = new Form[Usuario]("form") {
+  var dateHoraEntrada = usuario.horaEntrada.toDate();
+  var dateHoraSaida = usuario.horaSaida.toDate();
+  var dateJornada = usuario.jornada.toDate();
+
+  var form = new Form[Usuario]("form") {
     override protected def onSubmit = {
-      usuarioSelecionado.setHoraEntrada(new DateTime(dateHoraEntrada));
-      usuarioSelecionado.setHoraSaida(new DateTime(dateHoraSaida));
-      usuarioSelecionado.setJornada(new DateTime(dateJornada));
+      usuarioSelecionado.horaEntrada = (new DateTime(dateHoraEntrada));
+      usuarioSelecionado.horaSaida = (new DateTime(dateHoraSaida));
+      usuarioSelecionado.jornada = (new DateTime(dateJornada));
       usuarioMediatorScala.salvarUsuario(usuarioSelecionado);
       info("Usuario Salvo com Sucesso !!");
       setResponsePage(new UsuarioPageScala(usuario, false || direto.asInstanceOf[Boolean]));
@@ -80,32 +60,32 @@ class UsuarioPanelScala(pagePai: Page, usuario: Usuario, direto: java.lang.Boole
   };
   add(form);
 
-  textFieldNome = new RequiredTextField("textFieldNome", new PropertyModel[String](usuarioSelecionado, "nome"));
-  textFieldSenha = new PasswordTextField("textFieldSenha", new PropertyModel[String](usuarioSelecionado, "senha"));
+  var textFieldNome = new RequiredTextField("textFieldNome", new PropertyModel[String](usuarioSelecionado, "nome"));
+  var textFieldSenha = new PasswordTextField("textFieldSenha", new PropertyModel[String](usuarioSelecionado, "senha"));
   textFieldSenha.setResetPassword(false);
-  textFieldLogin = new RequiredTextField("textFieldLogin", new PropertyModel[String](usuarioSelecionado, "login"));
-  textFieldEmail = new RequiredTextField("textFieldEmail", new PropertyModel[String](this.usuarioSelecionado, "email"));
+  var textFieldLogin = new RequiredTextField("textFieldLogin", new PropertyModel[String](usuarioSelecionado, "login"));
+  var textFieldEmail = new RequiredTextField("textFieldEmail", new PropertyModel[String](this.usuarioSelecionado, "email"));
 
-  textFieldHoraEntrada = new DateTimeField24h("textFieldHoraEntrada", new PropertyModel(this, "dateHoraEntrada"));
+  var textFieldHoraEntrada = new DateTimeField24h("textFieldHoraEntrada", new PropertyModel(this, "dateHoraEntrada"));
   textFieldHoraEntrada.get("date").add(new SimpleAttributeModifier("type", "hidden"));
 
-  textFieldHoraSaida = new DateTimeField24h("textFieldHoraSaida", new PropertyModel(this, "dateHoraSaida"));
+  var textFieldHoraSaida = new DateTimeField24h("textFieldHoraSaida", new PropertyModel(this, "dateHoraSaida"));
   textFieldHoraSaida.get("date").add(new SimpleAttributeModifier("type", "hidden"));
 
-  textFieldJornada = new DateTimeField24h("textFieldJornada", new PropertyModel(this, "dateJornada"));
+  var textFieldJornada = new DateTimeField24h("textFieldJornada", new PropertyModel(this, "dateJornada"));
   textFieldJornada.get("date").add(new SimpleAttributeModifier("type", "hidden"));
 
-  textFieldIPs = new TextArea("textFieldIPs", new PropertyModel(this.usuarioSelecionado, "ips"));
-  checkBoxAdmin = new CheckBox("checkBoxAdmin", new PropertyModel(this.usuarioSelecionado, "adm"));
-  checkBoxExterno = new CheckBox("checkBoxExterno", new PropertyModel(this.usuarioSelecionado, "externo"));
-  checkBoxAcesso = new CheckBox("checkBoxAcesso", new PropertyModel(this.usuarioSelecionado, "acesso"));
+  var textFieldIPs = new TextArea("textFieldIPs", new PropertyModel(this.usuarioSelecionado, "ips"));
+  var checkBoxAdmin = new CheckBox("checkBoxAdmin", new PropertyModel(this.usuarioSelecionado, "adm"));
+  var checkBoxExterno = new CheckBox("checkBoxExterno", new PropertyModel(this.usuarioSelecionado, "externo"));
+  var checkBoxAcesso = new CheckBox("checkBoxAcesso", new PropertyModel(this.usuarioSelecionado, "acesso"));
 
   var listaWallpaper = new ArrayList[String]();
   listaWallpaper.add("wallpaper01");
   listaWallpaper.add("wallpaper07");
   listaWallpaper.add("wallpaper02");
   listaWallpaper.add("wallpaper03");
-  listChoice = new ListChoice[String]("listaWallpaper", new PropertyModel[String](this.usuarioSelecionado, "wallpaper"), listaWallpaper, 1);
+  var listChoice = new ListChoice[String]("listaWallpaper", new PropertyModel[String](this.usuarioSelecionado, "wallpaper"), listaWallpaper, 1);
   listChoice.setRequired(true);
 
   //Se for para o proprio usuario alterar seus dados
@@ -155,23 +135,23 @@ class UsuarioPanelScala(pagePai: Page, usuario: Usuario, direto: java.lang.Boole
     checkBoxAcesso.setModel(new PropertyModel(usuarioSelecionado, "acesso"));
     listChoice.setModel(new PropertyModel(usuarioSelecionado, "wallpaper"));
 
-    if (usuarioSelecionado.getHoraEntrada() == null) {
-      usuarioSelecionado.setHoraEntrada(new DateTime());
+    if (usuarioSelecionado.horaEntrada == null) {
+      usuarioSelecionado.horaEntrada=(new DateTime())
     }
-    if (usuarioSelecionado.getHoraSaida() == null) {
-      usuarioSelecionado.setHoraSaida(new DateTime());
+    if (usuarioSelecionado.horaSaida == null) {
+      usuarioSelecionado.horaSaida=(new DateTime())
     }
-    if (usuarioSelecionado.getJornada() == null) {
-      usuarioSelecionado.setJornada(new DateTime());
+    if (usuarioSelecionado.jornada == null) {
+      usuarioSelecionado.jornada=(new DateTime())
     }
 
-    dateHoraEntrada = usuarioSelecionado.getHoraEntrada().toDate();
-    dateHoraSaida = usuarioSelecionado.getHoraSaida().toDate();
-    dateJornada = usuarioSelecionado.getJornada().toDate();
+    dateHoraEntrada = usuarioSelecionado.horaEntrada.toDate
+    dateHoraSaida = usuarioSelecionado.horaSaida.toDate
+    dateJornada = usuarioSelecionado.jornada.toDate
 
-    textFieldHoraEntrada.setModel(new PropertyModel(this, "dateHoraEntrada"));
-    textFieldHoraSaida.setModel(new PropertyModel(this, "dateHoraSaida"));
-    textFieldJornada.setModel(new PropertyModel(this, "dateJornada"));
+    textFieldHoraEntrada.setModel(new PropertyModel(this, "dateHoraEntrada"))
+    textFieldHoraSaida.setModel(new PropertyModel(this, "dateHoraSaida"))
+    textFieldJornada.setModel(new PropertyModel(this, "dateJornada"))
   }
 
 }

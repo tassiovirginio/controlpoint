@@ -19,27 +19,23 @@ import org.apache.wicket.markup.html.form._
 import java.util.Date;
 import java.util.Locale;
 
-class EditPontoPanelScala(id: String, ponto: Ponto, modal: ModalWindow, paginaOrigem: PontoBasePageScala) extends Panel(id) {
+class EditPontoPanelScala(id:String, ponto:Ponto, modal:ModalWindow, paginaOrigem:PontoBasePageScala) extends Panel(id) {
 
-  var form:Form[Usuario] = _
-  var textFieldHoraEntrada:DateTimeField24h = _
-  var textFieldHoraSaida:DateTimeField24h = _
+  var form = new Form[Usuario]("form");
 
-  var dateHoraEntrada:Date = _
   var dateHoraSaida:Date = _
+
   var timeEndNull:Boolean =_
 
   var container:WebMarkupContainer = _
-  
 
   @SpringBean
   var pontoMediatorScala: TPontoMediatorScala = _
 
-  this.dateHoraEntrada = ponto.getDataInicio().toDate();
+  var dateHoraEntrada = ponto.getDataInicio().toDate();
   if (ponto.getDataFim() != null)
     this.dateHoraSaida = ponto.getDataFim().toDate();
 
-  form = new Form[Usuario]("form");
   add(form);
   form.setOutputMarkupId(true);
 
@@ -63,14 +59,15 @@ class EditPontoPanelScala(id: String, ponto: Ponto, modal: ModalWindow, paginaOr
     );
   getSession().setLocale(new Locale("pt", "BR"));
 
-  textFieldHoraEntrada = new DateTimeField24h("textFieldHoraEntrada", new PropertyModel(this, "dateHoraEntrada"));
+  var textFieldHoraEntrada = new DateTimeField24h("textFieldHoraEntrada", new PropertyModel(this, "dateHoraEntrada"));
   textFieldHoraEntrada.setRequired(true);
   form.add(textFieldHoraEntrada);
 
   container = new WebMarkupContainer("container");
-  textFieldHoraSaida = new DateTimeField24h("textFieldHoraSaida", new PropertyModel(this, "dateHoraSaida"));
+
+  var textFieldHoraSaida = new DateTimeField24h("textFieldHoraSaida", new PropertyModel(this, "dateHoraSaida"));
   container.add(textFieldHoraSaida);
-  var checknull:CheckBox = new CheckBox("endTimeisNull",new PropertyModel(this, "timeEndNull"))
+  var checknull = new CheckBox("endTimeisNull",new PropertyModel(this, "timeEndNull"))
   container.add(checknull);
   form.add(container);
   

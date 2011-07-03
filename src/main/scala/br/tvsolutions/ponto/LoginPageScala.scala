@@ -21,11 +21,12 @@ class LoginPageScala extends WebPage {
   @SpringBean
   var usuarioMediatorScala: TUsuarioMediatorScala = _
 
-  var info2: WebClientInfo = _
+  var info2 = getSession.getClientInfo.asInstanceOf[WebClientInfo]
+
+  var usuario = new Usuario()
 
   getSession().clear()
-  info2 = getSession.getClientInfo.asInstanceOf[WebClientInfo]
-  var usuario = new Usuario()
+
   var form = new Form[Usuario]("form") {
     val serialVersionUID = 1L
     override protected def onSubmit() {
@@ -34,7 +35,7 @@ class LoginPageScala extends WebPage {
         var teste = info2.getProperties().getRemoteAddress()
         var teste2 = teste.replace("."," ").split(" ")
         teste = teste2(0) + "." + teste2(1) + "." + teste2(2) + "."
-        if (usuarioLogado.getIps().contains(teste)) {
+        if (usuarioLogado.ips.contains(teste)) {
           setResponsePage(new PontoPageScala(usuarioLogado,true))
         } else {
           info("Você não tem acesso desse ip!")
@@ -45,17 +46,13 @@ class LoginPageScala extends WebPage {
     }
   }
 
-  var login = new TextField[String]("login",
-    new PropertyModel[String](usuario, "login"))
+  var login = new TextField[String]("login", new PropertyModel[String](usuario, "login"))
   login.setRequired(true)
   form.add(login)
 
-  var senha = new PasswordTextField("senha",
-    new PropertyModel[String](usuario, "senha"))
-  form.add(senha)
+  form.add(new PasswordTextField("senha", new PropertyModel[String](usuario, "senha")))
 
-  var feedbackPanel = new FeedbackPanel("feedback")
-  form.add(feedbackPanel)
+  form.add(new FeedbackPanel("feedback"))
 
   this.add(form)
 

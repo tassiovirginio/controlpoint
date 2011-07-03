@@ -19,16 +19,14 @@ import br.tvsolutions.ponto.mediators.TUsuarioMediatorScala
 class RelPeriodoPageScala(usuario: Usuario, travarLista: java.lang.Boolean) extends PontoBasePageScala(usuario) {
 
   val serialVersionUID = 1L
-  var dataPesquisaInicio: Date = _
-  var dataPesquisaFim: Date = _
   var usuarioSelecionado: Usuario = _
 
   def this(usuario: Usuario) = this(usuario, false)
 
   setUsuarioLogado(usuario);
 
-  dataPesquisaInicio = new Date();
-  dataPesquisaFim = new Date();
+  var dataPesquisaInicio = new Date();
+  var dataPesquisaFim = new Date();
 
   var form = new Form("form") {
     override protected def onSubmit() {
@@ -49,7 +47,7 @@ class RelPeriodoPageScala(usuario: Usuario, travarLista: java.lang.Boolean) exte
 
   var listaUsuario = new ArrayList[Usuario]();
 
-  if (getUsuarioLogado().getAdm().asInstanceOf[Boolean]) {
+  if (getUsuarioLogado().adm.asInstanceOf[Boolean]) {
     listaUsuario.addAll(usuarioMediatorScala.listaUsuarios);
   } else {
     listaUsuario.add(getUsuarioLogado());
