@@ -19,11 +19,11 @@ class PontoMediatorScala extends TPontoMediatorScala {
 	@Autowired
 	var daoUsuarioScala:DaoUsuarioScala=_
 	
-	def salvarPonto(ponto:Ponto):Unit = daoPontoScala.save(ponto)
+	def salvarPonto(ponto:Ponto): Unit = daoPontoScala.save(ponto)
 	
-	def deletePonto(ponto:Ponto):Unit = daoPontoScala.delete(ponto)
+	def deletePonto(ponto:Ponto): Unit = daoPontoScala.delete(ponto)
 	
-	def sizePonto():Long = daoPontoScala.getTotalCount()
+	def sizePonto() = daoPontoScala.getTotalCount()
 	
 	def listaPontoUsuario(usuario:Usuario, dataDiaInicio:DateTime):List[Ponto] = {
 		var ponto = new Ponto()

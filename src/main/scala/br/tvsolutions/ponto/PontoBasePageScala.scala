@@ -114,7 +114,7 @@ class PontoBasePageScala(usuario:Usuario) extends WebPage {
   var dataBusca = new DateTime();
   var listaPonto = pontoMediatorScala.listaPontoUsuario(usuarioLogado, dataBusca);
 
-  for (val ponto <- listaPonto) {
+  for (ponto <- listaPonto) {
     if (ponto.getDataInicio() != null && ponto.getDataFim() == null) {
       contadorMilesegundos = ponto.getDataInicio().getMillis() + "";
     }

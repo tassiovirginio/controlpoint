@@ -152,8 +152,9 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
             def onClose(target:AjaxRequestTarget) = setResponsePage(pageOrigem)
         })
 	add(editarPontoWinModal);
-	
-	private class LinkDate(id:String,ponto:Ponto,clickavel:java.lang.Boolean,tipo:Integer) extends AjaxLink[String](id){
+
+
+	private class LinkDate(id:String,ponto:Ponto,clickavel:java.lang.Boolean,tipo:java.lang.Integer) extends AjaxLink[String](id){
 		if(clickavel == true){
 			setEnabled(true);
 		}else{
@@ -177,9 +178,10 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 	//Pode existir a Class e o Object-Class
 	object LinkDate extends Serializable{
 		val serialVersionUID:Long = 1L
-		val ENTRADA:Integer = 1
-		val SAIDA:Integer = 2
-		val BRANCO:Integer = 3
+		val ENTRADA:java.lang.Integer = 1
+		val SAIDA:java.lang.Integer = 2
+		val BRANCO:java.lang.Integer = 3
+
 	}
 	
 	private class LinkDelete(id:String,ponto:Ponto,clickavel:java.lang.Boolean) extends AjaxLink[String](id){
