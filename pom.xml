@@ -16,15 +16,15 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
-	
+
+
 	<dependencies>
 		<dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>2.8.1</version>
-        </dependency>
-		<!--  WICKET DEPENDENCIES -->
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+		<!-- WICKET DEPENDENCIES -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket</artifactId>
@@ -110,7 +110,7 @@
 			<version>1.2.14</version>
 		</dependency>
 
-		<!--  JUNIT DEPENDENCY FOR TESTING -->
+		<!-- JUNIT DEPENDENCY FOR TESTING -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -118,7 +118,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--  JETTY DEPENDENCIES FOR TESTING  -->
+		<!-- JETTY DEPENDENCIES FOR TESTING -->
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
 			<artifactId>jetty</artifactId>
@@ -150,155 +150,110 @@
 			<version>1.2</version>
 		</dependency>
 	</dependencies>
-	
-	
+
+
 	<build>
-		<resources>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**</include>
-                </includes>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>src/main/scala</directory>
-                <includes>
-                    <include>**</include>
-                </includes>
-                <excludes>
-                    <exclude>**/*.scala</exclude>
-                </excludes>
-            </resource>
-        </resources>
-	
-	<!-- 
-		<resources>
-			<resource>
-				<filtering>false</filtering>
-				<directory>src/main/resources</directory>
-			</resource>
-			<resource>
-				<filtering>false</filtering>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**</include>
-				</includes>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</resource>
-		</resources>
-		
-		<testResources>
-			<testResource>
-				<filtering>false</filtering>
-				<directory>src/test/java</directory>
-				<includes>
-					<include>**</include>
-				</includes>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</testResource>
-		</testResources>
 		<plugins>
 			<plugin>
-				<inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<optimize>true</optimize>
-					<debug>true</debug>
-					<encoding>UTF-8</encoding>
+					<sourceDir>src/main/java</sourceDir>
+					<jvmArgs>
+						<jvmArg>-Xms64m</jvmArg>
+						<jvmArg>-Xmx1024m</jvmArg>
+					</jvmArgs>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.8</version>
+				<!-- see http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html 
+					for more information -->
 				<configuration>
 					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+					<projectnatures>
+						<projectnature>ch.epfl.lamp.sdt.core.scalanature</projectnature>
+						<projectnature>org.eclipse.jdt.core.javanature</projectnature>
+					</projectnatures>
+					<buildcommands>
+						<buildcommand>ch.epfl.lamp.sdt.core.scalabuilder</buildcommand>
+					</buildcommands>
+					<classpathContainers>
+						<classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>
+						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+					</classpathContainers>
+					<excludes>
+						<exclude>org.scala-lang:scala-library</exclude>
+						<exclude>org.scala-lang:scala-compiler</exclude>
+					</excludes>
+					<sourceIncludes>
+						<sourceInclude>**/*.scala</sourceInclude>
+						<sourceInclude>**/*.java</sourceInclude>
+					</sourceIncludes>
 				</configuration>
 			</plugin>
-		</plugins>
-		-->
-		<plugins>
-            <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <goals>
-                        <goal>compile</goal>
-                        </goals>
-                        <phase>compile</phase>
-                    </execution>
-				<!-- 
-                    <execution>
-                        <id>test-compile</id>
-                        <goals>
-                        <goal>testCompile</goal>
-                        </goals>
-                        <phase>test-compile</phase>
-                    </execution>
-				 -->
-                    <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-            </plugin>
+			<plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>add-source</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>add-source</goal>
+                    </goals>
+                    <configuration>
+                        <sources>
+                            <source>src/main/scala</source>
+                        </sources>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>add-test-source</id>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>add-test-source</goal>
+                    </goals>
+                    <configuration>
+                        <sources>
+                            <source>src/test/scala</source>
+                        </sources>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
 
-        </plugins>
+		</plugins>
 	</build>
-	
+
 	<pluginRepositories>
-        <pluginRepository>
-            <id>scala</id>
-            <name>Scala Tools</name>
-            <url>http://scala-tools.org/repo-releases</url>
-            <releases>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-	
-	 <repositories>
-        <repository>
-            <id>scala</id>
-            <name>Scala Tools</name>
-            <url>http://scala-tools.org/repo-releases</url>
-            <releases>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-	
+		<pluginRepository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<repositories>
+		<repository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</repository>
+	</repositories>
+
 	<properties>
 		<wicket.version>1.4.17</wicket.version>
 		<jetty.version>6.1.4</jetty.version>
