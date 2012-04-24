@@ -1,25 +1,24 @@
-package br.tvsolutions.ponto
+package br.tvsolutions.ponto.pages
 
-import org.apache.wicket.markup.html.WebPage
 import org.apache.wicket.markup.html.form.Form
 import org.apache.wicket.markup.html.form.PasswordTextField
 import org.apache.wicket.markup.html.form.TextField
 import org.apache.wicket.markup.html.panel.FeedbackPanel
+import org.apache.wicket.markup.html.WebPage
 import org.apache.wicket.model.PropertyModel
-import org.apache.wicket.request.ClientInfo
-import org.apache.wicket.spring.injection.annot.SpringBean
 import org.apache.wicket.protocol.http.request.WebClientInfo
-
+import org.apache.wicket.spring.injection.annot.SpringBean
 import br.tvsolutions.ponto.entities.Usuario
-import br.tvsolutions.ponto.mediators.TUsuarioMediatorScala
-import javax.annotation.Resource
+import br.tvsolutions.ponto.mediators.TUsuarioMediator
+import javax.persistence.Entity
+import br.tvsolutions.ponto.mediators.TUsuarioMediator
 
-class LoginPageScala extends WebPage {
+class LoginPage extends WebPage {
 
   val serialVersionUID = 1L;
 
   @SpringBean
-  var usuarioMediatorScala: TUsuarioMediatorScala = _
+  var usuarioMediatorScala: TUsuarioMediator = _
 
   var info2 = getSession.getClientInfo.asInstanceOf[WebClientInfo]
 
@@ -36,7 +35,7 @@ class LoginPageScala extends WebPage {
         var teste2 = teste.replace("."," ").split(" ")
         teste = teste2(0) + "." + teste2(1) + "." + teste2(2) + "."
         if (usuarioLogado.ips.contains(teste)) {
-          setResponsePage(new PontoPageScala(usuarioLogado,true))
+          setResponsePage(new PontoPage(usuarioLogado,true))
         } else {
           info("Você não tem acesso desse ip!")
         }

@@ -25,7 +25,7 @@
         </init-param>
         <init-param>
             <param-name>applicationClassName</param-name>
-            <param-value>br.tvsolutions.ponto.WicketApplicationScala</param-value>
+            <param-value>br.tvsolutions.ponto.WicketApplication</param-value>
         </init-param>
     </filter>
  

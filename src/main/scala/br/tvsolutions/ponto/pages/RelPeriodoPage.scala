@@ -1,9 +1,8 @@
-package br.tvsolutions.ponto
+package br.tvsolutions.ponto.pages
 
 import java.util.ArrayList
 import java.util.Date
 import java.util.List
-
 import org.apache.wicket.extensions.markup.html.form.DateTextField
 import org.apache.wicket.extensions.yui.calendar.DatePicker
 import org.apache.wicket.markup.html.form.ChoiceRenderer
@@ -12,11 +11,11 @@ import org.apache.wicket.markup.html.form.ListChoice
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.DateTime
-
 import br.tvsolutions.ponto.entities.Usuario
-import br.tvsolutions.ponto.mediators.TUsuarioMediatorScala
+import br.tvsolutions.ponto.mediators.TUsuarioMediator
+import br.tvsolutions.ponto.pages.base.PontoBasePage
 
-class RelPeriodoPageScala(usuario: Usuario, travarLista: java.lang.Boolean) extends PontoBasePageScala(usuario) {
+class RelPeriodoPage(usuario: Usuario, travarLista: java.lang.Boolean) extends PontoBasePage(usuario) {
 
   val serialVersionUID = 1L
   var usuarioSelecionado: Usuario = _
@@ -30,7 +29,7 @@ class RelPeriodoPageScala(usuario: Usuario, travarLista: java.lang.Boolean) exte
 
   var form = new Form("form") {
     override protected def onSubmit() {
-      setResponsePage(new PontoPageScala(getUsuarioLogado(), usuarioSelecionado, new DateTime(dataPesquisaInicio), new DateTime(dataPesquisaFim), false));
+      setResponsePage(new PontoPage(getUsuarioLogado(), usuarioSelecionado, new DateTime(dataPesquisaInicio), new DateTime(dataPesquisaFim), false));
     }
   };
   add(form);
@@ -48,7 +47,7 @@ class RelPeriodoPageScala(usuario: Usuario, travarLista: java.lang.Boolean) exte
   var listaUsuario = new ArrayList[Usuario]();
 
   if (getUsuarioLogado().adm.asInstanceOf[Boolean]) {
-    listaUsuario.addAll(usuarioMediatorScala.listaUsuarios);
+    listaUsuario.addAll(usuarioMediator.listaUsuarios);
   } else {
     listaUsuario.add(getUsuarioLogado());
   }

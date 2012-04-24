@@ -3,7 +3,7 @@ import br.tvsolutions.ponto.entities.{Usuario, Ponto}
 import java.util.List
 import org.joda.time.DateTime
 
-trait TPontoMediatorScala {
+trait TPontoMediator {
 	
 	def salvarPonto(ponto:Ponto):Unit
 	

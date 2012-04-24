@@ -1,25 +1,26 @@
-package br.tvsolutions.ponto
+package br.tvsolutions.ponto.pages.panels
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.form.AjaxButton;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
-import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.joda.time.DateTime;
-
-import br.tvsolutions.ponto.entities.Ponto;
-import br.tvsolutions.ponto.entities.Usuario;
-import br.tvsolutions.ponto.mediators.TPontoMediatorScala;
-import br.tvsolutions.ponto.util.DateTimeField24h;
+import org.apache.wicket.ajax.AjaxRequestTarget
+import org.apache.wicket.ajax.markup.html.form.AjaxButton
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow
+import org.apache.wicket.markup.html.WebMarkupContainer
+import org.apache.wicket.markup.html.form.Form
+import org.apache.wicket.markup.html.panel.Panel
+import org.apache.wicket.model.PropertyModel
+import org.apache.wicket.spring.injection.annot.SpringBean
+import org.joda.time.DateTime
+import br.tvsolutions.ponto.entities.Ponto
+import br.tvsolutions.ponto.entities.Usuario
+import br.tvsolutions.ponto.mediators.TPontoMediator
+import br.tvsolutions.ponto.util.DateTimeField24h
 import org.apache.wicket.markup.html.form._
+import java.util.Date
+import java.util.Locale
+import br.tvsolutions.ponto.pages.base.PontoBasePage
+import br.tvsolutions.ponto.pages.base.PontoBasePage
+import br.tvsolutions.ponto.mediators.TPontoMediator
 
-import java.util.Date;
-import java.util.Locale;
-
-class EditPontoPanelScala(id:String, ponto:Ponto, modal:ModalWindow, paginaOrigem:PontoBasePageScala) extends Panel(id) {
+class EditPontoPanel(id:String, ponto:Ponto, modal:ModalWindow, paginaOrigem:PontoBasePage) extends Panel(id) {
 
   var form = new Form[Usuario]("form");
 
@@ -30,7 +31,7 @@ class EditPontoPanelScala(id:String, ponto:Ponto, modal:ModalWindow, paginaOrige
   var container:WebMarkupContainer = _
 
   @SpringBean
-  var pontoMediatorScala: TPontoMediatorScala = _
+  var pontoMediator: TPontoMediator = _
 
   var dateHoraEntrada = ponto.getDataInicio().toDate();
   if (ponto.getDataFim() != null)
@@ -48,7 +49,7 @@ class EditPontoPanelScala(id:String, ponto:Ponto, modal:ModalWindow, paginaOrige
       }else{
     	ponto.setDataFim(new DateTime(dateHoraSaida))
       }
-      pontoMediatorScala.salvarPonto(ponto)
+      pontoMediator.salvarPonto(ponto)
       modal.close(target)
     }
 
@@ -72,7 +73,5 @@ class EditPontoPanelScala(id:String, ponto:Ponto, modal:ModalWindow, paginaOrige
   form.add(container);
   
   timeEndNull = ponto.getDataFim() == null
-
-//  container.setVisible(ponto.getDataFim() != null);
 
 }

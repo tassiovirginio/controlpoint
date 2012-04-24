@@ -1,13 +1,13 @@
 package br.tvsolutions.ponto.mediators
 
-import br.tvsolutions.ponto.daos.DaoUsuarioScala
+import br.tvsolutions.ponto.daos.DaoUsuario
 import br.tvsolutions.ponto.entities._
 
-trait TUsuarioMediatorScala {
+trait TUsuarioMediator {
 	
-	def getDaoUsuario():DaoUsuarioScala
+	def getDaoUsuario():DaoUsuario
 
-	def setDaoUsuario(daoUsuario:DaoUsuarioScala):Unit
+	def setDaoUsuario(daoUsuario:DaoUsuario):Unit
 	
 	def salvarUsuario(usuario:Usuario):Unit
 	

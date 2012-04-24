@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import scala.collection.JavaConversions._
 
 @Component
-class DaoPontoScala extends DaoAbstractScala[Ponto,java.lang.Long]  with Serializable{
+class DaoPonto extends DaoAbstract[Ponto,java.lang.Long]  with Serializable{
 
 	override def getDomain() = classOf[Ponto]
 	

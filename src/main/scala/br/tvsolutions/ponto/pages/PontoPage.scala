@@ -1,15 +1,16 @@
-package br.tvsolutions.ponto
+package br.tvsolutions.ponto.pages
 
 import org.apache.wicket.markup.html.WebMarkupContainer
-import org.apache.wicket.markup.html.link.Link
 import org.joda.time.DateTime
-
 import br.tvsolutions.ponto.entities.Usuario
+import org.apache.wicket.markup.html.link.Link
+import br.tvsolutions.ponto.pages.base.PontoBasePage
+import br.tvsolutions.ponto.pages.panels.PontoListPanel
 
-class PontoPageScala(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInicio:DateTime, dateBuscaFim:DateTime, editavel:java.lang.Boolean) extends PontoBasePageScala(usuarioLogado) {
+class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInicio:DateTime, dateBuscaFim:DateTime, editavel:java.lang.Boolean) extends PontoBasePage(usuarioLogado) {
   val serialVersionUID: java.lang.Long = 1L
 
-  add(new PontoListPanelScala(usuarioSelecionado, usuarioLogado, dateBuscaInicio, dateBuscaFim, editavel.asInstanceOf[Boolean], this))
+  add(new PontoListPanel(usuarioSelecionado, usuarioLogado, dateBuscaInicio, dateBuscaFim, editavel.asInstanceOf[Boolean], this))
 
   var container = new WebMarkupContainer("container"){
     setOutputMarkupId(true)

@@ -7,7 +7,7 @@ import org.hibernate.{SessionFactory, Session}
 import org.hibernate.criterion._
 import scala.reflect.BeanProperty
 
-abstract class DaoAbstractScala[D,K <: Serializable](implicit m: scala.reflect.Manifest[D]) {
+abstract class DaoAbstract[D,K <: Serializable](implicit m: scala.reflect.Manifest[D]) {
 	val LOG = LogFactory.getLog(getClass())
 
 	@BeanProperty

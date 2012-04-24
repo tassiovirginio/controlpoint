@@ -1,33 +1,32 @@
-package br.tvsolutions.ponto
+package br.tvsolutions.ponto.pages.panels
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.wicket.Page;
-import org.apache.wicket.behavior.SimpleAttributeModifier;
-import org.apache.wicket.markup.html.form.CheckBox;
-import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.ListChoice;
-import org.apache.wicket.markup.html.form.PasswordTextField;
-import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.form.TextArea;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.joda.time.DateTime;
-
-import br.tvsolutions.ponto.entities.Usuario;
-import br.tvsolutions.ponto.mediators.TUsuarioMediatorScala;
+import java.util.ArrayList
+import java.util.Date
+import java.util.List
+import org.apache.wicket.Page
+import org.apache.wicket.behavior.SimpleAttributeModifier
+import org.apache.wicket.markup.html.form.CheckBox
+import org.apache.wicket.markup.html.form.Form
+import org.apache.wicket.markup.html.form.ListChoice
+import org.apache.wicket.markup.html.form.PasswordTextField
+import org.apache.wicket.markup.html.form.RequiredTextField
+import org.apache.wicket.markup.html.form.TextArea
+import org.apache.wicket.markup.html.panel.FeedbackPanel
+import org.apache.wicket.markup.html.panel.Panel
+import org.apache.wicket.model.PropertyModel
+import org.apache.wicket.spring.injection.annot.SpringBean
+import org.joda.time.DateTime
+import br.tvsolutions.ponto.entities.Usuario
+import br.tvsolutions.ponto.mediators.TUsuarioMediator
 import br.tvsolutions.ponto.util.DateTimeField24h;
+import br.tvsolutions.ponto.pages.UsuarioPage
 
-class UsuarioPanelScala(pagePai:Page, usuario:Usuario, direto:java.lang.Boolean) extends Panel("usuarioPanel") {
+class UsuarioPanel(pagePai:Page, usuario:Usuario, direto:java.lang.Boolean) extends Panel("usuarioPanel") {
 
   var serialVersionUID = 1L
 
   @SpringBean
-  var usuarioMediatorScala: TUsuarioMediatorScala = _
+  var usuarioMediator: TUsuarioMediator = _
 
   def this(pagePai: Page) = this(pagePai, new Usuario(), false)
 
@@ -53,9 +52,9 @@ class UsuarioPanelScala(pagePai:Page, usuario:Usuario, direto:java.lang.Boolean)
       usuarioSelecionado.horaEntrada = (new DateTime(dateHoraEntrada));
       usuarioSelecionado.horaSaida = (new DateTime(dateHoraSaida));
       usuarioSelecionado.jornada = (new DateTime(dateJornada));
-      usuarioMediatorScala.salvarUsuario(usuarioSelecionado);
+      usuarioMediator.salvarUsuario(usuarioSelecionado);
       info("Usuario Salvo com Sucesso !!");
-      setResponsePage(new UsuarioPageScala(usuario, false || direto.asInstanceOf[Boolean]));
+      setResponsePage(new UsuarioPage(usuario, false || direto.asInstanceOf[Boolean]));
     }
   };
   add(form);

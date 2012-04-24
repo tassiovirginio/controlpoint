@@ -1,4 +1,4 @@
-package br.tvsolutions.ponto
+package br.tvsolutions.ponto.pages
 
 import br.tvsolutions.ponto.entities.Usuario
 import java.util.{ Date, ArrayList }
@@ -8,8 +8,9 @@ import org.apache.wicket.markup.html.WebMarkupContainer
 import org.apache.wicket.markup.html.form.{ ListChoice, Form, ChoiceRenderer }
 import org.apache.wicket.model.PropertyModel
 import org.joda.time.DateTime
+import br.tvsolutions.ponto.pages.base.PontoBasePage
 
-class RelDiaPageScala(usuario: Usuario) extends PontoBasePageScala(usuario) {
+class RelDiaPage(usuario: Usuario) extends PontoBasePage(usuario) {
 
   val serialVersionUID = 1L
 
@@ -26,7 +27,7 @@ class RelDiaPageScala(usuario: Usuario) extends PontoBasePageScala(usuario) {
 
   var form = new Form("form") {
     override protected def onSubmit() {
-      setResponsePage(new PontoPageScala(getUsuarioLogado(), usuarioSelecionado, new DateTime(dataPesquisa), new DateTime(dataPesquisa), false));
+      setResponsePage(new PontoPage(getUsuarioLogado(), usuarioSelecionado, new DateTime(dataPesquisa), new DateTime(dataPesquisa), false));
     }
   };
   add(form);
@@ -39,7 +40,7 @@ class RelDiaPageScala(usuario: Usuario) extends PontoBasePageScala(usuario) {
   var listaUsuario = new ArrayList[Usuario]()
 
   if (getUsuarioLogado().adm.asInstanceOf[Boolean]) {
-    listaUsuario.addAll(usuarioMediatorScala.listaUsuarios)
+    listaUsuario.addAll(usuarioMediator.listaUsuarios)
   } else {
     listaUsuario.add(getUsuarioLogado())
   }

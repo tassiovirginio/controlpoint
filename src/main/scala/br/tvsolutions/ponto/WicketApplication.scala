@@ -1,23 +1,25 @@
 package br.tvsolutions.ponto
 
 import org.apache.wicket.protocol.http.WebApplication
-import br.tvsolutions.ponto.mediators.TPontoMediatorScala
-import br.tvsolutions.ponto.mediators.TUsuarioMediatorScala
-import br.tvsolutions.ponto.entities.Usuario
+import org.apache.wicket.spring.injection.annot.SpringComponentInjector
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import org.apache.wicket.spring.injection.annot.SpringComponentInjector
+import br.tvsolutions.ponto.entities.Usuario
+import br.tvsolutions.ponto.mediators.TPontoMediator
+import br.tvsolutions.ponto.mediators.TUsuarioMediator
+import javax.persistence.Entity
+import br.tvsolutions.ponto.pages.LoginPage
 
 @Component
 class WicketApplicationScala extends WebApplication{
 
 	@Autowired
-	var usuarioMediatorScala:TUsuarioMediatorScala = _ 
+	var usuarioMediator:TUsuarioMediator = _ 
 
 	@Autowired
-	var pontoMediatorScala:TPontoMediatorScala = _ 
+	var pontoMediator:TPontoMediator = _ 
 	
-	def getHomePage() = classOf[LoginPageScala]
+	def getHomePage() = classOf[LoginPage]
 	
 	override def init() = {
 		addComponentInstantiationListener(new SpringComponentInjector(this))
@@ -32,7 +34,7 @@ class WicketApplicationScala extends WebApplication{
 		usuario.nome = "Admin"
 		usuario.ips = "127.0.0.1"
 		usuario.wallpaper = "wallpaper02"
-		usuarioMediatorScala.salvarUsuario(usuario)
+		usuarioMediator.salvarUsuario(usuario)
 		
 		getApplicationSettings().setPageExpiredErrorPage(getHomePage())
 		

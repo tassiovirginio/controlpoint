@@ -1,4 +1,4 @@
-package br.tvsolutions.ponto
+package br.tvsolutions.ponto.pages.panels
 
 import org.apache.wicket.ajax.AjaxRequestTarget
 import org.apache.wicket.ajax.markup.html.AjaxLink
@@ -15,21 +15,21 @@ import org.apache.wicket.protocol.http.request.WebClientInfo
 import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.DateTime
 import org.joda.time.Period
-
 import org.joda.time.format.PeriodFormatterBuilder
-
 import br.tvsolutions.ponto.entities.Ponto
 import br.tvsolutions.ponto.entities.Usuario
-import br.tvsolutions.ponto.mediators.TPontoMediatorScala
-
+import br.tvsolutions.ponto.mediators.TPontoMediator
 import java.io.Serializable
+import br.tvsolutions.ponto.pages.base.PontoBasePage
+import br.tvsolutions.ponto.pages.PontoPage
+import br.tvsolutions.ponto.mediators.TPontoMediator
 
-class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaInicio:DateTime,dateBuscaFim:DateTime,editavel:Boolean,pageOrigem:PontoBasePageScala) extends Panel("pontoListPanel") with Serializable{
+class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaInicio:DateTime,dateBuscaFim:DateTime,editavel:Boolean,pageOrigem:PontoBasePage) extends Panel("pontoListPanel") with Serializable{
 	
 	var serialVersionUID:Long = 1L;
 
 	@SpringBean
-	var pontoMediatorScala:TPontoMediatorScala =_
+	var pontoMediator:TPontoMediator =_
 
 	var pontoParaFechar:Ponto =_
 
@@ -39,7 +39,7 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 	lbPeriodTotal.setOutputMarkupId(true);
 	add(lbPeriodTotal);
 		
-	var listData = pontoMediatorScala.listaPontoUsuario(usuarioSelecionado, dateBuscaInicio, dateBuscaFim);
+	var listData = pontoMediator.listaPontoUsuario(usuarioSelecionado, dateBuscaInicio, dateBuscaFim);
 	
 	var btAdd = new Button("btAdd") {
 		val serialVersionUID:Long = 1L
@@ -48,8 +48,8 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 			novoPonto.setDataInicio(dateBuscaInicio)
 			novoPonto.setUsuario(usuarioSelecionado)
 			novoPonto.setIpInicio(infoWeb.getProperties().getRemoteAddress())
-			pontoMediatorScala.salvarPonto(novoPonto)
-			setResponsePage(new PontoPageScala(usuarioLogado,usuarioSelecionado,dateBuscaInicio,dateBuscaFim,editavel))
+			pontoMediator.salvarPonto(novoPonto)
+			setResponsePage(new PontoPage(usuarioLogado,usuarioSelecionado,dateBuscaInicio,dateBuscaFim,editavel))
 		}
 	};
 	var formAdd = new Form("formAdd")
@@ -68,10 +68,10 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 			novoPonto.setDataInicio(new DateTime())
 			novoPonto.setUsuario(usuarioLogado)
 			novoPonto.setIpInicio(infoWeb.getProperties().getRemoteAddress())
-			pontoMediatorScala.salvarPonto(novoPonto)
+			pontoMediator.salvarPonto(novoPonto)
 			this.setVisible(false)
 			btSaida.setVisible(true)
-			setResponsePage(new PontoPageScala(usuarioLogado,editavel))
+			setResponsePage(new PontoPage(usuarioLogado,editavel))
 		}
 	};
 
@@ -80,11 +80,11 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 		override def onSubmit() {
 			pontoParaFechar.setDataFim(new DateTime())
 			pontoParaFechar.setIpFim(infoWeb.getProperties().getRemoteAddress())
-			pontoMediatorScala.salvarPonto(pontoParaFechar)
+			pontoMediator.salvarPonto(pontoParaFechar)
 			pontoParaFechar = null
 			btEntrada.setVisible(true)
 			this.setVisible(false)
-			setResponsePage(new PontoPageScala(usuarioLogado,editavel))
+			setResponsePage(new PontoPage(usuarioLogado,editavel))
 		}
 	};
 		
@@ -171,7 +171,7 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 		}));
 		
 		def onClick(target:AjaxRequestTarget) = {
-			editarPontoWinModal.setContent(new EditPontoPanelScala(editarPontoWinModal.getContentId(),this.ponto,editarPontoWinModal,pageOrigem));
+			editarPontoWinModal.setContent(new EditPontoPanel(editarPontoWinModal.getContentId(),this.ponto,editarPontoWinModal,pageOrigem));
 			editarPontoWinModal.show(target);
 		}
 	}
@@ -188,7 +188,7 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 		val serialVersionUID:Long = 1L;
 		
 		@SpringBean
-		var pontoMediatorScala:TPontoMediatorScala =_
+		var pontoMediator:TPontoMediator =_
 	
 		setVisible(clickavel.asInstanceOf[Boolean])
 		add(new Label("label", new Model[String]() {
@@ -196,8 +196,8 @@ class PontoListPanelScala(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateB
 		}));
 
 		def onClick(target:AjaxRequestTarget) {
-			pontoMediatorScala.deletePonto(ponto)
-			setResponsePage(new PontoPageScala(usuarioSelecionado,usuarioLogado,dateBuscaInicio,dateBuscaFim,editavel));
+			pontoMediator.deletePonto(ponto)
+			setResponsePage(new PontoPage(usuarioSelecionado,usuarioLogado,dateBuscaInicio,dateBuscaFim,editavel));
 		}
 	}
 	

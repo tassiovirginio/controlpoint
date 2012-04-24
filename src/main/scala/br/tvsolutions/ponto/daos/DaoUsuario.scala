@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 import br.tvsolutions.ponto.entities.Usuario
 
 @Component
-class DaoUsuarioScala extends DaoAbstractScala[Usuario, java.lang.Long] with Serializable {
+class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable {
   
   def getDomain(): Class[Usuario] = classOf[Usuario]
   

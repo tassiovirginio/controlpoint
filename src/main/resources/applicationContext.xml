@@ -22,13 +22,6 @@
 	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-<!-- 
-	<bean id="gerarXLS" class="br.tvsolutions.ponto.util.GerarXLS">
-		<property name="uri">
-			<value>D:/ProjetosWickets/pontoScala/</value>
-		</property>
-	</bean>
-	 -->
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -52,9 +45,6 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
-	<!-- 
-	<bean id="gtalkUtil" class="br.tvsolutions.ponto.util.GtalkUtil" />
-	 -->
 
 	<context:component-scan base-package="br.tvsolutions.ponto" />
 </beans>
