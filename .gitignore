@@ -4,3 +4,5 @@ work
 .project
 .classpath
 .settings
+.scala_dependencies 
+.cache
