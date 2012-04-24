@@ -1,25 +1,25 @@
 README
 
-Sistema de Ponto 0.9 Beta
+ControlPoint 1.0 Beta
 
-Sistema de ponto para facilitar o controle de horas para qualquer tipo de grupo de usuarios.
-Desenvolvido com a linguagem Scala e os frameworks Wicket, Spring e Hibernate.
-A interface é em HTML/HTML5 e CSS2/CSS3.r e
+ControlPoint to facilitate the control of hours for any group of users.
+Developed with the Scala language and frameworks Wicket, Spring and Hibernate.
+The interface is in HTML/HTML5 and CSS2/CSS3.
 
-Principais funções:
- - Controle de Acesso por login e IP.
- - Controle de Entrada e Saida.
- - Dois tipos de Ponto (Usuario Externo e Interno).
- - Lista de usuários Presentes (Trabalhando).
- - Ponto pelo Gtalk (Inicio da implementação).
- - Relatórios pelo dia e período.
- - Exportação dos relatorio para xls. (Em melhoramento)
+Main functions:
+  - Access Control and IP logging.
+  - Control of Entry and Exit.
+  - Two types of point (User External and Internal).
+  - List Gifts (Working).
+  - Point by Gtalk (Top of implementation).
+  - Reports by day and period.
+  - Export report to xls. (In improvement)
  
 
  
- Instalação:
-  - Pré-requisitos: Java, Maven, Git
-  - Faça o Download pelo git: git clone git://github.com/tassiovirginio/s2whponto.git
-  - Execute o comando: mvn jetty:run
-  - Acesse no navegador: 127.0.0.1:8080/ponto
+Installation:
+   - Prerequisites: Java, Maven, Git
+   - Download the git: git clone git://github.com/tassiovirginio/controlpoint.git
+   - Run the command: mvn jetty:run
+   - Access in the browser: 127.0.0.1:8080/controlpoint
   
