@@ -1,8 +1,8 @@
 package br.controlpoint.mediators
 
 import br.controlpoint.entities.{Usuario, Ponto}
-import java.util.List
 import org.joda.time.DateTime
+import java.util.List
 
 trait TPontoMediator {
 	

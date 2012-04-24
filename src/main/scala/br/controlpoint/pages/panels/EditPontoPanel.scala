@@ -8,15 +8,13 @@ import org.apache.wicket.markup.html.form.Form
 import org.apache.wicket.markup.html.panel.Panel
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
-import org.joda.time.DateTime
-import br.controlpoint.entities.Ponto
-import br.controlpoint.entities.Usuario
+import br.controlpoint.entities.{Ponto,Usuario}
 import br.controlpoint.mediators.TPontoMediator
 import br.controlpoint.util.DateTimeField24h
 import org.apache.wicket.markup.html.form._
-import java.util.Date
-import java.util.Locale
 import br.controlpoint.pages.base.PontoBasePage
+import org.joda.time.DateTime
+import java.util.{Date,Locale}
 
 class EditPontoPanel(id:String, ponto:Ponto, modal:ModalWindow, paginaOrigem:PontoBasePage) extends Panel(id) {
 

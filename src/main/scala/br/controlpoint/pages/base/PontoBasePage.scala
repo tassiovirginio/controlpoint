@@ -1,44 +1,32 @@
 package br.controlpoint.pages.base
 
-import java.util.List
-import java.util.Locale
+import java.util.{List,Locale}
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.reflect.BeanProperty
 import org.apache.wicket.behavior.SimpleAttributeModifier
 import org.apache.wicket.markup.html.basic.Label
-import org.apache.wicket.markup.html.form.Form
-import org.apache.wicket.markup.html.form.HiddenField
+import org.apache.wicket.markup.html.form.{Form,HiddenField}
 import org.apache.wicket.markup.html.image.Image
-import org.apache.wicket.markup.html.list.ListItem
-import org.apache.wicket.markup.html.list.ListView
+import org.apache.wicket.markup.html.list.{ListItem,ListView}
 import org.apache.wicket.markup.html.CSSPackageResource
 import org.apache.wicket.markup.html.WebPage
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.DateTime
-import br.controlpoint.entities.Ponto
-import br.controlpoint.entities.Usuario
-import br.controlpoint.pages.LoginPage
-import br.controlpoint.pages.PontoPage
-import br.controlpoint.pages.RelDiaPage
-import br.controlpoint.pages.RelPeriodoPage
-import br.controlpoint.pages.SobrePage
-import br.controlpoint.pages.UsuarioPage
+import br.controlpoint.entities.{Ponto,Usuario}
+import br.controlpoint.pages.{LoginPage,PontoPage,RelDiaPage,RelPeriodoPage,SobrePage,UsuarioPage}
 import javax.persistence.Entity
 import org.apache.wicket.markup.html.link.Link
 import br.controlpoint.pages.RelPeriodoPage
-import br.controlpoint.mediators.TPontoMediator
-import br.controlpoint.mediators.TUsuarioMediator
-import br.controlpoint.pages.UsuarioPage
-import br.controlpoint.pages.SobrePage
+import br.controlpoint.mediators.{TPontoMediator,TUsuarioMediator}
 
-class PontoBasePage(usuario:Usuario) extends WebPage {
+class PontoBasePage(usuario: Usuario) extends WebPage {
 
   @SpringBean
-  var usuarioMediator:TUsuarioMediator = _
+  var usuarioMediator: TUsuarioMediator = _
 
   @SpringBean
-  var pontoMediator:TPontoMediator = _
+  var pontoMediator: TPontoMediator = _
 
   @BeanProperty
   var usuarioLogado: Usuario = null
@@ -48,7 +36,7 @@ class PontoBasePage(usuario:Usuario) extends WebPage {
   var contadorMilesegundos: String = null;
 
   override def getLocale() = LOCALE_BR
-  
+
   if (getSession().isSessionInvalidated()) {
     usuarioLogado = null;
     getSession().invalidate();
@@ -79,7 +67,6 @@ class PontoBasePage(usuario:Usuario) extends WebPage {
       getRequestCycle().setRedirect(true);
     }
   })
-
 
   add(new Link("lkmnCadUsuario") {
     def onClick() {

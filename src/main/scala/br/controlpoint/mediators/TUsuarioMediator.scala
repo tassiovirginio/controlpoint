@@ -1,7 +1,7 @@
 package br.controlpoint.mediators
 
 import br.controlpoint.daos.DaoUsuario
-import br.controlpoint.entities._
+import br.controlpoint.entities.Usuario
 
 trait TUsuarioMediator {
 	

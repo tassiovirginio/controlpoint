@@ -5,10 +5,9 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import br.controlpoint.entities.Usuario
-import br.controlpoint.mediators.TPontoMediator
-import br.controlpoint.mediators.TUsuarioMediator
-import javax.persistence.Entity
+import br.controlpoint.mediators.{TPontoMediator,TUsuarioMediator}
 import br.controlpoint.pages.LoginPage
+import javax.persistence.Entity
 
 @Component
 class WicketApplication extends WebApplication{

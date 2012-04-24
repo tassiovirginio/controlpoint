@@ -1,18 +1,16 @@
 package br.controlpoint.pages
 
 import org.apache.wicket.markup.html.WebMarkupContainer
-import org.apache.wicket.markup.html.form.ChoiceRenderer
-import org.apache.wicket.markup.html.form.Form
-import org.apache.wicket.markup.html.form.ListChoice
+import org.apache.wicket.markup.html.form.{ChoiceRenderer,Form,ListChoice}
 import org.apache.wicket.markup.html.link.Link
 import org.apache.wicket.markup.html.panel.FeedbackPanel
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
-import java.util.List
 import br.controlpoint.entities.Usuario
 import br.controlpoint.mediators.UsuarioMediator
 import br.controlpoint.pages.base.PontoBasePage
 import br.controlpoint.pages.panels.UsuarioPanel
+import java.util.List
 
 class UsuarioPage(usuario:Usuario, direto:Boolean) extends PontoBasePage(usuario){
 

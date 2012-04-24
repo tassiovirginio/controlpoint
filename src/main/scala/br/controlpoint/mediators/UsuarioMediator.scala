@@ -13,13 +13,13 @@ import scala.reflect.BeanProperty
 class UsuarioMediator extends TUsuarioMediator{
 	
 	@Autowired
-	var daoUsuario:DaoUsuario =_
+	var daoUsuario:DaoUsuario = _
 	
 	def getDaoUsuario = daoUsuario
 
 	def setDaoUsuario(daoUsuario:DaoUsuario) = {this.daoUsuario = daoUsuario}
 	
-	def salvarUsuario(usuario:Usuario)=	daoUsuario.save(usuario)
+	def salvarUsuario(usuario:Usuario) = daoUsuario.save(usuario)
 	
 	def sizeUsuario = daoUsuario.size()
 	 

@@ -1,8 +1,6 @@
 package br.controlpoint.pages
 
-import org.apache.wicket.markup.html.form.Form
-import org.apache.wicket.markup.html.form.PasswordTextField
-import org.apache.wicket.markup.html.form.TextField
+import org.apache.wicket.markup.html.form.{Form,PasswordTextField,TextField}
 import org.apache.wicket.markup.html.panel.FeedbackPanel
 import org.apache.wicket.markup.html.WebPage
 import org.apache.wicket.model.PropertyModel
@@ -17,7 +15,7 @@ class LoginPage extends WebPage {
   val serialVersionUID = 1L;
 
   @SpringBean
-  var usuarioMediatorScala:TUsuarioMediator = _
+  var usuarioMediatorScala: TUsuarioMediator = _
 
   var info2 = getSession.getClientInfo.asInstanceOf[WebClientInfo]
 
@@ -31,10 +29,10 @@ class LoginPage extends WebPage {
       var usuarioLogado = usuarioMediatorScala.fazerLogin(usuario)
       if (usuarioLogado != null) {
         var teste = info2.getProperties().getRemoteAddress()
-        var teste2 = teste.replace("."," ").split(" ")
+        var teste2 = teste.replace(".", " ").split(" ")
         teste = teste2(0) + "." + teste2(1) + "." + teste2(2) + "."
         if (usuarioLogado.ips.contains(teste)) {
-          setResponsePage(new PontoPage(usuarioLogado,true))
+          setResponsePage(new PontoPage(usuarioLogado, true))
         } else {
           info("Você não tem acesso desse ip!")
         }

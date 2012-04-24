@@ -1,18 +1,10 @@
 package br.controlpoint.pages.panels
 
-import java.util.ArrayList
-import java.util.Date
-import java.util.List
+import java.util.{ArrayList,Date,List}
 import org.apache.wicket.Page
 import org.apache.wicket.behavior.SimpleAttributeModifier
-import org.apache.wicket.markup.html.form.CheckBox
-import org.apache.wicket.markup.html.form.Form
-import org.apache.wicket.markup.html.form.ListChoice
-import org.apache.wicket.markup.html.form.PasswordTextField
-import org.apache.wicket.markup.html.form.RequiredTextField
-import org.apache.wicket.markup.html.form.TextArea
-import org.apache.wicket.markup.html.panel.FeedbackPanel
-import org.apache.wicket.markup.html.panel.Panel
+import org.apache.wicket.markup.html.form.{CheckBox,Form,ListChoice,PasswordTextField,RequiredTextField,TextArea}
+import org.apache.wicket.markup.html.panel.{FeedbackPanel,Panel}
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.DateTime
