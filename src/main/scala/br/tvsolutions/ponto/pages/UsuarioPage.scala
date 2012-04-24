@@ -16,7 +16,7 @@ import br.tvsolutions.ponto.pages.panels.UsuarioPanel
 
 class UsuarioPage(usuario:Usuario, direto:Boolean) extends PontoBasePage(usuario){
 
-  val serialVersionUID:Long = 1L;
+  val serialVersionUID:Long = 1L
 
   var usuarioSelecionado:Usuario =_
 
