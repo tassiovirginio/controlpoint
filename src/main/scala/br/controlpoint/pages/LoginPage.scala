@@ -34,19 +34,17 @@ class LoginPage extends WebPage {
         if (usuarioLogado.ips.contains(teste)) {
           setResponsePage(new PontoPage(usuarioLogado, true))
         } else {
-          info("Você não tem acesso desse ip!")
+          error("Você não tem acesso desse ip!")
         }
       } else {
-        info("Login Incorretor!")
+        error("Login Incorretor!")
       }
     }
   }
 
-  var login = new TextField[String]("login", new PropertyModel[String](usuario, "login"))
-  login.setRequired(true)
-  form.add(login)
+  form.add(new TextField[String]("login", new PropertyModel[String](usuario, "login")).setRequired(true))
 
-  form.add(new PasswordTextField("senha", new PropertyModel[String](usuario, "senha")))
+  form.add(new PasswordTextField("senha", new PropertyModel[String](usuario, "senha")).setRequired(true))
 
   form.add(new FeedbackPanel("feedback"))
 
