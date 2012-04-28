@@ -35,7 +35,7 @@ class WicketApplication extends WebApplication{
 		usuario.senha = "admin"
 		usuario.nome = "Admin"
 		usuario.ips = "127.0.0.1"
-		usuario.wallpaper = "wallpaper02"
+		usuario.wallpaper = "wallpaper01"
 		usuarioMediator.salvarUsuario(usuario)
 	}
 
