@@ -10,7 +10,10 @@ defaultExcludes in unmanagedResources := ("*.scala" | "*.java")
   
 seq(webSettings :_*)
 
+resolvers += "Google Code" at "http://jqwicket.googlecode.com/svn/m2-repo/releases/"
+
 libraryDependencies ++= Seq(
+ 	"com.google.code.jqwicket" % "jqwicket" % "0.6",
 	"org.apache.wicket" % "wicket" % "1.4.17",
 	"org.apache.wicket" % "wicket-ioc" % "1.4.17",
 	"org.apache.wicket" % "wicket-spring" % "1.4.17",

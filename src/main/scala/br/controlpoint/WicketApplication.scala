@@ -4,10 +4,13 @@ import org.apache.wicket.protocol.http.WebApplication
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import com.google.code.jqwicket.JQContributionConfig
 import br.controlpoint.entities.Usuario
-import br.controlpoint.mediators.{TPontoMediator,TUsuarioMediator}
+import br.controlpoint.mediators.TPontoMediator
+import br.controlpoint.mediators.TUsuarioMediator
 import br.controlpoint.pages.LoginPage
-import javax.persistence.Entity
+import com.google.code.jqwicket.JQComponentOnBeforeRenderListener
+import br.controlpoint.pages.LoginPage
 
 @Component
 class WicketApplication extends WebApplication{
@@ -22,8 +25,18 @@ class WicketApplication extends WebApplication{
 	
 	override def init = {
 		addComponentInstantiationListener(new SpringComponentInjector(this))
-		getDebugSettings().setAjaxDebugModeEnabled(false)
 		getApplicationSettings().setPageExpiredErrorPage(getHomePage())
+		getRequestCycleSettings().setResponseRequestEncoding("UTF-8")
+        getMarkupSettings().setDefaultMarkupEncoding("UTF-8")
+		getDebugSettings().setAjaxDebugModeEnabled(true)
+
+		 var config = new JQContributionConfig("/js/jquery-1.5.1.min.js") 
+        config.withJQueryUiJs("/js/jquery-ui-1.8.12.custom.min.js") 
+        .withJQueryUiCss("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css");
+//		.withJQueryUiCss("/css/jquery-ui-1.8.12.custom.css"); 
+		
+        addPreComponentOnBeforeRenderListener(new JQComponentOnBeforeRenderListener(config));
+        
 		createAdmin
 	}
 	

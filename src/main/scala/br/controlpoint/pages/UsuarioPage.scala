@@ -24,36 +24,36 @@ class UsuarioPage(usuario:Usuario, direto:Boolean) extends PontoBasePage(usuario
   add(container)
   container.setVisible(!direto)
 
-  usuarioPanel = new UsuarioPanel(this, usuario,direto);
-  usuarioPanel.setOutputMarkupId(true);
-  usuarioPanel.setVisible(false||direto);
-  add(usuarioPanel);
+  usuarioPanel = new UsuarioPanel(this, usuario,direto)
+  usuarioPanel.setOutputMarkupId(true)
+  usuarioPanel.setVisible(false||direto)
+  add(usuarioPanel)
 
   var form = new Form("form"){
     override protected def onSubmit() {
       usuarioPanel.setUsuarioSelecionado(usuarioSelecionado);
       usuarioPanel.setVisible(true);
     }
-  };
+  }
 
-  container.add(form);
+  container.add(form)
 
   var listaUsuario:java.util.List[Usuario] = usuarioMediator.listaUsuarios
 
   var listChoice:ListChoice[Usuario] = new ListChoice[Usuario]("listaUsuario",new PropertyModel[Usuario](this, "usuarioSelecionado"), listaUsuario,new ChoiceRenderer[Usuario]("nome"),1);
-  listChoice.setRequired(true);
-  form.add(listChoice);
+  listChoice.setRequired(true)
+  form.add(listChoice)
 
   var linkNovoUsuario = new Link("linkNovoUsuario"){
     override def onClick() {
-      var usuario = new Usuario();
-      usuarioPanel.setUsuarioSelecionado(usuario);
-      usuarioPanel.setVisible(true);
+      var usuario = new Usuario()
+      usuarioPanel.setUsuarioSelecionado(usuario)
+      usuarioPanel.setVisible(true)
     }
   };
-  container.add(linkNovoUsuario);
+  container.add(linkNovoUsuario)
 
-  var feedbackPanel = new FeedbackPanel("feedback");
-  container.add(feedbackPanel);
+  var feedbackPanel = new FeedbackPanel("feedback")
+  container.add(feedbackPanel)
 
 }
