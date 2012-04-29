@@ -176,13 +176,10 @@ th {
 }
 
 input[type=submit] {
-	border-radius: 10px;
-	font-family: Verdana;
-	font-size: 8pt;
-	color: #000000;
-	font-weight: bold;
-	border: 1px solid black margin :   auto;
-	-webkit-box-align: center;
+	border-radius: 3px;
+	color: #FFFFFF;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#404040),to(#000000) );
+	background-image: -moz-linear-gradient(100% 100% 90deg, #404040, #000000);
 }
 
 textarea:focus {
@@ -210,10 +207,10 @@ input,textarea,select,option {
 }
 
 input:hover,textarea:hover,select:hover,option:hover {
-	color: #000000;
-	background: #99CCFF;
-	font-weight: bolder;
-	background-color: #99CCFF;
+	border-radius: 3px;
+	color: #99CCFF;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#404040),to(#000000) );
+	background-image: -moz-linear-gradient(100% 100% 90deg, #404040, #000000);
 }
 
 
@@ -223,5 +220,5 @@ input,textarea,select {
 
 .feedbackPanelERROR {
 	color: #FF0000;
-	*background: #FFFFFF;
+	background: #FFFFFF;
 }

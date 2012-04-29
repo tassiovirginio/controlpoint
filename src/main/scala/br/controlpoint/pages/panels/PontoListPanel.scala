@@ -16,8 +16,11 @@ import org.joda.time.format.PeriodFormatterBuilder
 import br.controlpoint.entities.{Ponto,Usuario}
 import br.controlpoint.mediators.TPontoMediator
 import br.controlpoint.pages.base.PontoBasePage
-import br.controlpoint.pages.PontoPage
+import br.controlpoint.pages.{PontoPage,EditPontoPage}
 import java.io.Serializable
+import com.google.code.jqwicket.ui.prettypopin.PrettyPopinBehavior
+import com.google.code.jqwicket.ui.prettypopin.PrettyPopinOptions
+import org.apache.wicket.markup.html.link.Link
 
 
 class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaInicio:DateTime,dateBuscaFim:DateTime,editavel:Boolean,pageOrigem:PontoBasePage) extends Panel("pontoListPanel") with Serializable{
@@ -150,7 +153,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	add(editarPontoWinModal);
 
 
-	private class LinkDate(id:String,ponto:Ponto,clickavel:java.lang.Boolean,tipo:java.lang.Integer) extends AjaxLink[String](id){
+	private class LinkDate(id:String,ponto:Ponto,clickavel:java.lang.Boolean,tipo:java.lang.Integer) extends Link[String](id){
 		if(clickavel == true){
 			setEnabled(true);
 		}else{
@@ -166,10 +169,15 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
             }
 		}));
 		
-		def onClick(target:AjaxRequestTarget) = {
-			editarPontoWinModal.setContent(new EditPontoPanel(editarPontoWinModal.getContentId(),this.ponto,editarPontoWinModal,pageOrigem));
-			editarPontoWinModal.show(target);
+		var prettyOpt = new PrettyPopinOptions()
+		var pretty = new PrettyPopinBehavior(prettyOpt.width(300).height(180).followScroll(false))
+		add(pretty);  
+		
+		def onClick(){
+//		  new EditPontoPanel(editarPontoWinModal.getContentId(),this.ponto,editarPontoWinModal,pageOrigem);
+		  setResponsePage(new EditPontoPage(this.ponto,pageOrigem))
 		}
+		
 	}
 	//Pode existir a Class e o Object-Class
 	object LinkDate extends Serializable{
