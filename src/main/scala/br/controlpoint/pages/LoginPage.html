@@ -5,7 +5,7 @@
 <title>Ponto On-Line</title>
 <LINK href="css/base.css" rel="stylesheet" type="text/css">
 </HEAD>
-<BODY>
+<body onload="setFocus()">
 
 	<div id="menu_div">&nbsp;
 		<font color="FFFFFF">&nbsp; Control Point &nbsp</font>
@@ -35,7 +35,7 @@
 	</TR>
 	<TR>
 		<TD align="right">Login:</TD>
-		<TD><input type="text" wicket:id="login" /></TD>
+		<TD><input type="text" wicket:id="login" id="login" /></TD>
 	</TR>
 	<TR>
 		<TD align="right">Senha:</TD>
@@ -51,6 +51,13 @@
 <div id="status_div">
 		Power by: Scala, Wicket, Hibernate e Spring.
 </div>
+
+<script type="text/javascript">
+		function setFocus()
+		{
+		     document.getElementById("login").focus();
+		}
+	</script>
 
 </BODY>
 </HTML>
