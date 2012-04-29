@@ -10,7 +10,6 @@ body {
 #relogio_div {
 	font-weight: bold;
 	font-size: 11px;
-	*border: 2px solid #ffffff;
 	width: 100%;
 	text-align: right;
 	margin: 0 auto;
@@ -59,7 +58,7 @@ body {
 	position: fixed;
 	font-weight: bold;
 	font-size: 11px;
-	width: 95%;
+	width: 93%;
 	margin: 0 auto;
 	margin-left: 0px;
 	background-color: #000000;
