@@ -1,11 +1,16 @@
 package br.controlpoint.pages
 
-import org.apache.wicket.markup.html.WebMarkupContainer
+import org.apache.wicket.markup.html.link.ResourceLink
+import org.apache.wicket.markup.html.{WebMarkupContainer,WebResource}
+import org.apache.wicket.protocol.http.WebResponse
+import org.apache.wicket.util.resource.StringResourceStream
 import org.joda.time.DateTime
 import br.controlpoint.entities.Usuario
-import org.apache.wicket.markup.html.link.Link
 import br.controlpoint.pages.base.PontoBasePage
 import br.controlpoint.pages.panels.PontoListPanel
+import org.apache.wicket.util.resource.IResourceStream
+import collection.JavaConversions._
+
 
 class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInicio:DateTime, dateBuscaFim:DateTime, editavel:java.lang.Boolean) extends PontoBasePage(usuarioLogado) {
   val serialVersionUID: java.lang.Long = 1L
@@ -17,12 +22,33 @@ class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInic
   }
   add(container)
 
-  var linkGerarXls = new Link("linkGerarXls") {
-     override def onClick(){}
+  var listData = pontoMediator.listaPontoUsuario(usuarioSelecionado, dateBuscaInicio, dateBuscaFim);
+  
+  var export = new WebResource() {
+    
+    override def getResourceStream:IResourceStream = {
+      var result = new StringBuffer()
+      
+      for (ponto <- listData) {
+		    result.append(ponto.getDataInicio.toString("HH:mm dd/MM/yyyy")+",")
+		    if(ponto.getDataFim != null){
+		    	result.append(ponto.getDataFim.toString("HH:mm dd/MM/yyyy"))
+		    }
+		    result.append("\n")
+	  }
+      
+      return new StringResourceStream(result, "text/plain");
+    }
+    
+    override def setHeaders(response: WebResponse) {
+      super.setHeaders(response);
+      response.setAttachmentHeader(usuarioSelecionado.login +  ".csv");
+    }
   }
 
-  container.add(linkGerarXls)
-
+  export.setCacheable(false);
+  container.add(new ResourceLink("linkGerarXls", export));
+  
   if(dateBuscaFim == null){
 	 container.setVisible(false)
   }

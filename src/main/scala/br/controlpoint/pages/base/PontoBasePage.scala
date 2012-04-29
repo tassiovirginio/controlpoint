@@ -19,6 +19,7 @@ import javax.persistence.Entity
 import org.apache.wicket.markup.html.link.Link
 import br.controlpoint.pages.RelPeriodoPage
 import br.controlpoint.mediators.{TPontoMediator,TUsuarioMediator}
+import collection.JavaConversions._
 
 class PontoBasePage(usuario: Usuario) extends WebPage {
 
