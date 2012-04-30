@@ -32,8 +32,7 @@ class WicketApplication extends WebApplication{
 
 		 var config = new JQContributionConfig("/js/jquery-1.5.1.min.js") 
         config.withJQueryUiJs("/js/jquery-ui-1.8.12.custom.min.js") 
-        .withJQueryUiCss("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css");
-//		.withJQueryUiCss("/css/jquery-ui-1.8.12.custom.css"); 
+		.withJQueryUiCss("/css/jquery-ui.css"); 
 		
         addPreComponentOnBeforeRenderListener(new JQComponentOnBeforeRenderListener(config));
         

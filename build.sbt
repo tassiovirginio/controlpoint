@@ -34,9 +34,7 @@ libraryDependencies ++= {
 		"joda-time" % "joda-time" % "1.6",
 		"joda-time" % "joda-time-hibernate" % "1.2",
 		"junit" % "junit" % "3.8.2",
-		"org.slf4j" % "slf4j-log4j12" % "1.4.2",
-		"org.apache.poi" % "poi" % "3.6",
-		"postgresql" % "postgresql" % "8.4-701.jdbc4"
+		"org.slf4j" % "slf4j-log4j12" % "1.4.2"
 	)
 }
 

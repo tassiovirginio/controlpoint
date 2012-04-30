@@ -19,9 +19,11 @@ import org.apache.wicket.markup.html.basic.Label
 import org.apache.wicket.model.Model
 
 
-class UsuarioPanel(pagePai:Page, usuario:Usuario, direto:java.lang.Boolean) extends Panel("usuarioPanel") {
+class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) extends Panel("usuarioPanel") {
 
   var serialVersionUID = 1L
+  
+  var direto = diretoS.asInstanceOf[Boolean]
   
   @SpringBean
   var usuarioMediator:TUsuarioMediator = _

@@ -26,6 +26,11 @@
 		</dependency>
 		<!-- WICKET DEPENDENCIES -->
 		<dependency>
+			<groupId>com.google.code.jqwicket</groupId>
+			<artifactId>jqwicket</artifactId>
+			<version>0.6</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket</artifactId>
 			<version>${wicket.version}</version>
@@ -86,17 +91,6 @@
 			<version>1.8.0.10</version>
 		</dependency>
 
-		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>8.4-701.jdbc4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>3.6</version>
-		</dependency>
 
 		<!-- LOGGING DEPENDENCIES - LOG4J -->
 		<dependency>
@@ -280,6 +274,11 @@
 			<id>scala-tools.org</id>
 			<name>Scala-tools Maven2 Repository</name>
 			<url>http://scala-tools.org/repo-releases</url>
+		</repository>
+		<repository>
+			<id>Google Code</id>
+			<name>Google Code Maven2 Repository</name>
+			<url>http://jqwicket.googlecode.com/svn/m2-repo/releases/</url>
 		</repository>
 	</repositories>
 
