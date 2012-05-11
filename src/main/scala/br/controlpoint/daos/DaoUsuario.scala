@@ -36,18 +36,10 @@ class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable 
   
   def buscarUsuarioPorLogin(login:String): Usuario = {
 	  
-    var usuarioReturn: Usuario = null
-    
-    var usuarioBusca = currentSession.createCriteria(classOf[Usuario])
+    return currentSession.createCriteria(classOf[Usuario])
       .add(Restrictions.eq("login", login))
       .uniqueResult().asInstanceOf[Usuario]
-
-    if (usuarioBusca != null && usuarioBusca.senha.length() < 15) {
-      usuarioBusca.senha = (DaoUsuarioScala.codificarSenha(usuarioBusca.login.trim() + usuarioBusca.senha.trim()))
-      this.save(usuarioBusca)
-    }
     
-    return usuarioReturn
   }
   
 }
