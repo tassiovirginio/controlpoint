@@ -30,9 +30,9 @@ class WicketApplication extends WebApplication{
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8")
 		getDebugSettings().setAjaxDebugModeEnabled(true)
 
-		 var config = new JQContributionConfig("/js/jquery-1.5.1.min.js") 
-        config.withJQueryUiJs("/js/jquery-ui-1.8.12.custom.min.js") 
-		.withJQueryUiCss("/css/jquery-ui.css"); 
+		 var config = new JQContributionConfig("js/jquery-1.5.1.min.js") 
+        config.withJQueryUiJs("js/jquery-ui-1.8.12.custom.min.js") 
+		.withJQueryUiCss("css/jquery-ui.css"); 
 		
         addPreComponentOnBeforeRenderListener(new JQComponentOnBeforeRenderListener(config));
         
