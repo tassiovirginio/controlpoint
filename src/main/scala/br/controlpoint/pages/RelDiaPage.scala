@@ -12,8 +12,6 @@ import br.controlpoint.pages.base.PontoBasePage
 
 class RelDiaPage(usuario: Usuario) extends PontoBasePage(usuario) {
 
-  val serialVersionUID = 1L
-
   var dataPesquisa: Date = _
 
   var usuarioSelecionado: Usuario = _
@@ -27,7 +25,7 @@ class RelDiaPage(usuario: Usuario) extends PontoBasePage(usuario) {
 
   var form = new Form("form") {
     override protected def onSubmit() {
-      setResponsePage(new PontoPage(getUsuarioLogado(), usuarioSelecionado, new DateTime(dataPesquisa), new DateTime(dataPesquisa), false));
+      setResponsePage(new PontoPage(usuarioLogado, usuarioSelecionado, new DateTime(dataPesquisa), new DateTime(dataPesquisa), false));
     }
   };
   add(form);
@@ -39,10 +37,10 @@ class RelDiaPage(usuario: Usuario) extends PontoBasePage(usuario) {
 
   var listaUsuario = new ArrayList[Usuario]()
 
-  if (getUsuarioLogado().adm.asInstanceOf[Boolean]) {
+  if (usuarioLogado.adm.asInstanceOf[Boolean]) {
     listaUsuario.addAll(usuarioMediator.listaUsuarios)
   } else {
-    listaUsuario.add(getUsuarioLogado())
+    listaUsuario.add(usuarioLogado)
   }
 
   var listChoice = new ListChoice[Usuario]("listaUsuario", new PropertyModel[Usuario](this, "usuarioSelecionado"), listaUsuario, new ChoiceRenderer[Usuario]("nome"), 1)

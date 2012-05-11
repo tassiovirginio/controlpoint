@@ -12,13 +12,13 @@ import br.controlpoint.entities.Usuario
 @Component
 class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable {
   
-  def getDomain(): Class[Usuario] = classOf[Usuario]
+  def domain: Class[Usuario] = classOf[Usuario]
   
   def buscarUsuarioPorLogin(usuario: Usuario): Usuario = {
 	  
     var usuarioReturn: Usuario = null
     
-    var usuarioBusca = getCurrentSession().createCriteria(classOf[Usuario])
+    var usuarioBusca = currentSession.createCriteria(classOf[Usuario])
       .add(Restrictions.eq("login", usuario.login))
       .uniqueResult().asInstanceOf[Usuario]
 
@@ -36,7 +36,6 @@ class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable 
 }
 
 object DaoUsuarioScala {
-  val serialVersionUID = 1L
 	
   def codificarSenha(senha: String): String = {
 	  

@@ -13,7 +13,6 @@ import collection.JavaConversions._
 
 
 class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInicio:DateTime, dateBuscaFim:DateTime, editavel:java.lang.Boolean) extends PontoBasePage(usuarioLogado) {
-  val serialVersionUID: java.lang.Long = 1L
 
   add(new PontoListPanel(usuarioSelecionado, usuarioLogado, dateBuscaInicio, dateBuscaFim, editavel.asInstanceOf[Boolean], this))
 
@@ -30,9 +29,9 @@ class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInic
       var result = new StringBuffer()
       
       for (ponto <- listData) {
-		    result.append(ponto.getDataInicio.toString("HH:mm dd/MM/yyyy")+",")
-		    if(ponto.getDataFim != null){
-		    	result.append(ponto.getDataFim.toString("HH:mm dd/MM/yyyy"))
+		    result.append(ponto.dataInicio.toString("HH:mm dd/MM/yyyy")+",")
+		    if(ponto.dataFim != null){
+		    	result.append(ponto.dataFim.toString("HH:mm dd/MM/yyyy"))
 		    }
 		    result.append("\n")
 	  }

@@ -25,7 +25,7 @@ class EditPontoPanel(id:String, ponto:Ponto, paginaOrigem:PontoBasePage) extends
   
   val dateFormatter = "dd/MM/yyyy HH:mm"
   
-  var dateHoraEntrada = ponto.getDataInicio().toString(dateFormatter)
+  var dateHoraEntrada = ponto.dataInicio.toString(dateFormatter)
 
   var timeEndNull:Boolean =_
 
@@ -34,20 +34,20 @@ class EditPontoPanel(id:String, ponto:Ponto, paginaOrigem:PontoBasePage) extends
   @SpringBean
   var pontoMediator:TPontoMediator = _
 
-  if (ponto.getDataFim() != null) {
-    this.dateHoraSaida = ponto.getDataInicio().toString(dateFormatter)
+  if (ponto.dataFim != null) {
+    this.dateHoraSaida = ponto.dataInicio.toString(dateFormatter)
   }
     
   
   var form = new Form[Usuario]("form"){
     override def onSubmit(){
     	val formatter = DateTimeFormat.forPattern(dateFormatter)
-	      ponto.setDataInicio(formatter.parseDateTime(dateHoraEntrada))
+	      ponto.dataInicio = formatter.parseDateTime(dateHoraEntrada)
 	      
 	      if (timeEndNull) {
-	        ponto.setDataFim(null)
+	        ponto.dataFim = null
 	      }else{
-	    	ponto.setDataFim(formatter.parseDateTime(dateHoraSaida))
+	    	ponto.dataFim = formatter.parseDateTime(dateHoraSaida)
 	      }
 	      
     	println(dateHoraEntrada.toString)
@@ -82,6 +82,6 @@ class EditPontoPanel(id:String, ponto:Ponto, paginaOrigem:PontoBasePage) extends
   container.add(checknull);
   form.add(container);
   
-  timeEndNull = ponto.getDataFim() == null
+  timeEndNull = ponto.dataFim == null
 
 }

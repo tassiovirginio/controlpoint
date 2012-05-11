@@ -12,8 +12,6 @@ import javax.persistence.Entity
 
 class LoginPage extends WebPage {
 
-  val serialVersionUID = 1L;
-
   @SpringBean
   var usuarioMediatorScala: TUsuarioMediator = _
 

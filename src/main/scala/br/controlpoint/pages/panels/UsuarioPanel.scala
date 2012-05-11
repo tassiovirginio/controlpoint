@@ -21,8 +21,6 @@ import org.apache.wicket.model.Model
 
 class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) extends Panel("usuarioPanel") {
 
-  var serialVersionUID = 1L
-  
   var direto = diretoS.asInstanceOf[Boolean]
   
   @SpringBean

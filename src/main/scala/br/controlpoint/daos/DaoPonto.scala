@@ -11,7 +11,7 @@ import scala.collection.JavaConversions._
 @Component
 class DaoPonto extends DaoAbstract[Ponto,java.lang.Long]  with Serializable{
 
-	override def getDomain() = classOf[Ponto]
+	override def domain = classOf[Ponto]
 	
 	def buscarPontos(ponto:Ponto,dataDiaInicio:DateTime,dataDiaFim:DateTime):jList[Ponto] = {
 		var dateTime1 = dataDiaInicio.withTime(00,00,00,00)
@@ -19,8 +19,8 @@ class DaoPonto extends DaoAbstract[Ponto,java.lang.Long]  with Serializable{
 		if(dataDiaFim != null){
 			dateTime2 = dataDiaFim.withTime(23,59,59,00)
 		}
-		return getCurrentSession().createCriteria(classOf[Ponto])
-		.add(Restrictions.eq("usuario", ponto.getUsuario()))
+		return currentSession.createCriteria(classOf[Ponto])
+		.add(Restrictions.eq("usuario", ponto.usuario))
 		.add(Restrictions.between("dataInicio", dateTime1, dateTime2))
 		.addOrder(Order.asc("dataInicio"))
 		.list().asInstanceOf[jList[Ponto]]
@@ -31,18 +31,16 @@ class DaoPonto extends DaoAbstract[Ponto,java.lang.Long]  with Serializable{
 		var dateTime2 = dataDiaInicio.withTime(23,59,59,00)
 		if(dataDiaFim != null){dateTime2 = dataDiaFim.withTime(23,59,59,00)}
 
-		var lista = getCurrentSession().createCriteria(classOf[Ponto])
+		var lista = currentSession.createCriteria(classOf[Ponto])
 		.add(Restrictions.between("dataInicio", dateTime1, dateTime2))
 		.add(Restrictions.isNull("dataFim"))
 		.addOrder(Order.asc("dataInicio"))
 		.list().asInstanceOf[jList[Ponto]]
 		
 		for (ponto <- lista) {
-			ponto.getUsuario().nome
+			ponto.usuario.nome
 		}
 
 		return lista
 	}
 }
-
-object DaoPontoScala{val serialVersionUID:Long = 1L;}

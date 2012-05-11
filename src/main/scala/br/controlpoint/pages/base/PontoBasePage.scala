@@ -29,7 +29,6 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
   @SpringBean
   var pontoMediator: TPontoMediator = _
 
-  @BeanProperty
   var usuarioLogado: Usuario = null
 
   private val LOCALE_BR = new Locale("pt_BR");
@@ -110,8 +109,8 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
   var listaPonto = pontoMediator.listaPontoUsuario(usuarioLogado, dataBusca);
 
   for (ponto <- listaPonto) {
-    if (ponto.getDataInicio() != null && ponto.getDataFim() == null) {
-      contadorMilesegundos = ponto.getDataInicio().getMillis() + "";
+    if (ponto.dataInicio != null && ponto.dataFim == null) {
+      contadorMilesegundos = ponto.dataInicio.getMillis() + "";
     }
   }
 
@@ -121,10 +120,9 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
 
   var listaPonto2: List[Ponto] = pontoMediator.listaPontoUsuario(new DateTime());
   add(new ListView[Ponto]("listaPonto", listaPonto2) {
-    val serialVersionUID = 1L;
     def populateItem(item: ListItem[Ponto]) {
       var ponto = item.getModelObject();
-      item.add(new Label("nome", ponto.getUsuario().nome));
+      item.add(new Label("nome", ponto.usuario.nome));
     }
   });
 

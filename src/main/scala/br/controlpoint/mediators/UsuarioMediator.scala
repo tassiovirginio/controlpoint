@@ -21,7 +21,7 @@ class UsuarioMediator extends TUsuarioMediator{
 	
 	def salvarUsuario(usuario:Usuario) = daoUsuario.save(usuario)
 	
-	def sizeUsuario = daoUsuario.size()
+	def sizeUsuario = daoUsuario.size
 	 
 	def fazerLogin(usuario:Usuario) = daoUsuario.buscarUsuarioPorLogin(usuario)
 	

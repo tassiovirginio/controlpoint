@@ -41,12 +41,12 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	var listData = pontoMediator.listaPontoUsuario(usuarioSelecionado, dateBuscaInicio, dateBuscaFim);
 	
 	var btAdd = new Button("btAdd") {
-		val serialVersionUID:Long = 1L
-		override def onSubmit() {
+
+	  override def onSubmit() {
 			var novoPonto = new Ponto()
-			novoPonto.setDataInicio(dateBuscaInicio)
-			novoPonto.setUsuario(usuarioSelecionado)
-			novoPonto.setIpInicio(infoWeb.getProperties().getRemoteAddress())
+			novoPonto.dataInicio = dateBuscaInicio
+			novoPonto.usuario = usuarioSelecionado
+			novoPonto.ipInicio = infoWeb.getProperties().getRemoteAddress()
 			pontoMediator.salvarPonto(novoPonto)
 			setResponsePage(new PontoPage(usuarioLogado,usuarioSelecionado,dateBuscaInicio,dateBuscaFim,editavel))
 		}
@@ -61,12 +61,12 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
   var btEntrada: Button = _
 
 	btEntrada = new Button("btEntrada") {
-		val serialVersionUID:Long = 1L
-		override def onSubmit() {
+
+	  override def onSubmit() {
 			var novoPonto = new Ponto()
-			novoPonto.setDataInicio(new DateTime())
-			novoPonto.setUsuario(usuarioLogado)
-			novoPonto.setIpInicio(infoWeb.getProperties().getRemoteAddress())
+			novoPonto.dataInicio = new DateTime()
+			novoPonto.usuario = usuarioLogado
+			novoPonto.ipInicio = infoWeb.getProperties().getRemoteAddress()
 			pontoMediator.salvarPonto(novoPonto)
 			this.setVisible(false)
 			btSaida.setVisible(true)
@@ -75,10 +75,10 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	};
 
 	btSaida = new Button("btSaida") {
-		val serialVersionUID:Long = 1L
-		override def onSubmit() {
-			pontoParaFechar.setDataFim(new DateTime())
-			pontoParaFechar.setIpFim(infoWeb.getProperties().getRemoteAddress())
+
+	  override def onSubmit() {
+			pontoParaFechar.dataFim = new DateTime()
+			pontoParaFechar.ipFim = infoWeb.getProperties().getRemoteAddress()
 			pontoMediator.salvarPonto(pontoParaFechar)
 			pontoParaFechar = null
 			btEntrada.setVisible(true)
@@ -91,7 +91,6 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	btSaida.setVisible(false);
 	
 	add(new ListView[Ponto]("listaPonto", listData) {
-		val serialVersionUID:Long = 1L;
 
 		override protected def onBeforeRender() {
 			periodTotal = new Period();
@@ -101,7 +100,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 		def populateItem(item:ListItem[Ponto]) = {
 			var ponto = item.getModelObject()
 			item.add(new LinkDate("dataInicio", ponto, usuarioLogado.adm,LinkDate.ENTRADA))
-			if (ponto.getDataFim() == null) {
+			if (ponto.dataFim == null) {
 				btEntrada.setVisible(false)
 				btSaida.setVisible(true)
 				pontoParaFechar = ponto;
@@ -109,10 +108,10 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 			} else {
 				item.add(new LinkDate("dataFim", ponto, usuarioLogado.adm,LinkDate.SAIDA))
 			}
-			if (ponto.getDataFim() == null) {
+			if (ponto.dataFim == null) {
 				item.add(new Label("total", ""))
 			} else {
-				var period = new Period(ponto.getDataInicio(), ponto.getDataFim())
+				var period = new Period(ponto.dataInicio, ponto.dataFim)
 				periodTotal = periodTotal.plus(period)
 				lbPeriodTotal.setDefaultModel(new Model(periodTotal.toPeriod().normalizedStandard().toString(getFormatter())))
 				period = period.normalizedStandard()
@@ -120,7 +119,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 			}
 			//Regra para quando chegar no tamanho maximo travar o ponto max 2 por dia se for ext)
 			if(usuarioLogado.externo.asInstanceOf[Boolean]){
-				if(dateBuscaFim == null && listData.size() > 1 && ponto.getDataFim() != null){
+				if(dateBuscaFim == null && listData.size() > 1 && ponto.dataFim != null){
 					container.setVisible(false)
 				}else{
 					container.setVisible(editavel)
@@ -162,9 +161,9 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 		add(new Label("label", new Model[String]() {
             override def getObject():String = {
             	var retorno = "";
-            	if(tipo == LinkDate.ENTRADA){retorno = ponto.getDataInicio().toString("dd/MM/YYYY HH:mm:ss")}
+            	if(tipo == LinkDate.ENTRADA){retorno = ponto.dataInicio.toString("dd/MM/YYYY HH:mm:ss")}
             	if(tipo == LinkDate.SAIDA){
-            		retorno = ponto.getDataFim().toString("dd/MM/YYYY HH:mm:ss")}
+            		retorno = ponto.dataFim.toString("dd/MM/YYYY HH:mm:ss")}
             	return retorno;
             }
 		}));
@@ -181,15 +180,12 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	}
 	//Pode existir a Class e o Object-Class
 	object LinkDate extends Serializable{
-		val serialVersionUID:Long = 1L
 		val ENTRADA:java.lang.Integer = 1
 		val SAIDA:java.lang.Integer = 2
 		val BRANCO:java.lang.Integer = 3
-
 	}
 	
 	private class LinkDelete(id:String,ponto:Ponto,clickavel:java.lang.Boolean) extends AjaxLink[String](id){
-		val serialVersionUID:Long = 1L;
 		
 		@SpringBean
 		var pontoMediator:TPontoMediator =_

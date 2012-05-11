@@ -13,19 +13,18 @@ import org.joda.time.DateTime
 
 class RelPeriodoPage(usuario: Usuario, travarLista: java.lang.Boolean) extends PontoBasePage(usuario) {
 
-  val serialVersionUID = 1L
   var usuarioSelecionado: Usuario = _
 
   def this(usuario: Usuario) = this(usuario, false)
 
-  setUsuarioLogado(usuario);
+  usuarioLogado = usuario
 
   var dataPesquisaInicio = new Date();
   var dataPesquisaFim = new Date();
 
   var form = new Form("form") {
     override protected def onSubmit() {
-      setResponsePage(new PontoPage(getUsuarioLogado(), usuarioSelecionado, new DateTime(dataPesquisaInicio), new DateTime(dataPesquisaFim), false));
+      setResponsePage(new PontoPage(usuarioLogado, usuarioSelecionado, new DateTime(dataPesquisaInicio), new DateTime(dataPesquisaFim), false));
     }
   };
   add(form);
@@ -42,16 +41,16 @@ class RelPeriodoPage(usuario: Usuario, travarLista: java.lang.Boolean) extends P
 
   var listaUsuario = new ArrayList[Usuario]();
 
-  if (getUsuarioLogado().adm.asInstanceOf[Boolean]) {
+  if (usuarioLogado.adm.asInstanceOf[Boolean]) {
     listaUsuario.addAll(usuarioMediator.listaUsuarios);
   } else {
-    listaUsuario.add(getUsuarioLogado());
+    listaUsuario.add(usuarioLogado);
   }
 
   var listChoice = new ListChoice[Usuario]("listaUsuario", new PropertyModel[Usuario](this, "usuarioSelecionado"), listaUsuario, new ChoiceRenderer[Usuario]("nome"), 1);
   listChoice.setRequired(true);
   if (travarLista.asInstanceOf[Boolean]) {
-    usuarioSelecionado = getUsuarioLogado();
+    usuarioSelecionado = usuarioLogado;
     listChoice.setVisible(false);
   }
   form.add(listChoice);

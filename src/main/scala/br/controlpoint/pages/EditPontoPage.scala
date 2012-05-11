@@ -14,7 +14,6 @@ import br.controlpoint.entities.Ponto
 import br.controlpoint.pages.base.PontoBasePage
 
 class EditPontoPage(ponto:Ponto, paginaOrigem:PontoBasePage) extends WebPage {
-  val serialVersionUID = 1L;
 
   add(new EditPontoPanel("panel",this.ponto,paginaOrigem))
 

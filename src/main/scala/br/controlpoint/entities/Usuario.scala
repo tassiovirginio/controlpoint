@@ -13,6 +13,7 @@ import scala.reflect.BeanProperty
 import java.lang.Boolean
 
 @Entity
+@SerialVersionUID(1L)
 class Usuario extends Serializable {
 	
 	@Id
@@ -51,8 +52,4 @@ class Usuario extends Serializable {
 	@Type(`type`="org.joda.time.contrib.hibernate.PersistentTimeOfDay")
 	var alerta1:LocalTime = _
 
-}
-
-object Usuario{
-	val serialVersionUID:Long = 1L;
 }

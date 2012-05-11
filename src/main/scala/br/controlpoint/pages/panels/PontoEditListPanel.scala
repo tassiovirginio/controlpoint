@@ -13,8 +13,6 @@ import org.joda.time.DateTime
 
 class PontoEditListPanel(usuario:Usuario, dateBuscaInicio:DateTime, dateBuscaFim:DateTime) extends Panel("PontoEditListPanel") {
 
-  val serialVersionUID = 1L;
-
   @SpringBean
   var pontoMediator:TPontoMediator = _
 
@@ -25,11 +23,10 @@ class PontoEditListPanel(usuario:Usuario, dateBuscaInicio:DateTime, dateBuscaFim
   };
   
   formEntrada.add(new ListView[Ponto]("listaPonto", listData) {
-    val serialVersionUID = 1L;
     def populateItem(item: ListItem[Ponto]) {
       var ponto = item.getModelObject();
-      item.add(new Label("dataInicio", ponto.getDataInicio().toString("dd/MM/yyyy HH:mm:ss")));
-      item.add(new Label("dataFim", ponto.getDataFim().toString("dd/MM/yyyy HH:mm:ss")));
+      item.add(new Label("dataInicio", ponto.dataInicio.toString("dd/MM/yyyy HH:mm:ss")));
+      item.add(new Label("dataFim", ponto.dataFim.toString("dd/MM/yyyy HH:mm:ss")));
     }
   });
   

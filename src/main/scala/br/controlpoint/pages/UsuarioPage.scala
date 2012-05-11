@@ -14,8 +14,6 @@ import java.util.List
 
 class UsuarioPage(usuario:Usuario, direto:Boolean) extends PontoBasePage(usuario){
 
-  val serialVersionUID:Long = 1L
-
   var usuarioSelecionado:Usuario =_
 
   var usuarioPanel:UsuarioPanel =_
