@@ -40,15 +40,20 @@ class WicketApplication extends WebApplication{
 	}
 	
 	def createAdmin = {
+	  
+	  var usuario = usuarioMediator.buscarUsuarioPorLogin("admin")
+	  
+	  if(usuario == null){
 		var usuario = new Usuario
 		usuario.adm = true
 		usuario.email = "admin@email.com"
 		usuario.login = "admin"
 		usuario.senha = "admin"
 		usuario.nome = "Admin"
-		usuario.ips = "127.0.0.1"
+		usuario.ips = "127.0.0.1,192.168.171.191"
 		usuario.wallpaper = "wallpaper01"
 		usuarioMediator.salvarUsuario(usuario)
+	  }
 	}
 
 }

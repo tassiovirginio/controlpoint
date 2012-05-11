@@ -15,6 +15,8 @@ trait TUsuarioMediator {
 	
 	def fazerLogin(usuario:Usuario):Usuario
 	
+	def buscarUsuarioPorLogin(login:String):Usuario
+	
 	def getUsuarioForId(id:Long):Usuario
 	
 	def listaUsuarios:java.util.List[Usuario]
