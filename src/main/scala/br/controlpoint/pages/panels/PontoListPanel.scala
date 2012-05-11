@@ -33,11 +33,10 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	var pontoParaFechar:Ponto =_
 
 	var infoWeb:WebClientInfo = getSession().getClientInfo().asInstanceOf[WebClientInfo]
-	var periodTotal = new Period();
-	var lbPeriodTotal = new Label("periodTotal");
-	lbPeriodTotal.setOutputMarkupId(true);
-	add(lbPeriodTotal);
-		
+	var periodTotal = new Period()
+	var lbPeriodTotal = new Label("periodTotal")
+	lbPeriodTotal.setOutputMarkupId(true)
+	add(lbPeriodTotal)
 	var listData = pontoMediator.listaPontoUsuario(usuarioSelecionado, dateBuscaInicio, dateBuscaFim);
 	
 	var btAdd = new Button("btAdd") {
@@ -87,14 +86,14 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 		}
 	};
 		
-	btEntrada.setVisible(editavel);
-	btSaida.setVisible(false);
+	btEntrada.setVisible(editavel)
+	btSaida.setVisible(false)
 	
 	add(new ListView[Ponto]("listaPonto", listData) {
 
 		override protected def onBeforeRender() {
-			periodTotal = new Period();
-			super.onBeforeRender();
+			periodTotal = new Period()
+			super.onBeforeRender()
 		}
 
 		def populateItem(item:ListItem[Ponto]) = {
@@ -154,23 +153,23 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 
 	private class LinkDate(id:String,ponto:Ponto,clickavel:java.lang.Boolean,tipo:java.lang.Integer) extends Link[String](id){
 		if(clickavel == true){
-			setEnabled(true);
+			setEnabled(true)
 		}else{
-			setEnabled(false);
+			setEnabled(false)
 		}
 		add(new Label("label", new Model[String]() {
             override def getObject():String = {
-            	var retorno = "";
+            	var retorno = ""
             	if(tipo == LinkDate.ENTRADA){retorno = ponto.dataInicio.toString("dd/MM/YYYY HH:mm:ss")}
             	if(tipo == LinkDate.SAIDA){
             		retorno = ponto.dataFim.toString("dd/MM/YYYY HH:mm:ss")}
-            	return retorno;
+            	return retorno
             }
 		}));
 		
 		var prettyOpt = new PrettyPopinOptions()
 		var pretty = new PrettyPopinBehavior(prettyOpt.width(300).height(180).followScroll(false))
-		add(pretty);  
+		add(pretty)
 		
 		def onClick(){
 //		  new EditPontoPanel(editarPontoWinModal.getContentId(),this.ponto,editarPontoWinModal,pageOrigem);

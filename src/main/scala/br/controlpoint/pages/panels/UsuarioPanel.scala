@@ -28,21 +28,21 @@ class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) ext
 
   def this(pagePai: Page) = this(pagePai, new Usuario(), false)
 
-  var usuarioSelecionado = usuario;
+  var usuarioSelecionado = usuario
 
   if (usuario.horaEntrada == null) {
-    usuario.horaEntrada = (new DateTime());
+    usuario.horaEntrada = (new DateTime())
   }
   if (usuario.horaSaida == null) {
-    usuario.horaSaida = (new DateTime());
+    usuario.horaSaida = (new DateTime())
   }
   if (usuario.jornada == null) {
-    usuario.jornada = (new DateTime());
+    usuario.jornada = (new DateTime())
   }
 
-  var dateHoraEntrada = usuario.horaEntrada.toString("hh:mm");
-  var dateHoraSaida = usuario.horaSaida.toString("hh:mm");
-  var dateJornada = usuario.jornada.toString("hh:mm");
+  var dateHoraEntrada = usuario.horaEntrada.toString("hh:mm")
+  var dateHoraSaida = usuario.horaSaida.toString("hh:mm")
+  var dateJornada = usuario.jornada.toString("hh:mm")
 
   var form = new Form[Usuario]("form") {
     override protected def onSubmit = {
@@ -57,9 +57,9 @@ class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) ext
   };
   add(form);
 
-  var textFieldNome = new RequiredTextField("textFieldNome", new PropertyModel[String](usuarioSelecionado, "nome"));
-  var textFieldSenha = new PasswordTextField("textFieldSenha", new PropertyModel[String](usuarioSelecionado, "senha"));
-  textFieldSenha.setResetPassword(false);
+  var textFieldNome = new RequiredTextField("textFieldNome", new PropertyModel[String](usuarioSelecionado, "nome"))
+  var textFieldSenha = new PasswordTextField("textFieldSenha", new PropertyModel[String](usuarioSelecionado, "senha"))
+  textFieldSenha.setResetPassword(false)
   var textFieldLogin = new RequiredTextField("textFieldLogin", new PropertyModel[String](usuarioSelecionado, "login"))
   var textFieldEmail = new RequiredTextField("textFieldEmail", new PropertyModel[String](this.usuarioSelecionado, "email"))
 
@@ -119,22 +119,22 @@ class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) ext
   form.add(checkBoxExterno)
   form.add(checkBoxAcesso)
 
-  var feedbackPanel = new FeedbackPanel("feedback");
+  var feedbackPanel = new FeedbackPanel("feedback")
   form.add(feedbackPanel);
 
   def getUsuarioSelecionado(): Usuario = usuarioSelecionado
 
   def setUsuarioSelecionado(usuarioSelecionado: Usuario): Unit = {
     this.usuarioSelecionado = usuarioSelecionado;
-    textFieldNome.setModel(new PropertyModel(usuarioSelecionado, "nome"));
-    textFieldSenha.setModel(new PropertyModel(usuarioSelecionado, "senha"));
-    textFieldLogin.setModel(new PropertyModel(usuarioSelecionado, "login"));
-    textFieldEmail.setModel(new PropertyModel(usuarioSelecionado, "email"));
-    textFieldIPs.setModel(new PropertyModel(usuarioSelecionado, "ips"));
-    checkBoxAdmin.setModel(new PropertyModel(usuarioSelecionado, "adm"));
-    checkBoxExterno.setModel(new PropertyModel(usuarioSelecionado, "externo"));
-    checkBoxAcesso.setModel(new PropertyModel(usuarioSelecionado, "acesso"));
-    listChoice.setModel(new PropertyModel(usuarioSelecionado, "wallpaper"));
+    textFieldNome.setModel(new PropertyModel(usuarioSelecionado, "nome"))
+    textFieldSenha.setModel(new PropertyModel(usuarioSelecionado, "senha"))
+    textFieldLogin.setModel(new PropertyModel(usuarioSelecionado, "login"))
+    textFieldEmail.setModel(new PropertyModel(usuarioSelecionado, "email"))
+    textFieldIPs.setModel(new PropertyModel(usuarioSelecionado, "ips"))
+    checkBoxAdmin.setModel(new PropertyModel(usuarioSelecionado, "adm"))
+    checkBoxExterno.setModel(new PropertyModel(usuarioSelecionado, "externo"))
+    checkBoxAcesso.setModel(new PropertyModel(usuarioSelecionado, "acesso"))
+    listChoice.setModel(new PropertyModel(usuarioSelecionado, "wallpaper"))
 
     if (usuarioSelecionado.horaEntrada == null) {
       usuarioSelecionado.horaEntrada=(new DateTime())
@@ -147,8 +147,8 @@ class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) ext
     }
 
     dateHoraEntrada = usuarioSelecionado.horaEntrada.toString("hh:mm")
-    dateHoraSaida = usuarioSelecionado.horaSaida.toString("hh:mm");
-    dateJornada = usuarioSelecionado.jornada.toString("hh:mm");
+    dateHoraSaida = usuarioSelecionado.horaSaida.toString("hh:mm")
+    dateJornada = usuarioSelecionado.jornada.toString("hh:mm")
 
     textFieldHoraEntrada.setModel(new PropertyModel(this, "dateHoraEntrada"))
     textFieldHoraSaida.setModel(new PropertyModel(this, "dateHoraSaida"))

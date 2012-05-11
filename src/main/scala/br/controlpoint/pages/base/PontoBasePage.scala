@@ -31,27 +31,27 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
 
   var usuarioLogado: Usuario = null
 
-  private val LOCALE_BR = new Locale("pt_BR");
+  private val LOCALE_BR = new Locale("pt_BR")
 
-  var contadorMilesegundos: String = null;
+  var contadorMilesegundos: String = null
 
   override def getLocale() = LOCALE_BR
 
   if (getSession().isSessionInvalidated()) {
-    usuarioLogado = null;
-    getSession().invalidate();
-    getRequestCycle().setRedirect(true);
+    usuarioLogado = null
+    getSession().invalidate()
+    getRequestCycle().setRedirect(true)
   }
 
   usuarioLogado = usuarioMediator.getUsuarioForId(usuario.id)
   this.add(CSSPackageResource.getHeaderContribution("css/base.css"))
   var img = new Image("wallpaper")
   img.add(new SimpleAttributeModifier("src", "imagens/wallpapers/" + usuarioLogado.wallpaper + ".jpg"))
-  add(img);
+  add(img)
 
   if (usuarioLogado == null) {
-    getSession().invalidate();
-    getRequestCycle().setRedirect(true);
+    getSession().invalidate()
+    getRequestCycle().setRedirect(true)
     setResponsePage(new LoginPage())
   }
 
@@ -62,47 +62,35 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
 
   add(new Link("lkmnSair") {
     def onClick() {
-      usuarioLogado = null;
-      getSession().invalidate();
-      getRequestCycle().setRedirect(true);
+      usuarioLogado = null
+      getSession().invalidate()
+      getRequestCycle().setRedirect(true)
     }
   })
 
   add(new Link("lkmnCadUsuario") {
-    def onClick() {
-      setResponsePage(new UsuarioPage(usuarioLogado, false))
-    }
+    def onClick() = setResponsePage(new UsuarioPage(usuarioLogado, false))
     setVisible(usuarioLogado.adm.asInstanceOf[Boolean])
   })
 
   add(new Link("lkmnMeusDados") {
-    def onClick() {
-      setResponsePage(new UsuarioPage(usuarioLogado, true));
-    }
+    def onClick = setResponsePage(new UsuarioPage(usuarioLogado, true))
   })
 
   add(new Link("lkmnRelPeriodo") {
-    def onClick() {
-      setResponsePage(new RelPeriodoPage(usuarioLogado));
-    }
+    def onClick = setResponsePage(new RelPeriodoPage(usuarioLogado))
   })
 
   add(new Link("lkmnRelDia") {
-    def onClick() {
-      setResponsePage(new RelDiaPage(usuarioLogado));
-    }
+    def onClick = setResponsePage(new RelDiaPage(usuarioLogado))
   })
 
   add(new Link("lkmnPonto") {
-    def onClick() {
-      setResponsePage(new PontoPage(usuarioLogado, true));
-    }
+    def onClick = setResponsePage(new PontoPage(usuarioLogado, true))
   })
 
   add(new Link("lkmnSobre") {
-    def onClick() {
-      setResponsePage(new SobrePage(usuarioLogado));
-    }
+    def onClick = setResponsePage(new SobrePage(usuarioLogado))
   })
 
   var dataBusca = new DateTime();
@@ -110,19 +98,19 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
 
   for (ponto <- listaPonto) {
     if (ponto.dataInicio != null && ponto.dataFim == null) {
-      contadorMilesegundos = ponto.dataInicio.getMillis() + "";
+      contadorMilesegundos = ponto.dataInicio.getMillis() + ""
     }
   }
 
-  var formContador = new Form("form_contador");
-  formContador.add(new HiddenField("milissegundos", new PropertyModel[String](this, "contadorMilesegundos")));
-  add(formContador);
+  var formContador = new Form("form_contador")
+  formContador.add(new HiddenField("milissegundos", new PropertyModel[String](this, "contadorMilesegundos")))
+  add(formContador)
 
   var listaPonto2: List[Ponto] = pontoMediator.listaPontoUsuario(new DateTime());
   add(new ListView[Ponto]("listaPonto", listaPonto2) {
     def populateItem(item: ListItem[Ponto]) {
-      var ponto = item.getModelObject();
-      item.add(new Label("nome", ponto.usuario.nome));
+      var ponto = item.getModelObject()
+      item.add(new Label("nome", ponto.usuario.nome))
     }
   });
 
