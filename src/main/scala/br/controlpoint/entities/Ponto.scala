@@ -1,7 +1,5 @@
 package br.controlpoint.entities
 
-import java.io.Serializable
-
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
@@ -12,8 +10,9 @@ import org.hibernate.annotations.Type
 import org.joda.time.DateTime
 import scala.reflect.BeanProperty
 
+import java.io.Serializable
+
 @Entity
-@SerialVersionUID(1L)
 class Ponto extends Serializable{
 	
 	@Id
@@ -34,4 +33,13 @@ class Ponto extends Serializable{
 	var ipFim:String = _
 	
 	var total:Integer = _
+	
+	override def equals(that: Any): Boolean = that match {
+     case p:Ponto => this.id == p.id
+     case _ => false
+    }
+	
+    override def hashCode = this.id.hashCode
+    
+    override def toString = "Ponto("+this.id+")"
 }

@@ -11,47 +11,43 @@ import br.controlpoint.entities.Usuario
 
 @Component
 class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable {
-  
+
   def domain: Class[Usuario] = classOf[Usuario]
-  
+
   def buscarUsuarioPorLogin(usuario: Usuario): Usuario = {
-	  
+
     var usuarioReturn: Usuario = null
-    
-    var usuarioBusca = currentSession.createCriteria(classOf[Usuario])
-      .add(Restrictions.eq("login", usuario.login))
-      .uniqueResult().asInstanceOf[Usuario]
+
+    var usuarioBusca = createCriteria.add("login".equ(usuario.login))
+      .uniqueResult.asInstanceOf[Usuario]
 
     if (usuarioBusca != null && usuarioBusca.senha.length() < 15) {
       usuarioBusca.senha = (DaoUsuarioScala.codificarSenha(usuarioBusca.login.trim() + usuarioBusca.senha.trim()))
       this.save(usuarioBusca)
     }
-    
+
     if (usuarioBusca != null && usuarioBusca.senha.trim().equals(DaoUsuarioScala.codificarSenha(usuario.login.trim() + usuario.senha.trim()))) {
       usuarioReturn = usuarioBusca
     }
-    
+
     return usuarioReturn
   }
-  
-  def buscarUsuarioPorLogin(login:String): Usuario = {
-	  
-    return currentSession.createCriteria(classOf[Usuario])
-      .add(Restrictions.eq("login", login))
-      .uniqueResult().asInstanceOf[Usuario]
-    
+
+  def buscarUsuarioPorLogin(login: String): Usuario = {
+    createCriteria.add("login" equ login)
+      .uniqueResult.asInstanceOf[Usuario]
   }
-  
+
 }
 
 object DaoUsuarioScala {
-	
+
   def codificarSenha(senha: String): String = {
-	  
+
     var md: MessageDigest = null
-    
+
     var bytes: Array[Byte] = null
-    
+
     try {
       md = MessageDigest.getInstance("MD5")
       md.update(senha.getBytes())
@@ -59,9 +55,9 @@ object DaoUsuarioScala {
     } catch {
       case e: NoSuchAlgorithmException => e.printStackTrace()
     }
-    
+
     var s = new StringBuilder()
-    
+
     for (i <- 0 to (bytes.length - 1)) {
       var parteAlta = ((bytes(i) >> 4) & 0xf) << 4
       var parteBaixa = bytes(i) & 0xf

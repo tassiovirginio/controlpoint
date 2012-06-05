@@ -12,18 +12,16 @@ class DateTimeField24h(id:String,model:IModel[Date]) extends DateTimeField(id,mo
 	
 	override def toString():String = super.toString
 	
-	override def toString(detailed:Boolean):String = super.toString(detailed)
+	override def toString(d:Boolean):String = super.toString(d)
 	
-	override def renderAll(markupStream:MarkupStream) = super.renderAll(markupStream)
+	override def renderAll(m:MarkupStream) = super.renderAll(m)
 	
-	override def renderPlaceholderTag(tag:ComponentTag,response:Response) = super.renderPlaceholderTag(tag, response)
+	override def renderPlaceholderTag(t:ComponentTag,r:Response) = super.renderPlaceholderTag(t,r)
 	
 	def this(id:String) = this(id,null)
 	
 	override def use12HourFormat():Boolean = false
 	
-	override def onRender(markupStream:MarkupStream) = super.onRender(markupStream)
+	override def onRender(m:MarkupStream) = super.onRender(m)
 	
 }
-
-object DateTimeField24h{val serialVersionUID:Long = 1L;}

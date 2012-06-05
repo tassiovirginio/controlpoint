@@ -1,20 +1,16 @@
 package br.controlpoint.entities
 
-import java.io.Serializable
-
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.{Entity,GeneratedValue,Id}
 
 import org.hibernate.annotations.Type
-import org.joda.time.DateTime
-import org.joda.time.LocalTime
+import org.joda.time.{DateTime,LocalTime}
 import scala.reflect.BeanProperty
-import java.lang.Boolean
+import java.lang.{Boolean => JBoolean}
+
+import java.io.Serializable
 
 @Entity
-@SerialVersionUID(1L)
-class Usuario extends Serializable {
+class Usuario extends Serializable{
 	
 	@Id
 	@GeneratedValue
@@ -32,9 +28,9 @@ class Usuario extends Serializable {
 
 	var ips:String = _
 
-	var externo:java.lang.Boolean = _
+	var externo:JBoolean = _
 
-	var gtalk:java.lang.Boolean = _
+	var gtalk:JBoolean = _
 
 	var adm:Boolean = _
 
@@ -51,5 +47,14 @@ class Usuario extends Serializable {
 	
 	@Type(`type`="org.joda.time.contrib.hibernate.PersistentTimeOfDay")
 	var alerta1:LocalTime = _
+	
+	override def equals(that: Any): Boolean = that match {
+     case u:Usuario => this.id == u.id
+     case _ => false
+    }
+	
+    override def hashCode = this.id.hashCode
+    
+    override def toString = "Usuario("+this.id+")"
 
 }
