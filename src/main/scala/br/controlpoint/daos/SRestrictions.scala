@@ -8,9 +8,9 @@ import org.hibernate.criterion.Criterion
 
 class SRestrictions(s:String) {
   
-  def equ(value:Object):Criterion = Restrictions.eq(s,value)
+  def eq_(v:Object):Criterion = Restrictions.eq(s,v)
   
-  def between(value1:Object, value2:Object):Criterion = Restrictions.between(s, value1, value2)
+  def between(v1:Object, v2:Object):Criterion = Restrictions.between(s,v1,v2)
   
   def orderAsc:Order = Order.asc(s)
   

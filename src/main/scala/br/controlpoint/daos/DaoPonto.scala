@@ -29,7 +29,7 @@ class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with Serializable {
     if (dataFim != null) dHoraFim = dataFim.withTime(23, 59, 59, 00)
 
     createCriteria
-      .add("usuario" equ(p.usuario))
+      .add("usuario" eq_(p.usuario))
       .add("dataInicio" between(dHoraInicio, dHoraFim))
       .addOrder("dataInicio" orderAsc)
       .list().asInstanceOf[jList[Ponto]]
