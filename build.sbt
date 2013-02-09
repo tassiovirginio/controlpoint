@@ -1,8 +1,8 @@
 name := "Control Point"
 
-version := "1.0"
+version := "1.1"
 
-scalaVersion := "2.9.1"
+scalaVersion := "2.9.2"
 
 unmanagedResourceDirectories in Compile += new File("src/main/scala")
 
@@ -13,7 +13,7 @@ seq(webSettings :_*)
 resolvers += "Google Code" at "http://jqwicket.googlecode.com/svn/m2-repo/releases/"
 
 libraryDependencies ++= { 
-	val wicketVersion = "1.4.17"
+	val wicketVersion = "1.4.21"
 	val jettyVersion = "6.1.22"
 	Seq(
 		"org.apache.wicket" % "wicket" % wicketVersion,
