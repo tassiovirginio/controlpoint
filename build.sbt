@@ -2,7 +2,7 @@ name := "Control Point"
 
 version := "1.1"
 
-scalaVersion := "2.9.2"
+scalaVersion := "2.10.0"
 
 unmanagedResourceDirectories in Compile += new File("src/main/scala")
 
