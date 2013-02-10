@@ -2,7 +2,7 @@ README
 
 ControlPoint 1.1 Beta
 
-:::Wicket 1.4.21, Hibernate 3.6, Scala 2.10:::
+:::Wicket 1.4.21, Slick 1.0, Scala 2.10:::
 
 ControlPoint to facilitate the control of hours for any group of users.
 Developed with the Scala language and frameworks Wicket, Spring and Hibernate.
