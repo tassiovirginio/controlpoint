@@ -4,38 +4,29 @@ import java.io.Serializable
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
-import org.hibernate.criterion.Restrictions
 import org.springframework.stereotype.Component
 
-import br.controlpoint.entities.Usuario
+import br.controlpoint.entities._
 
 @Component
 class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable {
 
   def domain: Class[Usuario] = classOf[Usuario]
 
-  def buscarUsuarioPorLogin(usuario: Usuario): Usuario = {
-
-    var usuarioReturn: Usuario = null
-    
-    var usuarioBusca = createCriteria.add("login".eq_(usuario.login))
-      .uniqueResult.asInstanceOf[Usuario]
-
-    if (usuarioBusca != null && usuarioBusca.senha.length() < 15) {
-      usuarioBusca.senha = (DaoUsuarioScala.codificarSenha(usuarioBusca.login.trim() + usuarioBusca.senha.trim()))
-      this.save(usuarioBusca)
-    }
-
-    if (usuarioBusca != null && usuarioBusca.senha.trim().equals(DaoUsuarioScala.codificarSenha(usuario.login.trim() + usuario.senha.trim()))) {
-      usuarioReturn = usuarioBusca
-    }
-
-    return usuarioReturn
+  def buscarUsuarioPorLogin(u: Usuario): Usuario = {
+    return Usuarios.findByLogin(u.login).get
   }
 
   def buscarUsuarioPorLogin(login: String): Usuario = {
-    createCriteria.add("login" eq_ login)
-      .uniqueResult.asInstanceOf[Usuario]
+    var u = Usuarios.findByLogin(login)
+    if(u != None){
+      return u.get
+    }
+    return null
+  }
+  
+  override def save(u:Usuario): Unit = {
+    
   }
 
 }

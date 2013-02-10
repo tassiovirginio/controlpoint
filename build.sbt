@@ -26,15 +26,12 @@ libraryDependencies ++= {
 		"org.mortbay.jetty" % "jetty-management" % jettyVersion,
 		"hsqldb" % "hsqldb" % "1.8.0.10",
 		"com.google.code.jqwicket" % "jqwicket" % "0.6",
-		"org.hibernate" % "hibernate" % "3.2.6.ga",
-		"org.hibernate" % "ejb3-persistence" % "3.3.2.Beta1",
-		"org.hibernate" % "hibernate-annotations" % "3.4.0.GA",
 		"commons-dbcp" % "commons-dbcp" % "1.2.2",
 		"org.springframework" % "spring" % "2.5.6",
-		"joda-time" % "joda-time" % "1.6",
-		"joda-time" % "joda-time-hibernate" % "1.2",
+		"joda-time" % "joda-time-hibernate" % "1.3",
 		"junit" % "junit" % "3.8.2",
-		"org.slf4j" % "slf4j-log4j12" % "1.4.2"
+		"org.slf4j" % "slf4j-log4j12" % "1.4.2",
+		"com.typesafe.slick" % "slick_2.10" % "1.0.0"
 	)
 }
 

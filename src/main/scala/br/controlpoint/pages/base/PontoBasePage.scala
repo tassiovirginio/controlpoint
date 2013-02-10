@@ -15,11 +15,12 @@ import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.DateTime
 import br.controlpoint.entities.{Ponto,Usuario}
 import br.controlpoint.pages.{LoginPage,PontoPage,RelDiaPage,RelPeriodoPage,SobrePage,UsuarioPage}
-import javax.persistence.Entity
 import org.apache.wicket.markup.html.link.Link
 import br.controlpoint.pages.RelPeriodoPage
 import br.controlpoint.mediators.{TPontoMediator,TUsuarioMediator}
 import collection.JavaConversions._
+import scala.slick.driver.HsqldbDriver.simple._
+import scala.slick.direct.AnnotationMapper.column
 
 class PontoBasePage(usuario: Usuario) extends WebPage {
 

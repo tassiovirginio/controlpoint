@@ -5,14 +5,8 @@ import br.controlpoint.entities.Ponto
 import java.io.Serializable
 import java.util.{ List => jList }
 
-import org.hibernate.criterion.Order
 import org.joda.time.DateTime
 import org.springframework.stereotype.Component
-
-import org.hibernate.criterion.Restrictions._
-import org.hibernate.criterion.Restrictions.{ eq => _eq }
-import org.hibernate.criterion.Order.{ asc => OrderAsc }
-import org.hibernate.criterion.Order.{ desc => OrderDesc }
 
 import scala.collection.JavaConversions._
 
@@ -27,13 +21,8 @@ class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with TDaoPonto with Se
     var dHoraFim = dataInicio.withTime(23, 59, 59, 00)
 
     if (dataFim != null) dHoraFim = dataFim.withTime(23, 59, 59, 00)
-
-    createCriteria
-      .add("usuario" eq_ p.usuario )
-      .add("dataInicio" between (dHoraInicio, dHoraFim))
-      .addOrder("dataInicio" orderAsc)
-      .list().asInstanceOf[jList[Ponto]]
-      
+    
+    null
   }
  
 
@@ -43,15 +32,7 @@ class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with TDaoPonto with Se
 
     if (dFim != null) { dHoraFim = dFim.withTime(23, 59, 59, 00) }
 
-    var lista = createCriteria
-      .add("dataInicio".between(dHoraInicio, dHoraFim))
-      .add("dataFim".isNull)
-      .addOrder("dataInicio".orderAsc)
-      .list().asInstanceOf[jList[Ponto]]
-
-    lista.foreach(p => p.usuario.nome)
-
-    return lista
+    return null
   }
 }
 

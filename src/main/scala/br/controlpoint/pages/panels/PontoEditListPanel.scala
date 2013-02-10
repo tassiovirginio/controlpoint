@@ -7,7 +7,6 @@ import org.apache.wicket.spring.injection.annot.SpringBean
 import br.controlpoint.entities.{Ponto,Usuario}
 import br.controlpoint.mediators.TPontoMediator
 import org.apache.wicket.markup.html.form.Form
-import javax.persistence.Entity
 import org.joda.time.DateTime
 
 

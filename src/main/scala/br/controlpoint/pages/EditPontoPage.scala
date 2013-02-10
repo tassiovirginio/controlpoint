@@ -8,7 +8,6 @@ import org.apache.wicket.protocol.http.request.WebClientInfo
 import org.apache.wicket.spring.injection.annot.SpringBean
 import br.controlpoint.entities.Usuario
 import br.controlpoint.mediators.TUsuarioMediator
-import javax.persistence.Entity
 import br.controlpoint.pages.panels.EditPontoPanel
 import br.controlpoint.entities.Ponto
 import br.controlpoint.pages.base.PontoBasePage

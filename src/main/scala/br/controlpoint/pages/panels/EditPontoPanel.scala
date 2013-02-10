@@ -16,7 +16,6 @@ import br.controlpoint.entities.Ponto
 import br.controlpoint.entities.Usuario
 import br.controlpoint.mediators.TPontoMediator
 import br.controlpoint.pages.base.PontoBasePage
-import javax.persistence.Entity
 import br.controlpoint.pages.EditPontoPage
 
 class EditPontoPanel(id:String, ponto:Ponto, paginaOrigem:PontoBasePage) extends Panel(id) {
