@@ -26,7 +26,7 @@ class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) ext
   @SpringBean
   var usuarioMediator:TUsuarioMediator = _
 
-  def this(pagePai: Page) = this(pagePai, new Usuario(), false)
+  def this(pagePai: Page) = this(pagePai, new Usuario, false)
 
   var usuarioSelecionado = usuario
 

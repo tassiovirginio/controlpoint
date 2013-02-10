@@ -18,7 +18,7 @@ import scala.collection.JavaConversions._
 
 
 @Component
-class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with Serializable {
+class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with TDaoPonto with Serializable {
   
   override def domain = classOf[Ponto]
 
@@ -29,15 +29,13 @@ class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with Serializable {
     if (dataFim != null) dHoraFim = dataFim.withTime(23, 59, 59, 00)
 
     createCriteria
-      .add("usuario" eq_(p.usuario))
-      .add("dataInicio" between(dHoraInicio, dHoraFim))
+      .add("usuario" eq_ p.usuario )
+      .add("dataInicio" between (dHoraInicio, dHoraFim))
       .addOrder("dataInicio" orderAsc)
       .list().asInstanceOf[jList[Ponto]]
       
   }
-  
-  
-  
+ 
 
   def buscarPontos(dInicio: DateTime, dFim: DateTime): jList[Ponto] = {
     var dHoraInicio = dInicio.withTime(00, 00, 00, 00)
@@ -55,4 +53,11 @@ class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with Serializable {
 
     return lista
   }
+}
+
+
+
+trait TDaoPonto extends TDaoAbstract[Ponto, java.lang.Long] with Serializable {
+  def buscarPontos(p: Ponto, dataInicio: DateTime, dataFim: DateTime): jList[Ponto] 
+  def buscarPontos(dInicio: DateTime, dFim: DateTime): jList[Ponto] 
 }

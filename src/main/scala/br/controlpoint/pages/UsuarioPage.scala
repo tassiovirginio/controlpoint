@@ -44,7 +44,7 @@ class UsuarioPage(usuario:Usuario, direto:Boolean) extends PontoBasePage(usuario
 
   var linkNovoUsuario = new Link("linkNovoUsuario"){
     override def onClick() {
-      var usuario = new Usuario()
+      var usuario = new Usuario
       usuarioPanel.setUsuarioSelecionado(usuario)
       usuarioPanel.setVisible(true)
     }

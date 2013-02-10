@@ -8,7 +8,7 @@ import org.hibernate.criterion._
 import scala.reflect.BeanProperty
 
 
-abstract class DaoAbstract[D, K <: Serializable] {
+abstract class DaoAbstract[D, K <: Serializable] extends TDaoAbstract[D, K] {
   
   implicit def rest(x:String):SRestrictions = new SRestrictions(x)
 
@@ -17,7 +17,7 @@ abstract class DaoAbstract[D, K <: Serializable] {
   @BeanProperty
   var sessionFactory: SessionFactory = _
   
-  protected def domain: Class[D]
+  protected def domain: Class[D] 
   
   protected def currentSession = sessionFactory.getCurrentSession()
 
@@ -61,5 +61,26 @@ abstract class DaoAbstract[D, K <: Serializable] {
   }
 
   def save(d: D): Unit = currentSession.saveOrUpdate(d)
+
+}
+
+
+trait TDaoAbstract[D, K <: Serializable] {
+
+  def delete(d: D)
+
+  def getAll(offset: Int, maxResult: Int): JList[D] 
+
+  def getAll(): JList[D]
+
+  def getAll(offset: Int, max: Int, order: String, asc: Boolean): JList[D] 
+  
+  def getById(id: K): D
+
+  def totalCount: Long 
+
+  def size: Long
+
+  def save(d: D): Unit
 
 }

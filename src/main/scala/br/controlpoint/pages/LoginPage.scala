@@ -17,7 +17,7 @@ class LoginPage extends WebPage {
 
   var info2 = getSession.getClientInfo.asInstanceOf[WebClientInfo]
 
-  var usuario = new Usuario()
+  var usuario = new Usuario
 
   getSession().clear()
 

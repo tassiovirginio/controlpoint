@@ -10,7 +10,7 @@ import java.lang.{Boolean => JBoolean}
 import java.io.Serializable
 
 @Entity
-class Usuario extends Serializable{
+case class Usuario extends Serializable{
 	
 	@Id
 	@GeneratedValue
