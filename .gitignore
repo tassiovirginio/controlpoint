@@ -6,3 +6,7 @@ work
 .settings
 .scala_dependencies 
 .cache
+*.iml
+*.ipr
+*.iws
+.idea

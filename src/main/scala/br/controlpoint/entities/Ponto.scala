@@ -34,7 +34,41 @@ object Pontos extends Table[Ponto]("Ponto") {
   def dataInicio = column[DateTime]("ipInicio")
   def dataFim = column[DateTime]("ipInicio")
 
+  val byId = createFinderBy(_.id)
+
   def * = id ~ usuario_id ~ ipInicio ~ ipFim ~ total ~ dataInicio ~ dataFim <> (Ponto, Ponto.unapply _)
+
+  def findById(id: Long): Option[Ponto] = database.withSession {
+    Pontos.byId(id).firstOption
+  }
+
+  def update(ponto: Ponto) = database.withSession {
+    Pontos.where(_.id === ponto.id).update(ponto)
+  }
+
+  def delete(id: Long) = database.withSession {
+    Pontos.where(_.id === id).delete
+  }
+
+  def salvar(ponto: Ponto):Unit = database.withSession {
+    Pontos.insert(ponto)
+  }
+
+  def all:List[Ponto] = database.withSession {
+    (for(p <- Pontos) yield p).list()
+  }
+
+  def all(u:Usuario):List[Ponto] = database.withSession {
+    (for(p <- Pontos if p.usuario_id === u.id) yield p).list()
+  }
+
+  def all(u:Usuario, di:DateTime, df:DateTime):List[Ponto] = database.withSession {
+    (for(p <- Pontos if p.usuario_id === u.id && p.dataInicio >= di && p.dataFim <= df) yield p).list()
+  }
+
+  def all(di:DateTime, df:DateTime):List[Ponto] = database.withSession {
+    (for(p <- Pontos if p.dataInicio >= di && p.dataFim <= df) yield p).list()
+  }
 }
 
 case class Ponto(

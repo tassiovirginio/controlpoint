@@ -14,6 +14,7 @@ import br.controlpoint.entities._
 import br.controlpoint.entities.Implicits._
 import scala.slick.driver.HsqldbDriver.simple._
 import Database.threadLocalSession
+import org.joda.time.DateTime
 
 @Component
 class WicketApplication extends WebApplication {
@@ -41,7 +42,7 @@ class WicketApplication extends WebApplication {
     
     slick
     
-    createAdmin
+    //createAdmin
   }
   
   def slick {
@@ -56,6 +57,15 @@ class WicketApplication extends WebApplication {
       println(Pontos.ddl.createStatements.foreach(println))
       println(Usuarios.ddl.createStatements.foreach(println))
     }
+
+
+    var usuario = new Usuario(0,true,"admin","admin@email.com","admin","admin","127.0.0.1,192.168.171.191",
+        true,false,true,"wallpaper01",new DateTime,new DateTime,new DateTime,new DateTime)
+
+    Usuarios.salvar(usuario)
+
+
+
     
   }
 
@@ -64,14 +74,8 @@ class WicketApplication extends WebApplication {
     var usuario:Usuario = usuarioMediator.buscarUsuarioPorLogin("admin")
 
     if (usuario == null) {
-      var usuario = new Usuario
-      usuario.adm = true
-      usuario.email = "admin@email.com"
-      usuario.login = "admin"
-      usuario.senha = "admin"
-      usuario.nome = "Admin"
-      usuario.ips = "127.0.0.1,192.168.171.191"
-      usuario.wallpaper = "wallpaper01"
+      var usuario = new Usuario(0,true,"admin","admin@email.com","admin","admin","127.0.0.1,192.168.171.191",
+        true,false,true,"wallpaper01",new DateTime,new DateTime,new DateTime,new DateTime)
       usuarioMediator.salvarUsuario(usuario)
     }
   }

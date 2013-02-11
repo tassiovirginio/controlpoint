@@ -10,6 +10,7 @@ import br.controlpoint.entities.Usuario
 import br.controlpoint.mediators.UsuarioMediator
 import br.controlpoint.pages.base.PontoBasePage
 import org.joda.time.DateTime
+import scala.collection.JavaConversions._
 
 class RelPeriodoPage(usuario: Usuario, travarLista: java.lang.Boolean) extends PontoBasePage(usuario) {
 

@@ -21,6 +21,7 @@ import java.io.Serializable
 import com.google.code.jqwicket.ui.prettypopin.PrettyPopinBehavior
 import com.google.code.jqwicket.ui.prettypopin.PrettyPopinOptions
 import org.apache.wicket.markup.html.link.Link
+import scala.collection.JavaConversions._
 
 
 class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaInicio:DateTime,dateBuscaFim:DateTime,editavel:Boolean,pageOrigem:PontoBasePage) extends Panel("pontoListPanel") with Serializable{

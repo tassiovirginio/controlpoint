@@ -9,12 +9,16 @@ import org.springframework.stereotype.Component
 import br.controlpoint.entities._
 
 @Component
-class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable {
+class DaoUsuario extends TDaoAbstract[Usuario, Long] with Serializable {
 
   def domain: Class[Usuario] = classOf[Usuario]
 
-  def buscarUsuarioPorLogin(u: Usuario): Usuario = {
-    return Usuarios.findByLogin(u.login).get
+  def buscarUsuarioPorLogin(usuario: Usuario): Usuario = {
+    var u = Usuarios.findByLogin(usuario.login)
+    if(u != None){
+      return u.get
+    }
+    return null
   }
 
   def buscarUsuarioPorLogin(login: String): Usuario = {
@@ -25,9 +29,21 @@ class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable 
     return null
   }
   
-  override def save(u:Usuario): Unit = {
-    
-  }
+  def save(u:Usuario) = Usuarios.salvar(u)
+
+  def delete(u:Usuario) = Usuarios.delete(u.id)
+
+  def getAll(offset: Int, maxResult: Int): List[Usuario]  = null
+
+  def getAll(): List[Usuario] = Usuarios.all
+
+  def getAll(offset: Int, max: Int, order: String, asc: Boolean): List[Usuario] = null
+
+  def getById(id:Long): Usuario = Usuarios.findById(id).get
+
+  def totalCount: Long = Usuarios.all.size
+
+  def size: Long = Usuarios.all.size
 
 }
 

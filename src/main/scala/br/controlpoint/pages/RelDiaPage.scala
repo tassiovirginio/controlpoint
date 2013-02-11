@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.form.{ ListChoice, Form, ChoiceRenderer }
 import org.apache.wicket.model.PropertyModel
 import org.joda.time.DateTime
 import br.controlpoint.pages.base.PontoBasePage
+import scala.collection.JavaConversions._
 
 class RelDiaPage(usuario: Usuario) extends PontoBasePage(usuario) {
 

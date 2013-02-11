@@ -10,7 +10,7 @@ import br.controlpoint.entities.Usuario
 import br.controlpoint.mediators.UsuarioMediator
 import br.controlpoint.pages.base.PontoBasePage
 import br.controlpoint.pages.panels.UsuarioPanel
-import java.util.List
+import scala.collection.JavaConversions._
 
 class UsuarioPage(usuario:Usuario, direto:Boolean) extends PontoBasePage(usuario){
 

@@ -55,8 +55,12 @@ object Usuarios extends Table[Usuario]("Usuario") {
     Usuarios.where(_.id === usuarioId).delete
   }
   
-  def insert(usuario: Usuario): Long = database.withSession {
-    Usuarios.insert((usuario))
+  def salvar(usuario: Usuario):Unit = database.withSession {
+    Usuarios.insert(usuario)
+  }
+
+  def all:List[Usuario] = database.withSession {
+    (for(u <- Usuarios) yield u).list()
   }
 }
 
@@ -79,13 +83,13 @@ case class Usuario(
 	var alerta1:DateTime
 	)extends Serializable {
     
-    def this() = this(0,false,"","","","","",false,false,false,"",null,null,null,null)
+  def this() = this(0,false,"","","","","",false,false,false,"",null,null,null,null)
   
 	override def equals(that: Any): Boolean = that match {
-     case u:Usuario => this.id == u.id
-     case _ => false
-    }
+    case u:Usuario => this.id == u.id
+    case _ => false
+  }
 	
-    override def hashCode = this.id.hashCode
-    override def toString = "Usuario("+this.id+")"
+  override def hashCode = this.id.hashCode
+  override def toString = "Usuario("+this.id+")"
 }

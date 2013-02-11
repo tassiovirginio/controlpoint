@@ -1,6 +1,5 @@
 package br.controlpoint.mediators
 
-import java.util.List
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.{Component,Service}
 import org.springframework.transaction.annotation.Transactional
@@ -30,7 +29,7 @@ class UsuarioMediator extends TUsuarioMediator{
 	
 	def getUsuarioForId(id:Long)= daoUsuario.getById(id)
 	
-	def listaUsuarios:java.util.List[Usuario] = daoUsuario.getAll()
+	def listaUsuarios:List[Usuario] = daoUsuario.getAll()
 
 }
 
@@ -50,6 +49,6 @@ trait TUsuarioMediator {
 	
 	def getUsuarioForId(id:Long):Usuario
 	
-	def listaUsuarios:java.util.List[Usuario]
+	def listaUsuarios:List[Usuario]
 
 }
