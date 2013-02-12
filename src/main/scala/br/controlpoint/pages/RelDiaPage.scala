@@ -36,12 +36,12 @@ class RelDiaPage(usuario: Usuario) extends PontoBasePage(usuario) {
   dateTextField.setRequired(true);
   form.add(dateTextField);
 
-  var listaUsuario = new ArrayList[Usuario]()
+  var listaUsuario = List[Usuario]()
 
   if (usuarioLogado.adm.asInstanceOf[Boolean]) {
-    listaUsuario.addAll(usuarioMediator.listaUsuarios)
+    listaUsuario ::: usuarioMediator.listaUsuarios
   } else {
-    listaUsuario.add(usuarioLogado)
+    listaUsuario ::= usuarioLogado
   }
 
   var listChoice = new ListChoice[Usuario]("listaUsuario", new PropertyModel[Usuario](this, "usuarioSelecionado"), listaUsuario, new ChoiceRenderer[Usuario]("nome"), 1)

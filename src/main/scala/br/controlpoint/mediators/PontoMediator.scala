@@ -1,11 +1,8 @@
 package br.controlpoint.mediators
 
-import br.controlpoint.daos.{DaoUsuario, DaoPonto}
-import br.controlpoint.entities.{Usuario, Ponto}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import org.joda.time.DateTime
 import br.controlpoint.entities.{Usuario, Ponto}
 import org.joda.time.DateTime
 import br.controlpoint.daos.TDaoPonto

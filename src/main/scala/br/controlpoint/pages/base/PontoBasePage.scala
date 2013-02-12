@@ -1,8 +1,6 @@
 package br.controlpoint.pages.base
 
-import java.util.{List,Locale}
-import scala.collection.JavaConversions.asScalaBuffer
-import scala.reflect.BeanProperty
+import java.util.Locale
 import org.apache.wicket.behavior.SimpleAttributeModifier
 import org.apache.wicket.markup.html.basic.Label
 import org.apache.wicket.markup.html.form.{Form,HiddenField}
@@ -14,13 +12,11 @@ import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.DateTime
 import br.controlpoint.entities.{Ponto,Usuario}
-import br.controlpoint.pages.{LoginPage,PontoPage,RelDiaPage,RelPeriodoPage,SobrePage,UsuarioPage}
+import br.controlpoint.pages.{LoginPage,PontoPage,RelDiaPage,SobrePage,UsuarioPage}
 import org.apache.wicket.markup.html.link.Link
 import br.controlpoint.pages.RelPeriodoPage
 import br.controlpoint.mediators.{TPontoMediator,TUsuarioMediator}
 import collection.JavaConversions._
-import scala.slick.driver.HsqldbDriver.simple._
-import scala.slick.direct.AnnotationMapper.column
 
 class PontoBasePage(usuario: Usuario) extends WebPage {
 
@@ -98,7 +94,7 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
   var listaPonto = pontoMediator.listaPontoUsuario(usuarioLogado, dataBusca);
 
   for (ponto <- listaPonto) {
-    if (ponto.dataInicio != null && ponto.dataFim == null) {
+    if (ponto.dataInicio != null && ponto.dataFim == None) {
       contadorMilesegundos = ponto.dataInicio.getMillis() + ""
     }
   }

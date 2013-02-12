@@ -1,8 +1,7 @@
 package br.controlpoint.pages.panels
 
-import java.util.{ArrayList,Date,List}
+import java.util.ArrayList
 import org.apache.wicket.Page
-import org.apache.wicket.behavior.SimpleAttributeModifier
 import org.apache.wicket.markup.html.form.{CheckBox,Form,ListChoice,PasswordTextField,RequiredTextField,TextArea}
 import org.apache.wicket.markup.html.panel.{FeedbackPanel,Panel}
 import org.apache.wicket.model.PropertyModel
@@ -10,16 +9,14 @@ import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.DateTime
 import br.controlpoint.entities.Usuario
 import br.controlpoint.mediators.TUsuarioMediator
-import br.controlpoint.util.DateTimeField24h
 import br.controlpoint.pages.UsuarioPage
-import com.google.code.jqwicket.ui.datetimepicker.TimePickerTextField
-import com.google.code.jqwicket.ui.datetimepicker.DateTimePickerOptions
+import com.google.code.jqwicket.ui.datetimepicker.{TimePickerTextField,DateTimePickerOptions}
 import org.joda.time.format.DateTimeFormat
 import org.apache.wicket.markup.html.basic.Label
-import org.apache.wicket.model.Model
+import scala.collection.JavaConversions._
 
 
-class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) extends Panel("usuarioPanel") {
+class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:Boolean) extends Panel("usuarioPanel") {
 
   var direto = diretoS.asInstanceOf[Boolean]
   
