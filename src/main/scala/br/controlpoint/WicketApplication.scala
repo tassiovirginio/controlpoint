@@ -59,14 +59,10 @@ class WicketApplication extends WebApplication {
     }
 
 
-    var usuario = new Usuario(0,true,"admin","admin@email.com","admin","admin","127.0.0.1,192.168.171.191",
+    var usuario = Usuario(None,true,"admin","admin@email.com","admin","admin","127.0.0.1,192.168.171.191",
         true,false,true,"wallpaper01",new DateTime,new DateTime,new DateTime,new DateTime)
 
     Usuarios.salvar(usuario)
-
-
-
-    
   }
 
   def createAdmin = {
@@ -74,7 +70,7 @@ class WicketApplication extends WebApplication {
     var usuario:Usuario = usuarioMediator.buscarUsuarioPorLogin("admin")
 
     if (usuario == null) {
-      var usuario = new Usuario(0,true,"admin","admin@email.com","admin","admin","127.0.0.1,192.168.171.191",
+      var usuario = Usuario(None,true,"admin","admin@email.com","admin","admin","127.0.0.1,192.168.171.191",
         true,false,true,"wallpaper01",new DateTime,new DateTime,new DateTime,new DateTime)
       usuarioMediator.salvarUsuario(usuario)
     }

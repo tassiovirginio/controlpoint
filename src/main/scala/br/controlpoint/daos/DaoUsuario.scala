@@ -29,7 +29,14 @@ class DaoUsuario extends TDaoAbstract[Usuario, Long] with Serializable {
     return null
   }
   
-  def save(u:Usuario) = Usuarios.salvar(u)
+  def save(u:Usuario) = {
+    println(u)
+    if (u.id == None){
+      Usuarios.salvar(u)
+    }else{
+      Usuarios.update(u)
+    }
+  }
 
   def delete(u:Usuario) = Usuarios.delete(u.id)
 

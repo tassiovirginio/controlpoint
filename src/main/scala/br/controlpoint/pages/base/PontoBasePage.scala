@@ -44,7 +44,7 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
     getRequestCycle().setRedirect(true)
   }
 
-  usuarioLogado = usuarioMediator.getUsuarioForId(usuario.id)
+  usuarioLogado = usuarioMediator.getUsuarioForId(usuario.id.get)
   this.add(CSSPackageResource.getHeaderContribution("css/base.css"))
   var img = new Image("wallpaper")
   img.add(new SimpleAttributeModifier("src", "imagens/wallpapers/" + usuarioLogado.wallpaper + ".jpg"))

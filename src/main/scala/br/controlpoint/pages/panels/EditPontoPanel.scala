@@ -46,7 +46,7 @@ class EditPontoPanel(id:String, ponto:Ponto, paginaOrigem:PontoBasePage) extends
 	      if (timeEndNull) {
 	        ponto.dataFim = null
 	      }else{
-	    	ponto.dataFim = formatter.parseDateTime(dateHoraSaida)
+	    	ponto.dataFim = Some(formatter.parseDateTime(dateHoraSaida))
 	      }
 	      
     	println(dateHoraEntrada.toString)

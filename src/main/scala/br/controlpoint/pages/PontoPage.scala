@@ -31,7 +31,7 @@ class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInic
       for (ponto <- listData) {
 		    result.append(ponto.dataInicio.toString("HH:mm dd/MM/yyyy")+",")
 		    if(ponto.dataFim != null){
-		    	result.append(ponto.dataFim.toString("HH:mm dd/MM/yyyy"))
+		    	result.append(ponto.dataFim.get.toString("HH:mm dd/MM/yyyy"))
 		    }
 		    result.append("\n")
 	  }

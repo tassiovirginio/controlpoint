@@ -32,9 +32,16 @@ class DaoPonto extends TDaoPonto with Serializable {
     Pontos.all(dHoraInicio,dHoraFim)
   }
 
-  def save(p:Ponto) = Pontos.salvar(p)
+  def save(p:Ponto) = {
+    println(p)
+    if (p.id == None){
+      Pontos.salvar(p)
+    }else{
+      Pontos.update(p)
+    }
+  }
 
-  def delete(p:Ponto) = Pontos.delete(p.id)
+  def delete(p:Ponto) = Pontos.delete(p.id.get)
 
   def getAll(offset: Int, maxResult: Int): List[Ponto]  = null
 

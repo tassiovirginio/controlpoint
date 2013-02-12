@@ -34,10 +34,13 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	var pontoParaFechar:Ponto =_
 
 	var infoWeb:WebClientInfo = getSession().getClientInfo().asInstanceOf[WebClientInfo]
+
 	var periodTotal = new Period()
+
 	var lbPeriodTotal = new Label("periodTotal")
 	lbPeriodTotal.setOutputMarkupId(true)
 	add(lbPeriodTotal)
+
 	var listData = pontoMediator.listaPontoUsuario(usuarioSelecionado, dateBuscaInicio, dateBuscaFim);
 	
 	var btAdd = new Button("btAdd") {
@@ -77,7 +80,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	btSaida = new Button("btSaida") {
 
 	  override def onSubmit() {
-			pontoParaFechar.dataFim = new DateTime()
+			pontoParaFechar.dataFim = Some(new DateTime())
 			pontoParaFechar.ipFim = infoWeb.getProperties().getRemoteAddress()
 			pontoMediator.salvarPonto(pontoParaFechar)
 			pontoParaFechar = null
@@ -100,7 +103,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 		def populateItem(item:ListItem[Ponto]) = {
 			var ponto = item.getModelObject()
 			item.add(new LinkDate("dataInicio", ponto, usuarioLogado.adm,LinkDate.ENTRADA))
-			if (ponto.dataFim == null) {
+			if (ponto.dataFim == None) {
 				btEntrada.setVisible(false)
 				btSaida.setVisible(true)
 				pontoParaFechar = ponto;
@@ -108,10 +111,10 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 			} else {
 				item.add(new LinkDate("dataFim", ponto, usuarioLogado.adm,LinkDate.SAIDA))
 			}
-			if (ponto.dataFim == null) {
+			if (ponto.dataFim == None) {
 				item.add(new Label("total", ""))
 			} else {
-				var period = new Period(ponto.dataInicio, ponto.dataFim)
+				var period = new Period(ponto.dataInicio, ponto.dataFim.get)
 				periodTotal = periodTotal.plus(period)
 				lbPeriodTotal.setDefaultModel(new Model(periodTotal.toPeriod().normalizedStandard().toString(getFormatter())))
 				period = period.normalizedStandard()
@@ -119,7 +122,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 			}
 			//Regra para quando chegar no tamanho maximo travar o ponto max 2 por dia se for ext)
 			if(usuarioLogado.externo.asInstanceOf[Boolean]){
-				if(dateBuscaFim == null && listData.size() > 1 && ponto.dataFim != null){
+				if(dateBuscaFim == null && listData.size() > 1 && ponto.dataFim != None){
 					container.setVisible(false)
 				}else{
 					container.setVisible(editavel)
@@ -152,7 +155,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	add(editarPontoWinModal);
 
 
-	private class LinkDate(id:String,ponto:Ponto,clickavel:java.lang.Boolean,tipo:java.lang.Integer) extends Link[String](id){
+	private class LinkDate(id:String,ponto:Ponto,clickavel:Boolean,tipo:Int) extends Link[String](id){
 		if(clickavel == true){
 			setEnabled(true)
 		}else{
@@ -163,7 +166,8 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
             	var retorno = ""
             	if(tipo == LinkDate.ENTRADA){retorno = ponto.dataInicio.toString("dd/MM/YYYY HH:mm:ss")}
             	if(tipo == LinkDate.SAIDA){
-            		retorno = ponto.dataFim.toString("dd/MM/YYYY HH:mm:ss")}
+            		retorno = ponto.dataFim.get.toString("dd/MM/YYYY HH:mm:ss")
+              }
             	return retorno
             }
 		}));

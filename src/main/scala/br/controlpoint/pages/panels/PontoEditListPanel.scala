@@ -26,7 +26,7 @@ class PontoEditListPanel(usuario:Usuario, dateBuscaInicio:DateTime, dateBuscaFim
     def populateItem(item: ListItem[Ponto]) {
       var ponto = item.getModelObject()
       item.add(new Label("dataInicio", ponto.dataInicio.toString("dd/MM/yyyy HH:mm:ss")))
-      item.add(new Label("dataFim", ponto.dataFim.toString("dd/MM/yyyy HH:mm:ss")))
+      item.add(new Label("dataFim", ponto.dataFim.get.toString("dd/MM/yyyy HH:mm:ss")))
     }
   })
   

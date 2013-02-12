@@ -17,25 +17,22 @@ class PontoMediator extends TPontoMediator {
 	@Autowired
 	private var daoPonto:TDaoPonto =_
 	
-	@Autowired
-	private var daoUsuario:DaoUsuario =_
+	def salvarPonto(ponto:Ponto) = daoPonto.save(ponto)
 	
-	def salvarPonto(ponto:Ponto): Unit = daoPonto.save(ponto)
-	
-	def deletePonto(ponto:Ponto): Unit = daoPonto.delete(ponto)
+	def deletePonto(ponto:Ponto) = daoPonto.delete(ponto)
 	
 	def sizePonto() = daoPonto.totalCount
 	
 	def listaPontoUsuario(u:Usuario, di:DateTime):List[Ponto] = {
-		return this.daoPonto.buscarPontos(u,di,null)
+		daoPonto.buscarPontos(u,di,null)
 	}
 	
 	def listaPontoUsuario(di:DateTime):List[Ponto]={
-		return this.daoPonto.buscarPontos(di,null)
+		daoPonto.buscarPontos(di,null)
 	}
 	
 	def listaPontoUsuario(u:Usuario,di:DateTime,df:DateTime):List[Ponto]={
-		return this.daoPonto.buscarPontos(u,di,df)
+		daoPonto.buscarPontos(u,di,df)
 	}
 
 }

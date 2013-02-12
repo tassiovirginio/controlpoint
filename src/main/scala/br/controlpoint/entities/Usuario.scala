@@ -1,13 +1,9 @@
 package br.controlpoint.entities
 
-import org.joda.time.{DateTime,LocalTime}
+import org.joda.time.DateTime
 import java.io.Serializable
-import scala.slick.direct.AnnotationMapper._
 import scala.slick.driver.HsqldbDriver.simple._
-import java.sql.Timestamp
-import org.joda.time.DateTimeZone
 import Implicits._
-import java.sql.Date
 
 import Database.threadLocalSession
 
@@ -33,7 +29,7 @@ object Usuarios extends Table[Usuario]("Usuario") {
   val byName = createFinderBy(_.nome)
   val byLogin = createFinderBy(_.login)
   
-  def * = id ~ acesso ~ nome ~ email ~ login ~ senha ~ ips ~ externo ~ gtalk ~ adm ~ wallpaper ~ horaEntrada ~ horaSaida ~ jornada ~ alerta1 <> (Usuario, Usuario.unapply _)
+  def * = id.? ~ acesso ~ nome ~ email ~ login ~ senha ~ ips ~ externo ~ gtalk ~ adm ~ wallpaper ~ horaEntrada ~ horaSaida ~ jornada ~ alerta1 <> (Usuario, Usuario.unapply _)
   
   def findById(id: Long): Option[Usuario] = database.withSession {
     Usuarios.byId(id).firstOption
@@ -54,6 +50,10 @@ object Usuarios extends Table[Usuario]("Usuario") {
   def delete(usuarioId: Long) = database.withSession {
     Usuarios.where(_.id === usuarioId).delete
   }
+
+  def delete(id: Option[Long]) = database.withSession {
+    Usuarios.where(_.id === id.get).delete
+  }
   
   def salvar(usuario: Usuario):Unit = database.withSession {
     Usuarios.insert(usuario)
@@ -66,7 +66,7 @@ object Usuarios extends Table[Usuario]("Usuario") {
 
 
 case class Usuario(
-	var id:Long,
+	var id: Option[Long],
 	var acesso:Boolean,
 	var nome:String,
 	var email:String,
@@ -83,13 +83,13 @@ case class Usuario(
 	var alerta1:DateTime
 	)extends Serializable {
     
-  def this() = this(0,false,"","","","","",false,false,false,"",null,null,null,null)
+  def this() = this(None,false,"","","","","",false,false,false,"",null,null,null,null)
   
 	override def equals(that: Any): Boolean = that match {
     case u:Usuario => this.id == u.id
     case _ => false
   }
-	
+
   override def hashCode = this.id.hashCode
   override def toString = "Usuario("+this.id+")"
 }

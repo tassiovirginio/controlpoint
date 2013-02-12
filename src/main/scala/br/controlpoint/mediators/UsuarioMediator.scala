@@ -27,7 +27,7 @@ class UsuarioMediator extends TUsuarioMediator{
 	
 	def buscarUsuarioPorLogin(login:String): Usuario = daoUsuario.buscarUsuarioPorLogin(login)
 	
-	def getUsuarioForId(id:Long)= daoUsuario.getById(id)
+	def getUsuarioForId(id:Long) = daoUsuario.getById(id)
 	
 	def listaUsuarios:List[Usuario] = daoUsuario.getAll()
 
