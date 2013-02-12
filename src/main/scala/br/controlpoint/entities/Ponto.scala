@@ -84,7 +84,7 @@ object Pontos extends Table[Ponto]("Ponto") {
   }
 
   def all(di:DateTime, df:DateTime):List[Ponto] = database.withSession {
-    var r = (for(p <- Pontos if p.dataInicio >= di && p.dataInicio <= df) yield p)
+    var r = (for(p <- Pontos if p.dataInicio >= di && p.dataInicio <= df && p.dataFim.isNull) yield p)
     println(r.selectStatement)
     r.list()
   }
