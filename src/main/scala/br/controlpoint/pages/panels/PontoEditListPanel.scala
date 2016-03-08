@@ -8,10 +8,10 @@ import br.controlpoint.entities.{Ponto,Usuario}
 import br.controlpoint.mediators.TPontoMediator
 import org.apache.wicket.markup.html.form.Form
 import javax.persistence.Entity
-import org.joda.time.DateTime
+import org.joda.time.{LocalDateTime, DateTime}
 
 
-class PontoEditListPanel(usuario:Usuario, dateBuscaInicio:DateTime, dateBuscaFim:DateTime) extends Panel("PontoEditListPanel") {
+class PontoEditListPanel(usuario:Usuario, dateBuscaInicio:LocalDateTime, dateBuscaFim:LocalDateTime) extends Panel("PontoEditListPanel") {
 
   @SpringBean
   var pontoMediator:TPontoMediator = _

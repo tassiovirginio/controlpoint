@@ -39,12 +39,12 @@ class EditPontoPanel(id:String, ponto:Ponto, paginaOrigem:PontoBasePage) extends
   var form = new Form[Usuario]("form"){
     override def onSubmit(){
     	val formatter = DateTimeFormat.forPattern(dateFormatter)
-	      ponto.dataInicio = formatter.parseDateTime(dateHoraEntrada)
+	      ponto.dataInicio = formatter.parseLocalDateTime(dateHoraEntrada)
 	      
 	      if (timeEndNull) {
 	        ponto.dataFim = null
 	      }else{
-	    	ponto.dataFim = formatter.parseDateTime(dateHoraSaida)
+	    	ponto.dataFim = formatter.parseLocalDateTime(dateHoraSaida)
 	      }
 	      
     	println(dateHoraEntrada.toString)

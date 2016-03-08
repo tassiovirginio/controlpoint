@@ -1,59 +1,54 @@
 package br.controlpoint.entities
 
-import javax.persistence.{Entity,GeneratedValue,Id}
+import javax.persistence.{Entity, GeneratedValue, Id}
 
-import org.hibernate.annotations.Type
-import org.joda.time.{DateTime,LocalTime}
+import org.joda.time.{LocalDateTime}
 import java.lang.{Boolean => JBoolean}
 
 import java.io.Serializable
 
 @Entity
-class Usuario extends Serializable{
-	
-	@Id
-	@GeneratedValue
-	var id:Long = _
+class Usuario extends Serializable {
 
-	var acesso:Boolean = _
+  @Id
+  @GeneratedValue
+  var id: Long = _
 
-	var nome:String = _
+  var acesso: Boolean = _
 
-	var email:String = _
+  var nome: String = _
 
-	var login:String = _
+  var email: String = _
 
-	var senha:String = _
+  var login: String = _
 
-	var ips:String = _
+  var senha: String = _
 
-	var externo:JBoolean = _
+  var ips: String = _
 
-	var gtalk:JBoolean = _
+  var externo: JBoolean = _
 
-	var adm:Boolean = _
+  var gtalk: JBoolean = _
 
-	var wallpaper:String = _
-	
-	@Type(`type`="org.joda.time.contrib.hibernate.PersistentDateTime")
-	var horaEntrada:DateTime = _
-	
-	@Type(`type`="org.joda.time.contrib.hibernate.PersistentDateTime")
-	var horaSaida:DateTime = _
-	
-	@Type(`type`="org.joda.time.contrib.hibernate.PersistentDateTime")
-	var jornada:DateTime = _
-	
-	@Type(`type`="org.joda.time.contrib.hibernate.PersistentTimeOfDay")
-	var alerta1:LocalTime = _
-	
-	override def equals(that: Any): Boolean = that match {
-     case u:Usuario => this.id == u.id
-     case _ => false
-    }
-	
-    override def hashCode = this.id.hashCode
-    
-    override def toString = "Usuario("+this.id+")"
+  var adm: Boolean = _
+
+  var wallpaper: String = _
+
+  var horaEntrada: LocalDateTime = _
+
+  var horaSaida: LocalDateTime = _
+
+  var jornada: LocalDateTime = _
+
+  var alerta1: LocalDateTime = _
+
+  override def equals(that: Any): Boolean = that match {
+    case u: Usuario => this.id == u.id
+    case _ => false
+  }
+
+  override def hashCode = this.id.hashCode
+
+  override def toString = "Usuario(" + this.id + ")"
 
 }

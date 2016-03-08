@@ -11,7 +11,7 @@ import org.apache.wicket.markup.html.panel.Panel
 import org.apache.wicket.model.Model
 import org.apache.wicket.protocol.http.request.WebClientInfo
 import org.apache.wicket.spring.injection.annot.SpringBean
-import org.joda.time.{DateTime,Period}
+import org.joda.time.{LocalDateTime, DateTime, Period}
 import org.joda.time.format.PeriodFormatterBuilder
 import br.controlpoint.entities.{Ponto,Usuario}
 import br.controlpoint.mediators.TPontoMediator
@@ -21,7 +21,7 @@ import java.io.Serializable
 import org.apache.wicket.markup.html.link.Link
 
 
-class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaInicio:DateTime,dateBuscaFim:DateTime,editavel:Boolean,pageOrigem:PontoBasePage) extends Panel("pontoListPanel") with Serializable{
+class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaInicio:LocalDateTime,dateBuscaFim:LocalDateTime,editavel:Boolean,pageOrigem:PontoBasePage) extends Panel("pontoListPanel") with Serializable{
 	
 	var serialVersionUID:Long = 1L;
 
@@ -61,7 +61,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 
 	  override def onSubmit() {
 			var novoPonto = new Ponto()
-			novoPonto.dataInicio = new DateTime()
+			novoPonto.dataInicio = new LocalDateTime()
 			novoPonto.usuario = usuarioLogado
 			novoPonto.ipInicio = infoWeb.getProperties().getRemoteAddress()
 			pontoMediator.salvarPonto(novoPonto)
@@ -74,7 +74,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	btSaida = new Button("btSaida") {
 
 	  override def onSubmit() {
-			pontoParaFechar.dataFim = new DateTime()
+			pontoParaFechar.dataFim = new LocalDateTime()
 			pontoParaFechar.ipFim = infoWeb.getProperties().getRemoteAddress()
 			pontoMediator.salvarPonto(pontoParaFechar)
 			pontoParaFechar = null

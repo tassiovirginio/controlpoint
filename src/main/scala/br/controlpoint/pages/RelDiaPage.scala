@@ -7,7 +7,7 @@ import org.apache.wicket.extensions.yui.calendar.DatePicker
 import org.apache.wicket.markup.html.WebMarkupContainer
 import org.apache.wicket.markup.html.form.{ ListChoice, Form, ChoiceRenderer }
 import org.apache.wicket.model.PropertyModel
-import org.joda.time.DateTime
+import org.joda.time.{LocalDateTime, DateTime}
 import br.controlpoint.pages.base.PontoBasePage
 
 class RelDiaPage(usuario: Usuario) extends PontoBasePage(usuario) {
@@ -25,7 +25,7 @@ class RelDiaPage(usuario: Usuario) extends PontoBasePage(usuario) {
 
   var form = new Form("form") {
     override protected def onSubmit() {
-      setResponsePage(new PontoPage(usuarioLogado, usuarioSelecionado, new DateTime(dataPesquisa), new DateTime(dataPesquisa), false));
+      setResponsePage(new PontoPage(usuarioLogado, usuarioSelecionado, new LocalDateTime(dataPesquisa), new LocalDateTime(dataPesquisa), false));
     }
   };
   add(form);

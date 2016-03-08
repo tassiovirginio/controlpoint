@@ -3,7 +3,7 @@ package br.controlpoint.pages
 import org.apache.wicket.markup.html.link.ResourceLink
 import org.apache.wicket.markup.html.{WebMarkupContainer}
 import org.apache.wicket.util.resource.StringResourceStream
-import org.joda.time.DateTime
+import org.joda.time.{LocalDateTime, DateTime}
 import br.controlpoint.entities.Usuario
 import br.controlpoint.pages.base.PontoBasePage
 import br.controlpoint.pages.panels.PontoListPanel
@@ -11,7 +11,7 @@ import org.apache.wicket.util.resource.IResourceStream
 import collection.JavaConversions._
 
 
-class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInicio:DateTime, dateBuscaFim:DateTime, editavel:java.lang.Boolean) extends PontoBasePage(usuarioLogado) {
+class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInicio:LocalDateTime, dateBuscaFim:LocalDateTime, editavel:java.lang.Boolean) extends PontoBasePage(usuarioLogado) {
 
   add(new PontoListPanel(usuarioSelecionado, usuarioLogado, dateBuscaInicio, dateBuscaFim, editavel.asInstanceOf[Boolean], this))
 
@@ -51,12 +51,12 @@ class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInic
 	 container.setVisible(false)
   }
   
-  def this(usuario:Usuario, editavel:Boolean) = this(usuario,usuario,new DateTime(),null, editavel)
+  def this(usuario:Usuario, editavel:Boolean) = this(usuario,usuario,new LocalDateTime(),null, editavel)
   
-  def this(usuario:Usuario) = this(usuario,usuario,new DateTime(),null, false)
+  def this(usuario:Usuario) = this(usuario,usuario,new LocalDateTime(),null, false)
   
-  def this(usuario:Usuario, dateBuscaInicio:DateTime) = this(usuario,usuario,dateBuscaInicio,null,false)
+  def this(usuario:Usuario, dateBuscaInicio:LocalDateTime) = this(usuario,usuario,dateBuscaInicio,null,false)
 
-  def this(usuario:Usuario, dateBuscaInicio:DateTime,dateBuscaFim:DateTime , editavel:java.lang.Boolean) = this(usuario,usuario,dateBuscaInicio,null,editavel)
+  def this(usuario:Usuario, dateBuscaInicio:LocalDateTime,dateBuscaFim:LocalDateTime,editavel:java.lang.Boolean) = this(usuario,usuario,dateBuscaInicio,null,editavel)
 
 }

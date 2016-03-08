@@ -5,6 +5,7 @@ import java.util.{ List => JList }
 import org.apache.commons.logging.LogFactory
 import org.hibernate.{ SessionFactory, Session }
 import org.hibernate.criterion._
+import org.springframework.beans.factory.annotation.Autowired
 
 
 abstract class DaoAbstract[D, K <: Serializable] {
@@ -12,8 +13,8 @@ abstract class DaoAbstract[D, K <: Serializable] {
   implicit def rest(x:String):SRestrictions = new SRestrictions(x)
 
   val LOG = LogFactory.getLog(getClass())
-  
-  var sessionFactory: SessionFactory = _
+
+  @Autowired var sessionFactory: SessionFactory = _
   
   protected def domain: Class[D]
   

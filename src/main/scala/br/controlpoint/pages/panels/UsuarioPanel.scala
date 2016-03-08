@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.form._
 import org.apache.wicket.markup.html.panel.{FeedbackPanel, Panel}
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
-import org.joda.time.DateTime
+import org.joda.time.{LocalDateTime, DateTime}
 import br.controlpoint.entities.Usuario
 import br.controlpoint.mediators.TUsuarioMediator
 import br.controlpoint.pages.UsuarioPage
@@ -25,13 +25,13 @@ class UsuarioPanel(pagePai: Page, usuario: Usuario, diretoS: java.lang.Boolean) 
   var usuarioSelecionado = usuario
 
   if (usuario.horaEntrada == null) {
-    usuario.horaEntrada = (new DateTime())
+    usuario.horaEntrada = (new LocalDateTime())
   }
   if (usuario.horaSaida == null) {
-    usuario.horaSaida = (new DateTime())
+    usuario.horaSaida = (new LocalDateTime())
   }
   if (usuario.jornada == null) {
-    usuario.jornada = (new DateTime())
+    usuario.jornada = (new LocalDateTime())
   }
 
   var dateHoraEntrada = usuario.horaEntrada.toString("hh:mm")
@@ -41,9 +41,9 @@ class UsuarioPanel(pagePai: Page, usuario: Usuario, diretoS: java.lang.Boolean) 
   var form = new Form[Usuario]("form") {
     override protected def onSubmit = {
       val formatter = DateTimeFormat.forPattern("HH:mm")
-      usuarioSelecionado.horaEntrada = (formatter.parseDateTime(dateHoraEntrada))
-      usuarioSelecionado.horaSaida = (formatter.parseDateTime(dateHoraSaida))
-      usuarioSelecionado.jornada = (formatter.parseDateTime(dateJornada))
+      usuarioSelecionado.horaEntrada = (formatter.parseLocalDateTime(dateHoraEntrada))
+      usuarioSelecionado.horaSaida = (formatter.parseLocalDateTime(dateHoraSaida))
+      usuarioSelecionado.jornada = (formatter.parseLocalDateTime(dateJornada))
       usuarioMediator.salvarUsuario(usuarioSelecionado)
       info("Usuario Salvo com Sucesso !!")
       setResponsePage(new UsuarioPage(usuario, false || direto.asInstanceOf[Boolean]))
@@ -128,13 +128,13 @@ class UsuarioPanel(pagePai: Page, usuario: Usuario, diretoS: java.lang.Boolean) 
     listChoice.setModel(new PropertyModel(usuarioSelecionado, "wallpaper"))
 
     if (usuarioSelecionado.horaEntrada == null) {
-      usuarioSelecionado.horaEntrada = (new DateTime())
+      usuarioSelecionado.horaEntrada = (new LocalDateTime())
     }
     if (usuarioSelecionado.horaSaida == null) {
-      usuarioSelecionado.horaSaida = (new DateTime())
+      usuarioSelecionado.horaSaida = (new LocalDateTime())
     }
     if (usuarioSelecionado.jornada == null) {
-      usuarioSelecionado.jornada = (new DateTime())
+      usuarioSelecionado.jornada = (new LocalDateTime())
     }
 
     dateHoraEntrada = usuarioSelecionado.horaEntrada.toString("hh:mm")

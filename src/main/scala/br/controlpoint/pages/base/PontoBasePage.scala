@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.list.{ListItem,ListView}
 import org.apache.wicket.markup.html.WebPage
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
-import org.joda.time.DateTime
+import org.joda.time.{LocalDateTime, DateTime}
 import br.controlpoint.entities.{Ponto,Usuario}
 import br.controlpoint.pages.{LoginPage,PontoPage,RelDiaPage,SobrePage,UsuarioPage}
 import org.apache.wicket.markup.html.link.Link
@@ -88,12 +88,12 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
     def onClick = setResponsePage(new SobrePage(usuarioLogado))
   })
 
-  var dataBusca = new DateTime();
+  var dataBusca = new LocalDateTime();
   var listaPonto = pontoMediator.listaPontoUsuario(usuarioLogado, dataBusca);
 
   for (ponto <- listaPonto) {
     if (ponto.dataInicio != null && ponto.dataFim == null) {
-      contadorMilesegundos = ponto.dataInicio.getMillis() + ""
+      contadorMilesegundos = ponto.dataInicio.getMillisOfSecond() + ""
     }
   }
 
@@ -101,7 +101,7 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
   formContador.add(new HiddenField("milissegundos", new PropertyModel[String](this, "contadorMilesegundos")))
   add(formContador)
 
-  var listaPonto2: List[Ponto] = pontoMediator.listaPontoUsuario(new DateTime());
+  var listaPonto2: List[Ponto] = pontoMediator.listaPontoUsuario(new LocalDateTime());
   add(new ListView[Ponto]("listaPonto", listaPonto2) {
     def populateItem(item: ListItem[Ponto]) {
       var ponto = item.getModelObject()

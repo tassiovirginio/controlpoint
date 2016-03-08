@@ -9,7 +9,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean
 import br.controlpoint.entities.Usuario
 import br.controlpoint.mediators.UsuarioMediator
 import br.controlpoint.pages.base.PontoBasePage
-import org.joda.time.DateTime
+import org.joda.time.{LocalDateTime, DateTime}
 
 class RelPeriodoPage(usuario: Usuario, travarLista: java.lang.Boolean) extends PontoBasePage(usuario) {
 
@@ -24,7 +24,7 @@ class RelPeriodoPage(usuario: Usuario, travarLista: java.lang.Boolean) extends P
 
   var form = new Form("form") {
     override protected def onSubmit() {
-      setResponsePage(new PontoPage(usuarioLogado, usuarioSelecionado, new DateTime(dataPesquisaInicio), new DateTime(dataPesquisaFim), false));
+      setResponsePage(new PontoPage(usuarioLogado, usuarioSelecionado, new LocalDateTime(dataPesquisaInicio), new LocalDateTime(dataPesquisaFim), false));
     }
   };
   add(form);
