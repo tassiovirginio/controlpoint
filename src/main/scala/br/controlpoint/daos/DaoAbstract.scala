@@ -1,23 +1,22 @@
 package br.controlpoint.daos
 
 import java.io.Serializable
-import java.util.{ List => JList }
+import java.util.{List => JList}
 import org.apache.commons.logging.LogFactory
-import org.hibernate.{ SessionFactory, Session }
+import org.hibernate.SessionFactory
 import org.hibernate.criterion._
 import org.springframework.beans.factory.annotation.Autowired
 
-
 abstract class DaoAbstract[D, K <: Serializable] {
-  
-  implicit def rest(x:String):SRestrictions = new SRestrictions(x)
+
+  implicit def rest(x: String): SRestrictions = new SRestrictions(x)
 
   val LOG = LogFactory.getLog(getClass())
 
   @Autowired var sessionFactory: SessionFactory = _
-  
+
   protected def domain: Class[D]
-  
+
   protected def currentSession = sessionFactory.getCurrentSession()
 
   protected def createCriteria = currentSession.createCriteria(domain)
@@ -48,14 +47,18 @@ abstract class DaoAbstract[D, K <: Serializable] {
   def totalCount: Long = {
     var result = createCriteria.setProjection(Projections.rowCount())
     if (result == null) return 0L
-    if (result.isInstanceOf[Integer]) { return result.asInstanceOf[Integer].longValue() }
+    if (result.isInstanceOf[Integer]) {
+      return result.asInstanceOf[Integer].longValue()
+    }
     return result.asInstanceOf[Long].longValue
   }
 
   def size: Long = {
     var result = createCriteria.setProjection(Projections.rowCount())
     if (result == null) return 0L
-    if (result.isInstanceOf[Integer]) { return result.asInstanceOf[Integer].longValue() }
+    if (result.isInstanceOf[Integer]) {
+      return result.asInstanceOf[Integer].longValue()
+    }
     return result.asInstanceOf[Long].longValue
   }
 
