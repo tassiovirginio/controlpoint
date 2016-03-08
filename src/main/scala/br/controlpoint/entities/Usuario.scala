@@ -4,7 +4,6 @@ import javax.persistence.{Entity,GeneratedValue,Id}
 
 import org.hibernate.annotations.Type
 import org.joda.time.{DateTime,LocalTime}
-import scala.reflect.BeanProperty
 import java.lang.{Boolean => JBoolean}
 
 import java.io.Serializable

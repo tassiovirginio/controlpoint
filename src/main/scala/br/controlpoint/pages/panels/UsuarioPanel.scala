@@ -1,30 +1,24 @@
 package br.controlpoint.pages.panels
 
-import java.util.{ArrayList,Date,List}
+import java.util.ArrayList
 import org.apache.wicket.Page
-import org.apache.wicket.behavior.SimpleAttributeModifier
-import org.apache.wicket.markup.html.form.{CheckBox,Form,ListChoice,PasswordTextField,RequiredTextField,TextArea}
-import org.apache.wicket.markup.html.panel.{FeedbackPanel,Panel}
+import org.apache.wicket.markup.html.form._
+import org.apache.wicket.markup.html.panel.{FeedbackPanel, Panel}
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.DateTime
 import br.controlpoint.entities.Usuario
 import br.controlpoint.mediators.TUsuarioMediator
-import br.controlpoint.util.DateTimeField24h
 import br.controlpoint.pages.UsuarioPage
-import com.google.code.jqwicket.ui.datetimepicker.TimePickerTextField
-import com.google.code.jqwicket.ui.datetimepicker.DateTimePickerOptions
 import org.joda.time.format.DateTimeFormat
 import org.apache.wicket.markup.html.basic.Label
-import org.apache.wicket.model.Model
 
-
-class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) extends Panel("usuarioPanel") {
+class UsuarioPanel(pagePai: Page, usuario: Usuario, diretoS: java.lang.Boolean) extends Panel("usuarioPanel") {
 
   var direto = diretoS.asInstanceOf[Boolean]
-  
+
   @SpringBean
-  var usuarioMediator:TUsuarioMediator = _
+  var usuarioMediator: TUsuarioMediator = _
 
   def this(pagePai: Page) = this(pagePai, new Usuario(), false)
 
@@ -63,12 +57,9 @@ class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) ext
   var textFieldLogin = new RequiredTextField("textFieldLogin", new PropertyModel[String](usuarioSelecionado, "login"))
   var textFieldEmail = new RequiredTextField("textFieldEmail", new PropertyModel[String](this.usuarioSelecionado, "email"))
 
-  var textFieldHoraEntrada = new TimePickerTextField("textFieldHoraEntrada", new DateTimePickerOptions().hourGrid(3))
-  textFieldHoraEntrada.setModel(new PropertyModel(this, "dateHoraEntrada"))
-  var textFieldHoraSaida = new TimePickerTextField("textFieldHoraSaida", new DateTimePickerOptions().hourGrid(3))
-  textFieldHoraSaida.setModel(new PropertyModel(this, "dateHoraSaida"))
-  var textFieldJornada = new TimePickerTextField("textFieldJornada", new DateTimePickerOptions().hourGrid(3))
-  textFieldJornada.setModel(new PropertyModel(this, "dateJornada"))
+  var textFieldHoraEntrada = new TextField[String]("textFieldHoraEntrada", new PropertyModel[String](this, "dateHoraEntrada"))
+  var textFieldHoraSaida = new TextField[String]("textFieldHoraSaida", new PropertyModel[String](this, "dateHoraSaida"))
+  var textFieldJornada = new TextField[String]("textFieldJornada", new PropertyModel[String](this, "dateJornada"))
 
   var textFieldIPs = new TextArea("textFieldIPs", new PropertyModel(this.usuarioSelecionado, "ips"))
   var checkBoxAdmin = new CheckBox("checkBoxAdmin", new PropertyModel(this.usuarioSelecionado, "adm"))
@@ -78,22 +69,22 @@ class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) ext
   var listaWallpaper = new ArrayList[String]()
   listaWallpaper.add("wallpaper01")
   listaWallpaper.add("wallpaper02")
-  
-  
+
+
   var listChoice = new ListChoice[String]("listaWallpaper", new PropertyModel[String](this.usuarioSelecionado, "wallpaper"), listaWallpaper, 1)
   listChoice.setRequired(true)
 
   textFieldLogin.setVisible(!direto)
-  
-  form.add(new Label("lbHrEntrada","Hora de Entrada:").setVisible(!direto))
+
+  form.add(new Label("lbHrEntrada", "Hora de Entrada:").setVisible(!direto))
   form.add(new Label("lbHrSaida", "Hora de Saida:").setVisible(!direto))
   form.add(new Label("lbHrJornada", "Hora Jornada:").setVisible(!direto))
-  form.add(new Label("lbLogin","Login:").setVisible(!direto))
+  form.add(new Label("lbLogin", "Login:").setVisible(!direto))
   form.add(new Label("lbAdmin", "Admin:").setVisible(!direto))
   form.add(new Label("lbExterno", "Externo:").setVisible(!direto))
   form.add(new Label("lbAcesso", "Acesso:").setVisible(!direto))
   form.add(new Label("lbIps", "Ips:").setVisible(!direto))
-  
+
 
   textFieldHoraEntrada.setVisible(!direto)
   textFieldHoraSaida.setVisible(!direto)
@@ -137,13 +128,13 @@ class UsuarioPanel(pagePai:Page, usuario:Usuario, diretoS:java.lang.Boolean) ext
     listChoice.setModel(new PropertyModel(usuarioSelecionado, "wallpaper"))
 
     if (usuarioSelecionado.horaEntrada == null) {
-      usuarioSelecionado.horaEntrada=(new DateTime())
+      usuarioSelecionado.horaEntrada = (new DateTime())
     }
     if (usuarioSelecionado.horaSaida == null) {
-      usuarioSelecionado.horaSaida=(new DateTime())
+      usuarioSelecionado.horaSaida = (new DateTime())
     }
     if (usuarioSelecionado.jornada == null) {
-      usuarioSelecionado.jornada=(new DateTime())
+      usuarioSelecionado.jornada = (new DateTime())
     }
 
     dateHoraEntrada = usuarioSelecionado.horaEntrada.toString("hh:mm")

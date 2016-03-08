@@ -1,8 +1,9 @@
 target
 work
-*.class
 .project
 .classpath
 .settings
 .scala_dependencies 
 .cache
+.idea
+*.iml

@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne
 
 import org.hibernate.annotations.Type
 import org.joda.time.DateTime
-import scala.reflect.BeanProperty
 
 import java.io.Serializable
 

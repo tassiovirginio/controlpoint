@@ -23,10 +23,10 @@ class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with Serializable {
   override def domain = classOf[Ponto]
 
   def buscarPontos(p: Ponto, dataInicio: DateTime, dataFim: DateTime): jList[Ponto] = {
-    var dHoraInicio = dataInicio.withTime(00, 00, 00, 00)
-    var dHoraFim = dataInicio.withTime(23, 59, 59, 00)
+    var dHoraInicio = dataInicio.withTime(0,0,0,0)
+    var dHoraFim = dataInicio.withTime(23,59,59,0)
 
-    if (dataFim != null) dHoraFim = dataFim.withTime(23, 59, 59, 00)
+    if (dataFim != null) dHoraFim = dataFim.withTime(23,59,59,0)
 
     createCriteria
       .add("usuario" eq_(p.usuario))
@@ -40,10 +40,10 @@ class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with Serializable {
   
 
   def buscarPontos(dInicio: DateTime, dFim: DateTime): jList[Ponto] = {
-    var dHoraInicio = dInicio.withTime(00, 00, 00, 00)
-    var dHoraFim = dInicio.withTime(23, 59, 59, 00)
+    var dHoraInicio = dInicio.withTime(0,0,0,0)
+    var dHoraFim = dInicio.withTime(23,59,59,0)
 
-    if (dFim != null) { dHoraFim = dFim.withTime(23, 59, 59, 00) }
+    if (dFim != null) { dHoraFim = dFim.withTime(23,59,59,0) }
 
     var lista = createCriteria
       .add("dataInicio".between(dHoraInicio, dHoraFim))

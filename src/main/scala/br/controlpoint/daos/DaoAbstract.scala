@@ -5,7 +5,6 @@ import java.util.{ List => JList }
 import org.apache.commons.logging.LogFactory
 import org.hibernate.{ SessionFactory, Session }
 import org.hibernate.criterion._
-import scala.reflect.BeanProperty
 
 
 abstract class DaoAbstract[D, K <: Serializable] {
@@ -14,7 +13,6 @@ abstract class DaoAbstract[D, K <: Serializable] {
 
   val LOG = LogFactory.getLog(getClass())
   
-  @BeanProperty
   var sessionFactory: SessionFactory = _
   
   protected def domain: Class[D]

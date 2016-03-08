@@ -2,22 +2,19 @@ package br.controlpoint.pages.panels
 
 import java.util.Locale
 import org.apache.wicket.ajax.markup.html.form.AjaxButton
-import org.apache.wicket.ajax.AjaxRequestTarget
-import org.apache.wicket.markup.html.form.CheckBox
-import org.apache.wicket.markup.html.form.Form
+import org.apache.wicket.markup.html.form.{TextField, CheckBox, Form}
 import org.apache.wicket.markup.html.panel.Panel
 import org.apache.wicket.markup.html.WebMarkupContainer
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.format.DateTimeFormat
-import com.google.code.jqwicket.ui.datetimepicker.DateTimePickerOptions
-import com.google.code.jqwicket.ui.datetimepicker.DateTimePickerTextField
 import br.controlpoint.entities.Ponto
 import br.controlpoint.entities.Usuario
 import br.controlpoint.mediators.TPontoMediator
 import br.controlpoint.pages.base.PontoBasePage
-import javax.persistence.Entity
 import br.controlpoint.pages.EditPontoPage
+
+import scala.collection.JavaConverters._
 
 class EditPontoPanel(id:String, ponto:Ponto, paginaOrigem:PontoBasePage) extends Panel(id) {
 
@@ -64,20 +61,12 @@ class EditPontoPanel(id:String, ponto:Ponto, paginaOrigem:PontoBasePage) extends
 
   getSession().setLocale(new Locale("pt", "BR"));
   
-  var dateOpt = new DateTimePickerOptions()
-  dateOpt.dateFormat("dd/mm/yy")
-  dateOpt.timeFormat("hh:mm")
-
-  var textFieldHoraEntrada = new DateTimePickerTextField("textFieldHoraEntrada",dateOpt)
-  textFieldHoraEntrada.setModel(new PropertyModel(this, "dateHoraEntrada"))
-  textFieldHoraEntrada.setRequired(true);
-  form.add(textFieldHoraEntrada);
+  form.add(new TextField[String]("textFieldHoraEntrada", new PropertyModel[String](this, "dateHoraEntrada")).setRequired(true))
 
   container = new WebMarkupContainer("container");
 
-  var textFieldHoraSaida = new DateTimePickerTextField("textFieldHoraSaida",dateOpt)
-  textFieldHoraSaida.setModel(new PropertyModel(this, "dateHoraSaida"))
-  container.add(textFieldHoraSaida);
+  form.add(new TextField[String]("textFieldHoraSaida", new PropertyModel[String](this, "dateHoraSaida")).setRequired(true))
+
   var checknull = new CheckBox("endTimeisNull",new PropertyModel(this, "timeEndNull"))
   container.add(checknull);
   form.add(container);

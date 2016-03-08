@@ -18,8 +18,6 @@ import br.controlpoint.mediators.TPontoMediator
 import br.controlpoint.pages.base.PontoBasePage
 import br.controlpoint.pages.{PontoPage,EditPontoPage}
 import java.io.Serializable
-import com.google.code.jqwicket.ui.prettypopin.PrettyPopinBehavior
-import com.google.code.jqwicket.ui.prettypopin.PrettyPopinOptions
 import org.apache.wicket.markup.html.link.Link
 
 
@@ -141,7 +139,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
     var editarPontoWinModal = new ModalWindow("modalEditPonto")
     editarPontoWinModal.setTitle("Editar Ponto")
     editarPontoWinModal.setCookieName("modalEditPonto")
-    editarPontoWinModal.setPageMapName("modalEditPonto")
+//    editarPontoWinModal.setPageMapName("modalEditPonto")
     editarPontoWinModal.setHeightUnit("100")
     editarPontoWinModal.setWidthUnit("100")
     editarPontoWinModal.setResizable(true)
@@ -167,9 +165,9 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
             }
 		}));
 		
-		var prettyOpt = new PrettyPopinOptions()
-		var pretty = new PrettyPopinBehavior(prettyOpt.width(300).height(180).followScroll(false))
-		add(pretty)
+//		var prettyOpt = new PrettyPopinOptions()
+//		var pretty = new PrettyPopinBehavior(prettyOpt.width(300).height(180).followScroll(false))
+//		add(pretty)
 		
 		def onClick(){
 //		  new EditPontoPanel(editarPontoWinModal.getContentId(),this.ponto,editarPontoWinModal,pageOrigem);

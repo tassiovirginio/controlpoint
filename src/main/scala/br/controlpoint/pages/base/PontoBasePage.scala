@@ -2,24 +2,19 @@ package br.controlpoint.pages.base
 
 import java.util.{List,Locale}
 import scala.collection.JavaConversions.asScalaBuffer
-import scala.reflect.BeanProperty
-import org.apache.wicket.behavior.SimpleAttributeModifier
 import org.apache.wicket.markup.html.basic.Label
 import org.apache.wicket.markup.html.form.{Form,HiddenField}
 import org.apache.wicket.markup.html.image.Image
 import org.apache.wicket.markup.html.list.{ListItem,ListView}
-import org.apache.wicket.markup.html.CSSPackageResource
 import org.apache.wicket.markup.html.WebPage
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.DateTime
 import br.controlpoint.entities.{Ponto,Usuario}
-import br.controlpoint.pages.{LoginPage,PontoPage,RelDiaPage,RelPeriodoPage,SobrePage,UsuarioPage}
-import javax.persistence.Entity
+import br.controlpoint.pages.{LoginPage,PontoPage,RelDiaPage,SobrePage,UsuarioPage}
 import org.apache.wicket.markup.html.link.Link
 import br.controlpoint.pages.RelPeriodoPage
 import br.controlpoint.mediators.{TPontoMediator,TUsuarioMediator}
-import collection.JavaConversions._
 
 class PontoBasePage(usuario: Usuario) extends WebPage {
 
@@ -40,18 +35,18 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
   if (getSession().isSessionInvalidated()) {
     usuarioLogado = null
     getSession().invalidate()
-    getRequestCycle().setRedirect(true)
+//    getRequestCycle().setRedirect(true)
   }
 
   usuarioLogado = usuarioMediator.getUsuarioForId(usuario.id)
-  this.add(CSSPackageResource.getHeaderContribution("css/base.css"))
-  var img = new Image("wallpaper")
-  img.add(new SimpleAttributeModifier("src", "imagens/wallpapers/" + usuarioLogado.wallpaper + ".jpg"))
-  add(img)
+//  this.add(CSSPackageResource.getHeaderContribution("css/base.css"))
+//  val img = Image("wallpaper",Resouce)
+//  img.add(new SimpleAttributeModifier("src", "imagens/wallpapers/" + usuarioLogado.wallpaper + ".jpg"))
+//  add(img)
 
   if (usuarioLogado == null) {
     getSession().invalidate()
-    getRequestCycle().setRedirect(true)
+//    getRequestCycle().setRedirect(true)
     setResponsePage(new LoginPage())
   }
 
@@ -64,7 +59,7 @@ class PontoBasePage(usuario: Usuario) extends WebPage {
     def onClick() {
       usuarioLogado = null
       getSession().invalidate()
-      getRequestCycle().setRedirect(true)
+//      getRequestCycle().setRedirect(true)
     }
   })
 
