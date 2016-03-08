@@ -44,7 +44,7 @@
                 <prop key="jadira.usertype.autoRegisterUserTypes">true</prop>
                 <prop key="jadira.usertype.databaseZone">jvm</prop>
                 <prop key="jadira.usertype.javaZone">jvm</prop>
-                <!--<prop key="jadira.usertype.autoRegisterUserTypes">true</prop>-->
+                <prop key="jadira.usertype.autoRegisterUserTypes">true</prop>
             </props>
         </property>
         <property name="packagesToScan" value="br.controlpoint.entities"/>
@@ -81,20 +81,6 @@
         </property>
         <property name="automaticTestTable">
             <value>${c3p0.automaticTestTable}</value>
-        </property>
-    </bean>
-
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="${email.host}"/>
-        <property name="port" value="${email.port}"/>
-        <property name="username" value="${email.username}"/>
-        <property name="password" value="${email.password}"/>
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-                <prop key="mail.smtp.ssl.trust">${email.host}</prop>
-            </props>
         </property>
     </bean>
 
