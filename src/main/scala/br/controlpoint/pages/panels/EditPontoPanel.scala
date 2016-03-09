@@ -3,7 +3,7 @@ package br.controlpoint.pages.panels
 import java.util.Locale
 
 import br.controlpoint.entities.{Ponto, Usuario}
-import br.controlpoint.mediators.TPontoMediator
+import br.controlpoint.mediators.PontoMediator
 import br.controlpoint.pages.EditPontoPage
 import br.controlpoint.pages.base.PontoBasePage
 import org.apache.wicket.markup.html.WebMarkupContainer
@@ -26,7 +26,7 @@ class EditPontoPanel(id:String, ponto:Ponto, paginaOrigem:PontoBasePage) extends
   var container:WebMarkupContainer = _
 
   @SpringBean
-  var pontoMediator:TPontoMediator = _
+  var pontoMediator:PontoMediator = _
 
   if (ponto.dataFim != null) {
     this.dateHoraSaida = ponto.dataInicio.toString(dateFormatter)

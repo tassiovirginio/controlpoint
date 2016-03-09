@@ -3,7 +3,7 @@ package br.controlpoint
 import java.util.logging.Logger
 
 import br.controlpoint.entities.Usuario
-import br.controlpoint.mediators.{TPontoMediator, TUsuarioMediator}
+import br.controlpoint.mediators.{PontoMediator, UsuarioMediator}
 import br.controlpoint.pages._
 import org.apache.wicket.protocol.http.WebApplication
 import org.apache.wicket.response.filter.AjaxServerAndClientTimeFilter
@@ -17,8 +17,8 @@ class WicketApplication extends WebApplication {
 
   private[controlpoint] var log: Logger = Logger.getLogger(classOf[WicketApplication].getName)
 
-  @Autowired private var usuarioMediator: TUsuarioMediator = _
-  @Autowired private var pontoMediator: TPontoMediator = _
+  @Autowired private var usuarioMediator: UsuarioMediator = _
+  @Autowired private var pontoMediator: PontoMediator = _
 
   override def getHomePage = classOf[LoginPage]
 

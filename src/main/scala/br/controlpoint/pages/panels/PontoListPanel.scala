@@ -3,7 +3,7 @@ package br.controlpoint.pages.panels
 import java.io.Serializable
 
 import br.controlpoint.entities.{Ponto, Usuario}
-import br.controlpoint.mediators.TPontoMediator
+import br.controlpoint.mediators.PontoMediator
 import br.controlpoint.pages.base.PontoBasePage
 import br.controlpoint.pages.{EditPontoPage, PontoPage}
 import org.apache.wicket.ajax.AjaxRequestTarget
@@ -26,8 +26,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	
 	var serialVersionUID:Long = 1L;
 
-	@SpringBean
-	var pontoMediator:TPontoMediator =_
+	@SpringBean var pontoMediator:PontoMediator =_
 
 	var pontoParaFechar:Ponto =_
 
@@ -184,8 +183,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	
 	private class LinkDelete(id:String,ponto:Ponto,clickavel:java.lang.Boolean) extends AjaxLink[String](id){
 		
-		@SpringBean
-		var pontoMediator:TPontoMediator = null
+		@SpringBean var pontoMediator:PontoMediator = null
 	
 		setVisible(clickavel.asInstanceOf[Boolean])
 		add(new Label("label", new Model[String]() {

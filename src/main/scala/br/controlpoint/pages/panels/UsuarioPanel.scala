@@ -3,7 +3,7 @@ package br.controlpoint.pages.panels
 import java.util.ArrayList
 
 import br.controlpoint.entities.Usuario
-import br.controlpoint.mediators.TUsuarioMediator
+import br.controlpoint.mediators.UsuarioMediator
 import br.controlpoint.pages.UsuarioPage
 import org.apache.wicket.Page
 import org.apache.wicket.markup.html.basic.Label
@@ -19,7 +19,7 @@ class UsuarioPanel(pagePai: Page, usuario: Usuario, diretoS: java.lang.Boolean) 
   var direto = diretoS.asInstanceOf[Boolean]
 
   @SpringBean
-  var usuarioMediator: TUsuarioMediator = _
+  var usuarioMediator: UsuarioMediator = _
 
   def this(pagePai: Page) = this(pagePai, new Usuario(), false)
 

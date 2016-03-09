@@ -1,9 +1,9 @@
 <HTML xmlns:wicket="http://wicket.apache.org">
 <HEAD>
-    <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <link rel="shortcut icon" href="imagens/favicon.ico"/>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="../imagens/favicon.ico"/>
     <title>Control Point</title>
-    <LINK href="css/base.css" rel="stylesheet" type="text/css">
+    <LINK href="../css/base.css" rel="stylesheet" type="text/css">
 
     <script language="JavaScript">
         function do_Relogio() {
@@ -57,13 +57,13 @@
 </HEAD>
 <BODY onload="do_Relogio();do_Contador();">
 
-<img src="imagens/wallpapers/wallpaper01.jpg" class="bg">
+<img wicket:id="wallpaper" src="../imagens/wallpapers/wallpaper01.jpg" class="bg">
 
 <div id="menu_div">&nbsp;
     <font>&nbsp;Control Point&nbsp</font>
     <font size="1">1.0&nbsp;&nbsp;</font>
     <font size="1">|&nbsp;&nbsp;MENU:</font>
-    <A class="menu" wicket:id="lkmnCadUsuario" href="#">&nbsp;Cadastro de Usuários </A>
+    <A class="menu" wicket:id="lkmnCadUsuario" href="#">&nbsp;Cadastro de UsuÃ¡rios </A>
     <A class="menu" wicket:id="lkmnMeusDados" href="#">&nbsp;Meus Dados </A>
     <A class="menu" wicket:id="lkmnRelPeriodo" href="#">&nbsp;Relatorio do Periodo </A>
     <A class="menu" wicket:id="lkmnRelDia" href="#">&nbsp;Relatorio do Dia </A>
@@ -85,7 +85,7 @@
             </th>
         </tr>
         <TR wicket:id="listaPonto">
-            <TD wicket:id="nome">Tassio Virginio</TD>
+            <TD wicket:id="nome"></TD>
         </TR>
     </table>
 </div>
@@ -105,7 +105,7 @@
 </div>
 <div id="status_div">
     <span class="labelusuario" wicket:id="labelusuario"></span>
-    <A class="menu" wicket:id="lkmnSair" href="http://127.0.0.1:8080/ponto/pages/sair.jsp">&nbsp;Sair&nbsp;</A>
+    <A class="menu" wicket:id="lkmnSair" href="">&nbsp;Sair&nbsp;</A>
 </div>
 
 <wicket:child/>

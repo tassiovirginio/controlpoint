@@ -1,7 +1,7 @@
 package br.controlpoint.pages.panels
 
 import br.controlpoint.entities.{Ponto, Usuario}
-import br.controlpoint.mediators.TPontoMediator
+import br.controlpoint.mediators.PontoMediator
 import org.apache.wicket.markup.html.basic.Label
 import org.apache.wicket.markup.html.form.Form
 import org.apache.wicket.markup.html.list.{ListItem, ListView}
@@ -13,7 +13,7 @@ import org.joda.time.LocalDateTime
 class PontoEditListPanel(usuario:Usuario, dateBuscaInicio:LocalDateTime, dateBuscaFim:LocalDateTime) extends Panel("PontoEditListPanel") {
 
   @SpringBean
-  var pontoMediator:TPontoMediator = _
+  var pontoMediator:PontoMediator = _
 
   var listData = pontoMediator.listaPontoUsuario(usuario, dateBuscaInicio, dateBuscaFim);
   

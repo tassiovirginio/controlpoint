@@ -3,11 +3,13 @@ package br.controlpoint.pages.base
 import java.util.{List, Locale}
 
 import br.controlpoint.entities.{Ponto, Usuario}
-import br.controlpoint.mediators.{TPontoMediator, TUsuarioMediator}
+import br.controlpoint.mediators.{PontoMediator, UsuarioMediator}
 import br.controlpoint.pages.{LoginPage, PontoPage, RelDiaPage, RelPeriodoPage, SobrePage, UsuarioPage}
-import org.apache.wicket.markup.html.WebPage
+import org.apache.wicket.AttributeModifier
+import org.apache.wicket.markup.html.{WebComponent, WebPage}
 import org.apache.wicket.markup.html.basic.Label
 import org.apache.wicket.markup.html.form.HiddenField
+import org.apache.wicket.markup.html.image.Image
 import org.apache.wicket.markup.html.list.{ListItem, ListView}
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
@@ -18,11 +20,9 @@ import scala.collection.JavaConversions.asScalaBuffer
 
 class PontoBasePage(usuario: Usuario) extends WebPage with DSLWicket{
 
-  @SpringBean
-  var usuarioMediator: TUsuarioMediator = _
+  @SpringBean var usuarioMediator: UsuarioMediator = _
 
-  @SpringBean
-  var pontoMediator: TPontoMediator = _
+  @SpringBean var pontoMediator: PontoMediator = _
 
   var usuarioLogado: Usuario = null
 
@@ -39,10 +39,12 @@ class PontoBasePage(usuario: Usuario) extends WebPage with DSLWicket{
   }
 
   usuarioLogado = usuarioMediator.getUsuarioForId(usuario.id)
-  //  this.add(CSSPackageResource.getHeaderContribution("css/base.css"))
-  //  val img = Image("wallpaper",Resouce)
-  //  img.add(new SimpleAttributeModifier("src", "imagens/wallpapers/" + usuarioLogado.wallpaper + ".jpg"))
-  //  add(img)
+//    this.add(CSSPackageResource.getHeaderContribution("css/base.css"))
+//    val img = Image("wallpaper",null,null)
+
+  val img = new WebComponent("wallpaper")
+  img.add(new AttributeModifier("src", "../imagens/wallpapers/" + usuarioLogado.wallpaper + ".jpg"))
+  add(img)
 
   if (usuarioLogado == null) {
     getSession().invalidate()
