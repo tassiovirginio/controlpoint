@@ -11,12 +11,12 @@ class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInic
 
   add(new PontoListPanel(usuarioSelecionado, usuarioLogado, dateBuscaInicio, dateBuscaFim, editavel.asInstanceOf[Boolean], this))
 
-  var container = new WebMarkupContainer("container"){
-    setOutputMarkupId(true)
-  }
-  add(container)
+//  var container = new WebMarkupContainer("container"){
+//    setOutputMarkupId(true)
+//  }
+//  add(container)
 
-  var listData = pontoMediator.listaPontoUsuario(usuarioSelecionado, dateBuscaInicio, dateBuscaFim);
+//  var listData = pontoMediator.listaPontoUsuario(usuarioSelecionado, dateBuscaInicio, dateBuscaFim);
   
 //  var export = new WebResource() {
 //
@@ -43,9 +43,9 @@ class PontoPage(usuarioLogado:Usuario, usuarioSelecionado:Usuario, dateBuscaInic
 //  export.setCacheable(false);
 //  container.add(new ResourceLink("linkGerarXls", export));
   
-  if(dateBuscaFim == null){
-	 container.setVisible(false)
-  }
+//  if(dateBuscaFim == null){
+//	 container.setVisible(false)
+//  }
   
   def this(usuario:Usuario, editavel:Boolean) = this(usuario,usuario,new LocalDateTime(),null, editavel)
   

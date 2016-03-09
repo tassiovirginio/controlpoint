@@ -165,8 +165,8 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 		
 //		var prettyOpt = new PrettyPopinOptions()
 //		var pretty = new PrettyPopinBehavior(prettyOpt.width(300).height(180).followScroll(false))
-		var pretty = null
-		add(pretty)
+//		var pretty = null
+//		add(pretty)
 		
 		def onClick(){
 //		  new EditPontoPanel(editarPontoWinModal.getContentId(),this.ponto,editarPontoWinModal,pageOrigem);
