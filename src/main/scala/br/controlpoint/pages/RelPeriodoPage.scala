@@ -1,15 +1,14 @@
 package br.controlpoint.pages
 
-import java.util.{ArrayList,List,Date}
+import java.util.{ArrayList, Date}
+
+import br.controlpoint.entities.Usuario
+import br.controlpoint.pages.base.PontoBasePage
 import org.apache.wicket.extensions.markup.html.form.DateTextField
 import org.apache.wicket.extensions.yui.calendar.DatePicker
-import org.apache.wicket.markup.html.form.{ChoiceRenderer,Form,ListChoice}
+import org.apache.wicket.markup.html.form.{ChoiceRenderer, Form, ListChoice}
 import org.apache.wicket.model.PropertyModel
-import org.apache.wicket.spring.injection.annot.SpringBean
-import br.controlpoint.entities.Usuario
-import br.controlpoint.mediators.UsuarioMediator
-import br.controlpoint.pages.base.PontoBasePage
-import org.joda.time.{LocalDateTime, DateTime}
+import org.joda.time.LocalDateTime
 
 class RelPeriodoPage(usuario: Usuario, travarLista: java.lang.Boolean) extends PontoBasePage(usuario) {
 

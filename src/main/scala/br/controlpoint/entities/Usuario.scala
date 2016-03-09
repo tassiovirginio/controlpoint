@@ -1,49 +1,45 @@
 package br.controlpoint.entities
 
-import javax.persistence.{Entity, GeneratedValue, Id}
-
-import org.joda.time.{LocalDateTime}
 import java.lang.{Boolean => JBoolean}
+import javax.persistence.Entity
 
-import java.io.Serializable
+import org.joda.time.LocalDateTime
+
+import scala.beans.BeanProperty
 
 @Entity
-class Usuario extends Serializable {
+class Usuario extends Identifiable {
 
-  @Id
-  @GeneratedValue
-  var id: Long = _
+  @BeanProperty var acesso: Boolean = _
 
-  var acesso: Boolean = _
+  @BeanProperty var nome: String = _
 
-  var nome: String = _
+  @BeanProperty var email: String = _
 
-  var email: String = _
+  @BeanProperty var login: String = _
 
-  var login: String = _
+  @BeanProperty var senha: String = _
 
-  var senha: String = _
+  @BeanProperty var ips: String = _
 
-  var ips: String = _
+  @BeanProperty var externo: JBoolean = _
 
-  var externo: JBoolean = _
+  @BeanProperty var gtalk: JBoolean = _
 
-  var gtalk: JBoolean = _
+  @BeanProperty var adm: Boolean = _
 
-  var adm: Boolean = _
+  @BeanProperty var wallpaper: String = _
 
-  var wallpaper: String = _
+  @BeanProperty var horaEntrada: LocalDateTime = _
 
-  var horaEntrada: LocalDateTime = _
+  @BeanProperty var horaSaida: LocalDateTime = _
 
-  var horaSaida: LocalDateTime = _
+  @BeanProperty var jornada: LocalDateTime = _
 
-  var jornada: LocalDateTime = _
-
-  var alerta1: LocalDateTime = _
+  @BeanProperty var alerta1: LocalDateTime = _
 
   override def equals(that: Any): Boolean = that match {
-    case u: Usuario => this.id == u.id
+    case u: this.type => this.id == u.id
     case _ => false
   }
 

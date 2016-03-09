@@ -8,3 +8,4 @@ work
 .idea
 *.iml
 db
+dependency-reduced-pom.xml

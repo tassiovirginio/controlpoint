@@ -1,6 +1,6 @@
 package br.controlpoint.util
 
-import java.util.{ArrayList,Date,List}
+import java.util.{ArrayList, Date, List}
 
 
 class RelatorioXLS {

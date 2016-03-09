@@ -1,9 +1,10 @@
 package br.controlpoint.daos
 
-import br.controlpoint.entities.Ponto
 import java.io.Serializable
 import java.util.{List => jList}
 
+import br.controlpoint.daos.util.DaoAbstract
+import br.controlpoint.entities.Ponto
 import org.joda.time.LocalDateTime
 import org.springframework.stereotype.Component
 
@@ -20,7 +21,7 @@ class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with Serializable {
 
     if (dataFim != null) dHoraFim = dataFim.withTime(23, 59, 59, 0)
 
-    createCriteria
+    criteria
       .add("usuario" eq_ (p.usuario))
       .add("dataInicio" between(dHoraInicio, dHoraFim))
       .addOrder("dataInicio" orderAsc)
@@ -37,7 +38,7 @@ class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with Serializable {
       dHoraFim = dFim.withTime(23, 59, 59, 0)
     }
 
-    var lista = createCriteria
+    var lista = criteria
       .add("dataInicio".between(dHoraInicio, dHoraFim))
       .add("dataFim".isNull)
       .addOrder("dataInicio".orderAsc)

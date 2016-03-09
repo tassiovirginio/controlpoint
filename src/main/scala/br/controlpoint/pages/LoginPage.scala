@@ -1,14 +1,13 @@
 package br.controlpoint.pages
 
-import org.apache.wicket.markup.html.form.{Form,PasswordTextField,TextField}
-import org.apache.wicket.markup.html.panel.FeedbackPanel
+import br.controlpoint.entities.Usuario
+import br.controlpoint.mediators.TUsuarioMediator
 import org.apache.wicket.markup.html.WebPage
+import org.apache.wicket.markup.html.form.{Form, PasswordTextField, TextField}
+import org.apache.wicket.markup.html.panel.FeedbackPanel
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.protocol.http.request.WebClientInfo
 import org.apache.wicket.spring.injection.annot.SpringBean
-import br.controlpoint.entities.Usuario
-import br.controlpoint.mediators.TUsuarioMediator
-import javax.persistence.Entity
 
 class LoginPage extends WebPage {
 
@@ -30,7 +29,8 @@ class LoginPage extends WebPage {
         var teste2 = teste.replace(".", " ").split(" ")
         teste = teste2(0) + "." + teste2(1) + "." + teste2(2) + "."
         if (usuarioLogado.ips.contains(teste)) {
-          setResponsePage(new PontoPage(usuarioLogado, true))
+          setResponsePage(new SobrePage(usuarioLogado))
+//          setResponsePage(new PontoPage(usuarioLogado, true))
         } else {
           error("Você não tem acesso desse ip!")
         }

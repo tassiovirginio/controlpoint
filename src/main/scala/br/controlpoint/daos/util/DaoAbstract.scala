@@ -1,7 +1,8 @@
-package br.controlpoint.daos
+package br.controlpoint.daos.util
 
 import java.io.Serializable
 import java.util.{List => JList}
+
 import org.apache.commons.logging.LogFactory
 import org.hibernate.SessionFactory
 import org.hibernate.criterion._
@@ -19,19 +20,19 @@ abstract class DaoAbstract[D, K <: Serializable] {
 
   protected def currentSession = sessionFactory.getCurrentSession()
 
-  protected def createCriteria = currentSession.createCriteria(domain)
+  protected def criteria = currentSession.createCriteria(domain)
 
   def delete(d: D) = currentSession.delete(d)
 
-  def getAll(offset: Int, maxResult: Int): JList[D] = createCriteria
+  def getAll(offset: Int, maxResult: Int): JList[D] = criteria
     .setMaxResults(maxResult)
     .setFirstResult(offset)
     .list().asInstanceOf[JList[D]]
 
-  def getAll(): JList[D] = createCriteria.list().asInstanceOf[JList[D]]
+  def getAll(): JList[D] = criteria.list().asInstanceOf[JList[D]]
 
   def getAll(offset: Int, max: Int, order: String, asc: Boolean): JList[D] = {
-    var c = createCriteria
+    val c = criteria
       .setMaxResults(max)
       .setFirstResult(offset)
     if (asc) {
@@ -45,21 +46,11 @@ abstract class DaoAbstract[D, K <: Serializable] {
   def getById(id: K): D = currentSession.get(domain, id).asInstanceOf[D]
 
   def totalCount: Long = {
-    var result = createCriteria.setProjection(Projections.rowCount())
-    if (result == null) return 0L
-    if (result.isInstanceOf[Integer]) {
-      return result.asInstanceOf[Integer].longValue()
-    }
-    return result.asInstanceOf[Long].longValue
+    return criteria.setProjection(Projections.rowCount()).asInstanceOf[Long]
   }
 
   def size: Long = {
-    var result = createCriteria.setProjection(Projections.rowCount())
-    if (result == null) return 0L
-    if (result.isInstanceOf[Integer]) {
-      return result.asInstanceOf[Integer].longValue()
-    }
-    return result.asInstanceOf[Long].longValue
+    return criteria.setProjection(Projections.rowCount()).asInstanceOf[Long]
   }
 
   def save(d: D): Unit = currentSession.saveOrUpdate(d)

@@ -1,37 +1,29 @@
 package br.controlpoint.entities
 
-import javax.persistence.Entity
-import javax.persistence.FetchType
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.ManyToOne
+import javax.persistence.{Entity, FetchType, ManyToOne}
 
-import org.joda.time.{LocalDateTime, DateTime}
+import org.joda.time.LocalDateTime
 
-import java.io.Serializable
+import scala.beans.BeanProperty
 
 @Entity
-class Ponto extends Serializable {
+class Ponto extends Identifiable {
 
-  @Id
-  @GeneratedValue
-  var id: Long = _
+  @BeanProperty var dataInicio: LocalDateTime = _
 
-  var dataInicio: LocalDateTime = _
-
-  var dataFim: LocalDateTime = _
+  @BeanProperty var dataFim: LocalDateTime = _
 
   @ManyToOne(fetch = FetchType.LAZY)
-  var usuario: Usuario = _
+  @BeanProperty var usuario: Usuario = _
 
-  var ipInicio: String = _
+  @BeanProperty var ipInicio: String = _
 
-  var ipFim: String = _
+  @BeanProperty var ipFim: String = _
 
-  var total: Integer = _
+  @BeanProperty var total: Integer = _
 
   override def equals(that: Any): Boolean = that match {
-    case p: Ponto => this.id == p.id
+    case u: this.type => this.id == u.id
     case _ => false
   }
 

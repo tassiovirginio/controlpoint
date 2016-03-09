@@ -1,24 +1,25 @@
 package br.controlpoint.pages.panels
 
+import java.io.Serializable
+
+import br.controlpoint.entities.{Ponto, Usuario}
+import br.controlpoint.mediators.TPontoMediator
+import br.controlpoint.pages.base.PontoBasePage
+import br.controlpoint.pages.{EditPontoPage, PontoPage}
 import org.apache.wicket.ajax.AjaxRequestTarget
 import org.apache.wicket.ajax.markup.html.AjaxLink
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow
 import org.apache.wicket.markup.html.WebMarkupContainer
 import org.apache.wicket.markup.html.basic.Label
-import org.apache.wicket.markup.html.form.{Button,Form}
-import org.apache.wicket.markup.html.list.{ListItem,ListView}
+import org.apache.wicket.markup.html.form.{Button, Form}
+import org.apache.wicket.markup.html.link.Link
+import org.apache.wicket.markup.html.list.{ListItem, ListView}
 import org.apache.wicket.markup.html.panel.Panel
 import org.apache.wicket.model.Model
 import org.apache.wicket.protocol.http.request.WebClientInfo
 import org.apache.wicket.spring.injection.annot.SpringBean
-import org.joda.time.{LocalDateTime, DateTime, Period}
 import org.joda.time.format.PeriodFormatterBuilder
-import br.controlpoint.entities.{Ponto,Usuario}
-import br.controlpoint.mediators.TPontoMediator
-import br.controlpoint.pages.base.PontoBasePage
-import br.controlpoint.pages.{PontoPage,EditPontoPage}
-import java.io.Serializable
-import org.apache.wicket.markup.html.link.Link
+import org.joda.time.{LocalDateTime, Period}
 
 
 class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaInicio:LocalDateTime,dateBuscaFim:LocalDateTime,editavel:Boolean,pageOrigem:PontoBasePage) extends Panel("pontoListPanel") with Serializable{
@@ -58,7 +59,6 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
   var btEntrada: Button = _
 
 	btEntrada = new Button("btEntrada") {
-
 	  override def onSubmit() {
 			var novoPonto = new Ponto()
 			novoPonto.dataInicio = new LocalDateTime()
@@ -72,7 +72,6 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	};
 
 	btSaida = new Button("btSaida") {
-
 	  override def onSubmit() {
 			pontoParaFechar.dataFim = new LocalDateTime()
 			pontoParaFechar.ipFim = infoWeb.getProperties().getRemoteAddress()
@@ -167,7 +166,8 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 		
 //		var prettyOpt = new PrettyPopinOptions()
 //		var pretty = new PrettyPopinBehavior(prettyOpt.width(300).height(180).followScroll(false))
-//		add(pretty)
+		var pretty = null
+		add(pretty)
 		
 		def onClick(){
 //		  new EditPontoPanel(editarPontoWinModal.getContentId(),this.ponto,editarPontoWinModal,pageOrigem);
@@ -185,7 +185,7 @@ class PontoListPanel(usuarioSelecionado:Usuario,usuarioLogado:Usuario,dateBuscaI
 	private class LinkDelete(id:String,ponto:Ponto,clickavel:java.lang.Boolean) extends AjaxLink[String](id){
 		
 		@SpringBean
-		var pontoMediator:TPontoMediator =_
+		var pontoMediator:TPontoMediator = null
 	
 		setVisible(clickavel.asInstanceOf[Boolean])
 		add(new Label("label", new Model[String]() {

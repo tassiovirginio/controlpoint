@@ -41,16 +41,19 @@
         </dependency>
 
         <!--  WICKETSTUFF DEPENDENCIES -->
-
         <dependency>
             <groupId>org.wicketstuff</groupId>
             <artifactId>wicketstuff-restannotations</artifactId>
             <version>${wicket.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.wicketstuff</groupId>
             <artifactId>wicketstuff-restannotations-json</artifactId>
+            <version>${wicket.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wicketstuff.scala</groupId>
+            <artifactId>wicketstuff-scala</artifactId>
             <version>${wicket.version}</version>
         </dependency>
 
@@ -402,18 +405,18 @@
                 </configuration>
             </plugin>
 
-            <!--<plugin>-->
-            <!--<inherited>true</inherited>-->
-            <!--<groupId>org.apache.maven.plugins</groupId>-->
-            <!--<artifactId>maven-compiler-plugin</artifactId>-->
-            <!--<configuration>-->
-            <!--<source>${source.version}</source>-->
-            <!--<target>${source.version}</target>-->
-            <!--<optimize>true</optimize>-->
-            <!--<debug>true</debug>-->
-            <!--<encoding>utf-8</encoding>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${source.version}</source>
+                    <target>${source.version}</target>
+                    <optimize>true</optimize>
+                    <debug>true</debug>
+                    <encoding>utf-8</encoding>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>

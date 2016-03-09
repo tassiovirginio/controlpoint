@@ -1,20 +1,17 @@
 package br.controlpoint.pages.panels
 
 import java.util.Locale
-import org.apache.wicket.ajax.markup.html.form.AjaxButton
-import org.apache.wicket.markup.html.form.{TextField, CheckBox, Form}
-import org.apache.wicket.markup.html.panel.Panel
+
+import br.controlpoint.entities.{Ponto, Usuario}
+import br.controlpoint.mediators.TPontoMediator
+import br.controlpoint.pages.EditPontoPage
+import br.controlpoint.pages.base.PontoBasePage
 import org.apache.wicket.markup.html.WebMarkupContainer
+import org.apache.wicket.markup.html.form.{CheckBox, Form, TextField}
+import org.apache.wicket.markup.html.panel.Panel
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.format.DateTimeFormat
-import br.controlpoint.entities.Ponto
-import br.controlpoint.entities.Usuario
-import br.controlpoint.mediators.TPontoMediator
-import br.controlpoint.pages.base.PontoBasePage
-import br.controlpoint.pages.EditPontoPage
-
-import scala.collection.JavaConverters._
 
 class EditPontoPanel(id:String, ponto:Ponto, paginaOrigem:PontoBasePage) extends Panel(id) {
 

@@ -1,13 +1,10 @@
 package br.controlpoint.daos
 
 import java.io.Serializable
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
-import org.hibernate.criterion.Restrictions
-import org.springframework.stereotype.Component
-
+import br.controlpoint.daos.util.{DaoAbstract, Util}
 import br.controlpoint.entities.Usuario
+import org.springframework.stereotype.Component
 
 @Component
 class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable {
@@ -18,15 +15,15 @@ class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable 
 
     var usuarioReturn: Usuario = null
     
-    var usuarioBusca = createCriteria.add("login".eq_(usuario.login))
+    var usuarioBusca = criteria.add("login".eq_(usuario.login))
       .uniqueResult.asInstanceOf[Usuario]
 
     if (usuarioBusca != null && usuarioBusca.senha.length() < 15) {
-      usuarioBusca.senha = (DaoUsuarioScala.codificarSenha(usuarioBusca.login.trim() + usuarioBusca.senha.trim()))
+      usuarioBusca.senha = (Util.codificarSenha(usuarioBusca.login.trim() + usuarioBusca.senha.trim()))
       this.save(usuarioBusca)
     }
 
-    if (usuarioBusca != null && usuarioBusca.senha.trim().equals(DaoUsuarioScala.codificarSenha(usuario.login.trim() + usuario.senha.trim()))) {
+    if (usuarioBusca != null && usuarioBusca.senha.trim().equals(Util.codificarSenha(usuario.login.trim() + usuario.senha.trim()))) {
       usuarioReturn = usuarioBusca
     }
 
@@ -34,37 +31,7 @@ class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable 
   }
 
   def buscarUsuarioPorLogin(login: String): Usuario = {
-    createCriteria.add("login" eq_ login)
-      .uniqueResult.asInstanceOf[Usuario]
+    criteria.add("login" eq_ login).uniqueResult.asInstanceOf[Usuario]
   }
 
 }
-
-object DaoUsuarioScala {
-
-  def codificarSenha(senha: String): String = {
-
-    var md: MessageDigest = null
-
-    var bytes: Array[Byte] = null
-
-    try {
-      md = MessageDigest.getInstance("MD5")
-      md.update(senha.getBytes())
-      bytes = md.digest()
-    } catch {
-      case e: NoSuchAlgorithmException => e.printStackTrace()
-    }
-
-    var s = new StringBuilder()
-
-    for (i <- 0 to (bytes.length - 1)) {
-      var parteAlta = ((bytes(i) >> 4) & 0xf) << 4
-      var parteBaixa = bytes(i) & 0xf
-      if (parteAlta == 0) s.append('0')
-      s.append(Integer.toHexString(parteAlta | parteBaixa))
-    }
-    return s.toString()
-  }
-}
-

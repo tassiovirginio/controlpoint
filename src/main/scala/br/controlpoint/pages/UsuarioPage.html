@@ -1,4 +1,4 @@
-<wicket:extend>
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
 <BR><BR><BR><BR><BR><BR><BR>
 <TABLE border="1" align="center" bgcolor="#FFFFFF" wicket:id="container" >
 <TBODY><TR>
@@ -10,13 +10,10 @@
 	<TD>
 	<span wicket:id="feedback"></span>
 	<FORM wicket:id="form">
+		<br>
 			Usuario:
-			<SELECT wicket:id="listaUsuario" name="id">
-				<OPTION value="1">Tassio Virginio</OPTION>
-				<OPTION value="2">Awdryn</OPTION>
-				<OPTION value="11">Teste</OPTION>
-			</SELECT>
-			<BR>
+			<SELECT wicket:id="listaUsuario" name="id" />
+			<BR><BR>
 			<center>
 			<INPUT type="submit" value="Selecionar">
 			</center>

@@ -1,10 +1,6 @@
-package br.controlpoint.daos
+package br.controlpoint.daos.util
 
-import org.hibernate.criterion.Restrictions
-import org.hibernate.criterion.Order.asc
-import org.hibernate.criterion.Order.desc
-import org.hibernate.criterion.Order
-import org.hibernate.criterion.Criterion
+import org.hibernate.criterion.{Criterion, Order, Restrictions}
 
 class SRestrictions(s:String) {
   

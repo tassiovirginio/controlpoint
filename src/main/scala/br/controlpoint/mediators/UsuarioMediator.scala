@@ -1,10 +1,10 @@
 package br.controlpoint.mediators
 
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.{Component}
-import org.springframework.transaction.annotation.Transactional
-import br.controlpoint.entities.Usuario
 import br.controlpoint.daos.DaoUsuario
+import br.controlpoint.entities.Usuario
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 
 @Component
 @Transactional
