@@ -1,16 +1,16 @@
 <HTML xmlns:wicket="http://wicket.apache.org">
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon" href="imagens/favicon.ico" />
-<title>Control Point</title>
-<LINK href="css/base.css" rel="stylesheet" type="text/css">
+    <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="shortcut icon" href="imagens/favicon.ico"/>
+    <title>Control Point</title>
+    <LINK href="css/base.css" rel="stylesheet" type="text/css">
 </HEAD>
 <body onload="setFocus()">
 
-	<div id="menu_div">&nbsp;
-		<font color="FFFFFF">&nbsp; Control Point &nbsp</font>
-		<font size="1" color="0066CC">1.0 &nbsp;&nbsp;</font>
-	</div>
+<div id="menu_div">&nbsp;
+    <font color="FFFFFF">&nbsp; Control Point &nbsp</font>
+    <font size="1" color="0066CC">1.0 &nbsp;&nbsp;</font>
+</div>
 
 <img src="imagens/wallpapers/wallpaper01.jpg" class="bg">
 <BR>
@@ -26,38 +26,37 @@
 <BR>
 <BR>
 <form wicket:id="form">
-<TABLE>
-	<TR>
-		<TH colspan="2">Login</TH>
-	</TR>
-	<TR>
-		<TD colspan="2"><span wicket:id="feedback"></span></TD>
-	</TR>
-	<TR>
-		<TD align="right">Login:</TD>
-		<TD><input type="text" wicket:id="login" id="login" /></TD>
-	</TR>
-	<TR>
-		<TD align="right">Senha:</TD>
-		<TD><input type="password" wicket:id="senha" /></TD>
-	</TR>
-	<TR>
-		<TD colspan="2" align="center" ><input type="submit" /></TD>
-	</TR>
-</TABLE>
+    <TABLE>
+        <TR>
+            <TH colspan="2">Login</TH>
+        </TR>
+        <TR>
+            <TD colspan="2"><span wicket:id="feedback"></span></TD>
+        </TR>
+        <TR>
+            <TD align="right">Login:</TD>
+            <TD><input type="text" wicket:id="login" id="login"/></TD>
+        </TR>
+        <TR>
+            <TD align="right">Senha:</TD>
+            <TD><input type="password" wicket:id="senha"/></TD>
+        </TR>
+        <TR>
+            <TD colspan="2" align="center"><input type="submit"/></TD>
+        </TR>
+    </TABLE>
 </form>
 <br><br>
 
 <div id="status_div">
-		Power by: Scala, Wicket, Hibernate e Spring.
+    Power by: Scala, Wicket, Hibernate e Spring.
 </div>
 
 <script type="text/javascript">
-		function setFocus()
-		{
-		     document.getElementById("login").focus();
-		}
-	</script>
+    function setFocus() {
+        document.getElementById("login").focus();
+    }
+</script>
 
 </BODY>
 </HTML>

@@ -1,27 +1,30 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-<BR><BR><BR><BR><BR><BR><BR>
-<TABLE border="1" align="center" bgcolor="#FFFFFF" wicket:id="container" >
-<TBODY><TR>
-	<TH>
-		Lista de Usuários - <A class="escuro" wicket:id="linkNovoUsuario" href="http://127.0.0.1:8080/ponto/pages/usuario.jsp?id=0">Novo Usuario</A>
-	</TH>
-</TR>
-<TR>
-	<TD>
-	<span wicket:id="feedback"></span>
-	<FORM wicket:id="form">
-		<br>
-			Usuario:
-			<SELECT wicket:id="listaUsuario" name="id" />
-			<BR><BR>
-			<center>
-			<INPUT type="submit" value="Selecionar">
-			</center>
-	</FORM>
-	
-	</TD>
-</TR>
-</TBODY></TABLE>
+    <BR><BR><BR><BR><BR><BR><BR>
+    <TABLE border="1" align="center" bgcolor="#FFFFFF" wicket:id="container">
+        <TBODY>
+        <TR>
+            <TH>
+                Lista de Usuários - <A class="escuro" wicket:id="linkNovoUsuario"
+                                       href="http://127.0.0.1:8080/ponto/pages/usuario.jsp?id=0">Novo Usuario</A>
+            </TH>
+        </TR>
+        <TR>
+            <TD>
+                <span wicket:id="feedback"></span>
+                <FORM wicket:id="form">
+                    <br>
+                    Usuario:
+                    <SELECT wicket:id="listaUsuario" name="id"/>
+                    <BR><BR>
+                    <center>
+                        <INPUT type="submit" value="Selecionar">
+                    </center>
+                </FORM>
 
-<div wicket:id="usuarioPanel"></div>
+            </TD>
+        </TR>
+        </TBODY>
+    </TABLE>
+
+    <div wicket:id="usuarioPanel"></div>
 </wicket:extend>

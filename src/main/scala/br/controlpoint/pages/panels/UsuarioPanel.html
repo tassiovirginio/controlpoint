@@ -1,63 +1,67 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
-<br>
-<TABLE border="1" align="center" bgcolor="#FFFFFF">
-<TBODY><TR>
-	<TH colspan="2">
-		Cadastro de Usuário
-	</TH>
-</TR>
-<FORM wicket:id="form">
-<TR>
-<td colspan="2">
-	<span wicket:id="feedback"></span>
-</td>
-</TR>
-<TR>
-	<TD style="text-align: left;">
-			<INPUT type="hidden" name="id" value="1"/>
-			Nome:<BR><INPUT wicket:id="textFieldNome" type="text" name="nome" value="Tassio Virginio"/><BR>
-			Senha:<BR><INPUT wicket:id="textFieldSenha" type="password" name="senha" value="123"/><BR>
-			<span wicket:id="lbLogin">Login:</span><BR><INPUT wicket:id="textFieldLogin" type="text" name="login" value="tassio"/><BR>
-			Email:<BR><INPUT wicket:id="textFieldEmail" type="text" name="email" value="tassiovirginio@gmail.com"/><BR>
-	</TD>
-	<TD style="text-align: left;">
-			<span wicket:id="lbHrEntrada">Hora Entrada:</span>
-			<br><input type="text" wicket:id="textFieldHoraEntrada" /><br>
-			<span wicket:id="lbHrSaida">Hora Saida:</span>
-			<br><input type="text" wicket:id="textFieldHoraSaida" /><br>
-			<span wicket:id="lbHrJornada">Hora Jornada:</span>
-			<br><input type="text" wicket:id="textFieldJornada" /><br>
-	</TD>
-</TR>			
-<TR>
-	<TD colspan="2" style="text-align: left;">
-			<span wicket:id="lbAdmin">Login:</span><INPUT wicket:id="checkBoxAdmin" type="checkbox" />
-			<span wicket:id="lbExterno">Login:</span><INPUT wicket:id="checkBoxExterno" type="checkbox" />
-			<span wicket:id="lbAcesso">Login:</span><INPUT wicket:id="checkBoxAcesso" type="checkbox" />
-	</TD>
-</TR>	
-<TR>
-	<TD colspan="2" style="text-align: left;">
-	Wallpaper:
-			<SELECT wicket:id="listaWallpaper" name="id">
-				<OPTION value="1">Tassio Virginio</OPTION>
-				<OPTION value="2">Teste2</OPTION>
-				<OPTION value="11">Teste</OPTION>
-			</SELECT>		
-	</TD>
-</TR>	
-<TR>
-	<TD colspan="2" style="text-align: left;">
-			<span wicket:id="lbIps">IP's: </span><textarea rows="3" cols="60" wicket:id="textFieldIPs"></textarea>
-	</TD>
-</TR>			
-<TR>
-	<TD style="text-align: left;">
-			<INPUT type="submit" value="Salvar"/>
-			
-	</TD>
-</TR>
-</FORM>
-</TBODY>
-</TABLE>
+    <br>
+    <TABLE border="1" align="center" bgcolor="#FFFFFF">
+        <TBODY>
+        <TR>
+            <TH colspan="2">
+                Cadastro de Usuário
+            </TH>
+        </TR>
+        <FORM wicket:id="form">
+            <TR>
+                <td colspan="2">
+                    <span wicket:id="feedback"></span>
+                </td>
+            </TR>
+            <TR>
+                <TD style="text-align: left;">
+                    <INPUT type="hidden" name="id" value="1"/>
+                    Nome:<BR><INPUT wicket:id="textFieldNome" type="text" name="nome" value="Tassio Virginio"/><BR>
+                    Senha:<BR><INPUT wicket:id="textFieldSenha" type="password" name="senha" value="123"/><BR>
+                    <span wicket:id="lbLogin">Login:</span><BR><INPUT wicket:id="textFieldLogin" type="text"
+                                                                      name="login" value="tassio"/><BR>
+                    Email:<BR><INPUT wicket:id="textFieldEmail" type="text" name="email"
+                                     value="tassiovirginio@gmail.com"/><BR>
+                </TD>
+                <TD style="text-align: left;">
+                    <span wicket:id="lbHrEntrada">Hora Entrada:</span>
+                    <br><input type="text" wicket:id="textFieldHoraEntrada"/><br>
+                    <span wicket:id="lbHrSaida">Hora Saida:</span>
+                    <br><input type="text" wicket:id="textFieldHoraSaida"/><br>
+                    <span wicket:id="lbHrJornada">Hora Jornada:</span>
+                    <br><input type="text" wicket:id="textFieldJornada"/><br>
+                </TD>
+            </TR>
+            <TR>
+                <TD colspan="2" style="text-align: left;">
+                    <span wicket:id="lbAdmin">Login:</span><INPUT wicket:id="checkBoxAdmin" type="checkbox"/>
+                    <span wicket:id="lbExterno">Login:</span><INPUT wicket:id="checkBoxExterno" type="checkbox"/>
+                    <span wicket:id="lbAcesso">Login:</span><INPUT wicket:id="checkBoxAcesso" type="checkbox"/>
+                </TD>
+            </TR>
+            <TR>
+                <TD colspan="2" style="text-align: left;">
+                    Wallpaper:
+                    <SELECT wicket:id="listaWallpaper" name="id">
+                        <OPTION value="1">Tassio Virginio</OPTION>
+                        <OPTION value="2">Teste2</OPTION>
+                        <OPTION value="11">Teste</OPTION>
+                    </SELECT>
+                </TD>
+            </TR>
+            <TR>
+                <TD colspan="2" style="text-align: left;">
+                    <span wicket:id="lbIps">IP's: </span><textarea rows="3" cols="60"
+                                                                   wicket:id="textFieldIPs"></textarea>
+                </TD>
+            </TR>
+            <TR>
+                <TD style="text-align: left;">
+                    <INPUT type="submit" value="Salvar"/>
+
+                </TD>
+            </TR>
+        </FORM>
+        </TBODY>
+    </TABLE>
 </wicket:panel>

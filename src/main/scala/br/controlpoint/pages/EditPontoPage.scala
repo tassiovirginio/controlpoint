@@ -5,8 +5,8 @@ import br.controlpoint.pages.base.PontoBasePage
 import br.controlpoint.pages.panels.EditPontoPanel
 import org.apache.wicket.markup.html.WebPage
 
-class EditPontoPage(ponto:Ponto, paginaOrigem:PontoBasePage) extends WebPage {
+class EditPontoPage(ponto: Ponto, paginaOrigem: PontoBasePage) extends WebPage {
 
-  add(new EditPontoPanel("panel",this.ponto,paginaOrigem))
+  add(new EditPontoPanel("panel", this.ponto, paginaOrigem))
 
 }

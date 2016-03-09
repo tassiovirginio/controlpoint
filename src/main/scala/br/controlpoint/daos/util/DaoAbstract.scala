@@ -10,17 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired
 
 abstract class DaoAbstract[D, K <: Serializable] {
 
-  implicit def rest(x: String): SRestrictions = new SRestrictions(x)
-
   val LOG = LogFactory.getLog(getClass())
-
   @Autowired var sessionFactory: SessionFactory = _
 
-  protected def domain: Class[D]
-
-  protected def currentSession = sessionFactory.getCurrentSession()
-
-  protected def criteria = currentSession.createCriteria(domain)
+  implicit def rest(x: String): SRestrictions = new SRestrictions(x)
 
   def delete(d: D) = currentSession.delete(d)
 
@@ -30,6 +23,8 @@ abstract class DaoAbstract[D, K <: Serializable] {
     .list().asInstanceOf[JList[D]]
 
   def getAll(): JList[D] = criteria.list().asInstanceOf[JList[D]]
+
+  protected def criteria = currentSession.createCriteria(domain)
 
   def getAll(offset: Int, max: Int, order: String, asc: Boolean): JList[D] = {
     val c = criteria
@@ -45,6 +40,8 @@ abstract class DaoAbstract[D, K <: Serializable] {
 
   def getById(id: K): D = currentSession.get(domain, id).asInstanceOf[D]
 
+  protected def currentSession = sessionFactory.getCurrentSession()
+
   def totalCount: Long = {
     return criteria.setProjection(Projections.rowCount()).asInstanceOf[Long]
   }
@@ -54,5 +51,7 @@ abstract class DaoAbstract[D, K <: Serializable] {
   }
 
   def save(d: D): Unit = currentSession.saveOrUpdate(d)
+
+  protected def domain: Class[D]
 
 }

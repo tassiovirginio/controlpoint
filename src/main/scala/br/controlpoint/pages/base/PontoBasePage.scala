@@ -6,11 +6,10 @@ import br.controlpoint.entities.{Ponto, Usuario}
 import br.controlpoint.mediators.{PontoMediator, UsuarioMediator}
 import br.controlpoint.pages.{LoginPage, PontoPage, RelDiaPage, RelPeriodoPage, SobrePage, UsuarioPage}
 import org.apache.wicket.AttributeModifier
-import org.apache.wicket.markup.html.{WebComponent, WebPage}
 import org.apache.wicket.markup.html.basic.Label
 import org.apache.wicket.markup.html.form.HiddenField
-import org.apache.wicket.markup.html.image.Image
 import org.apache.wicket.markup.html.list.{ListItem, ListView}
+import org.apache.wicket.markup.html.{WebComponent, WebPage}
 import org.apache.wicket.model.PropertyModel
 import org.apache.wicket.spring.injection.annot.SpringBean
 import org.joda.time.LocalDateTime
@@ -18,19 +17,14 @@ import org.wicketstuff.scala.DSLWicket
 
 import scala.collection.JavaConversions.asScalaBuffer
 
-class PontoBasePage(usuario: Usuario) extends WebPage with DSLWicket{
+class PontoBasePage(usuario: Usuario) extends WebPage with DSLWicket {
 
-  @SpringBean var usuarioMediator: UsuarioMediator = _
-
-  @SpringBean var pontoMediator: PontoMediator = _
-
-  var usuarioLogado: Usuario = null
-
+  val img = new WebComponent("wallpaper")
+  val formContador = form("form_contador")
   private val LOCALE_BR = new Locale("pt_BR")
-
-  var contadorMilesegundos: String = null
-
-  override def getLocale() = LOCALE_BR
+  @SpringBean var usuarioMediator: UsuarioMediator = _
+  @SpringBean var pontoMediator: PontoMediator = _
+  var usuarioLogado: Usuario = null
 
   if (getSession().isSessionInvalidated()) {
     usuarioLogado = null
@@ -39,10 +33,9 @@ class PontoBasePage(usuario: Usuario) extends WebPage with DSLWicket{
   }
 
   usuarioLogado = usuarioMediator.getUsuarioForId(usuario.id)
-//    this.add(CSSPackageResource.getHeaderContribution("css/base.css"))
-//    val img = Image("wallpaper",null,null)
-
-  val img = new WebComponent("wallpaper")
+  //    this.add(CSSPackageResource.getHeaderContribution("css/base.css"))
+  //    val img = Image("wallpaper",null,null)
+  var contadorMilesegundos: String = null
   img.add(new AttributeModifier("src", "../imagens/wallpapers/" + usuarioLogado.wallpaper + ".jpg"))
   add(img)
 
@@ -55,9 +48,11 @@ class PontoBasePage(usuario: Usuario) extends WebPage with DSLWicket{
   getSession().setLocale(LOCALE_BR)
   this.usuarioLogado = usuarioLogado
 
-  label("labelusuario","(  " + usuarioLogado.nome + "  )")
+  label("labelusuario", "(  " + usuarioLogado.nome + "  )")
 
-  link("lkmnSair", () => {usuarioLogado = null ; getSession().invalidate()})
+  link("lkmnSair", () => {
+    usuarioLogado = null; getSession().invalidate()
+  })
 
   link("lkmnCadUsuario", () => setResponsePage(new UsuarioPage(usuarioLogado, false)))
     .setVisible(usuarioLogado.adm.asInstanceOf[Boolean])
@@ -71,7 +66,6 @@ class PontoBasePage(usuario: Usuario) extends WebPage with DSLWicket{
   link("lkmnPonto", () => setResponsePage(new PontoPage(usuarioLogado, true)))
 
   link("lkmnSobre", () => setResponsePage(new SobrePage(usuarioLogado)))
-
   var dataBusca = new LocalDateTime();
 
   var listaPonto = pontoMediator.listaPontoUsuario(usuarioLogado, dataBusca);
@@ -81,12 +75,11 @@ class PontoBasePage(usuario: Usuario) extends WebPage with DSLWicket{
       contadorMilesegundos = ponto.dataInicio.getMillisOfSecond() + ""
     }
   }
-
-  val formContador = form("form_contador")
+  var listaPonto2: List[Ponto] = pontoMediator.listaPontoUsuario(new LocalDateTime())
   formContador.add(new HiddenField("milissegundos", new PropertyModel[String](this, "contadorMilesegundos")))
   add(formContador)
 
-  var listaPonto2: List[Ponto] = pontoMediator.listaPontoUsuario(new LocalDateTime())
+  override def getLocale() = LOCALE_BR
 
   add(new ListView[Ponto]("listaPonto", listaPonto2) {
     def populateItem(item: ListItem[Ponto]) {

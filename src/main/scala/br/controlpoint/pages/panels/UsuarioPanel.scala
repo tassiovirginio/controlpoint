@@ -20,10 +20,8 @@ class UsuarioPanel(pagePai: Page, usuario: Usuario, diretoS: java.lang.Boolean) 
 
   @SpringBean
   var usuarioMediator: UsuarioMediator = _
-
-  def this(pagePai: Page) = this(pagePai, new Usuario(), false)
-
   var usuarioSelecionado = usuario
+  var dateHoraEntrada = usuario.horaEntrada.toString("hh:mm")
 
   if (usuario.horaEntrada == null) {
     usuario.horaEntrada = (new LocalDateTime())
@@ -34,11 +32,8 @@ class UsuarioPanel(pagePai: Page, usuario: Usuario, diretoS: java.lang.Boolean) 
   if (usuario.jornada == null) {
     usuario.jornada = (new LocalDateTime())
   }
-
-  var dateHoraEntrada = usuario.horaEntrada.toString("hh:mm")
   var dateHoraSaida = usuario.horaSaida.toString("hh:mm")
   var dateJornada = usuario.jornada.toString("hh:mm")
-
   var form = new Form[Usuario]("form") {
     override protected def onSubmit = {
       val formatter = DateTimeFormat.forPattern("HH:mm")
@@ -50,29 +45,24 @@ class UsuarioPanel(pagePai: Page, usuario: Usuario, diretoS: java.lang.Boolean) 
       setResponsePage(new UsuarioPage(usuario, false || direto.asInstanceOf[Boolean]))
     }
   };
-  add(form);
-
   var textFieldNome = new RequiredTextField("textFieldNome", new PropertyModel[String](usuarioSelecionado, "nome"))
+  add(form);
   var textFieldSenha = new PasswordTextField("textFieldSenha", new PropertyModel[String](usuarioSelecionado, "senha"))
-  textFieldSenha.setResetPassword(false)
   var textFieldLogin = new RequiredTextField("textFieldLogin", new PropertyModel[String](usuarioSelecionado, "login"))
+  textFieldSenha.setResetPassword(false)
   var textFieldEmail = new RequiredTextField("textFieldEmail", new PropertyModel[String](this.usuarioSelecionado, "email"))
-
   var textFieldHoraEntrada = new TextField[String]("textFieldHoraEntrada", new PropertyModel[String](this, "dateHoraEntrada"))
   var textFieldHoraSaida = new TextField[String]("textFieldHoraSaida", new PropertyModel[String](this, "dateHoraSaida"))
   var textFieldJornada = new TextField[String]("textFieldJornada", new PropertyModel[String](this, "dateJornada"))
-
   var textFieldIPs = new TextArea("textFieldIPs", new PropertyModel(this.usuarioSelecionado, "ips"))
   var checkBoxAdmin = new CheckBox("checkBoxAdmin", new PropertyModel(this.usuarioSelecionado, "adm"))
   var checkBoxExterno = new CheckBox("checkBoxExterno", new PropertyModel(this.usuarioSelecionado, "externo"))
   var checkBoxAcesso = new CheckBox("checkBoxAcesso", new PropertyModel(this.usuarioSelecionado, "acesso"))
-
   var listaWallpaper = new ArrayList[String]()
+  var listChoice = new ListChoice[String]("listaWallpaper", new PropertyModel[String](this.usuarioSelecionado, "wallpaper"), listaWallpaper, 1)
   listaWallpaper.add("wallpaper01")
   listaWallpaper.add("wallpaper02")
-
-
-  var listChoice = new ListChoice[String]("listaWallpaper", new PropertyModel[String](this.usuarioSelecionado, "wallpaper"), listaWallpaper, 1)
+  var feedbackPanel = new FeedbackPanel("feedback")
   listChoice.setRequired(true)
 
   textFieldLogin.setVisible(!direto)
@@ -111,7 +101,7 @@ class UsuarioPanel(pagePai: Page, usuario: Usuario, diretoS: java.lang.Boolean) 
   form.add(checkBoxExterno)
   form.add(checkBoxAcesso)
 
-  var feedbackPanel = new FeedbackPanel("feedback")
+  def this(pagePai: Page) = this(pagePai, new Usuario(), false)
   form.add(feedbackPanel);
 
   def getUsuarioSelecionado(): Usuario = usuarioSelecionado
