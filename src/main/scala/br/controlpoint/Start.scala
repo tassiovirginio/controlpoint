@@ -11,7 +11,7 @@ object Start {
     val timeout: Int = Duration.ONE_HOUR.getMilliseconds.toInt
     var webPort: String = System.getenv("PORT")
     if (webPort == null || webPort.isEmpty) {
-      webPort = "9999"
+      webPort = "8080"
     }
     val server: Server = new Server
     val connector: SocketConnector = new SocketConnector
