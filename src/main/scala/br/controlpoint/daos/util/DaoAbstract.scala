@@ -11,20 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired
 abstract class DaoAbstract[D, K <: Serializable] {
 
   val LOG = LogFactory.getLog(getClass())
+
   @Autowired var sessionFactory: SessionFactory = _
+
+  protected def currentSession = sessionFactory.getCurrentSession()
+  protected def criteria = currentSession.createCriteria(domain)
+  protected def domain: Class[D] = classOf[D]
 
   implicit def rest(x: String): SRestrictions = new SRestrictions(x)
 
-  def delete(d: D) = currentSession.delete(d)
-
-  def getAll(offset: Int, maxResult: Int): JList[D] = criteria
-    .setMaxResults(maxResult)
-    .setFirstResult(offset)
-    .list().asInstanceOf[JList[D]]
-
-  def getAll(): JList[D] = criteria.list().asInstanceOf[JList[D]]
-
-  protected def criteria = currentSession.createCriteria(domain)
+  def getAll(offset: Int, maxResult: Int) = criteria.setMaxResults(maxResult).setFirstResult(offset).list.asInstanceOf[JList[D]]
+  def getAll = criteria.list.asInstanceOf[JList[D]]
 
   def getAll(offset: Int, max: Int, order: String, asc: Boolean): JList[D] = {
     val c = criteria
@@ -38,20 +35,10 @@ abstract class DaoAbstract[D, K <: Serializable] {
     c.list().asInstanceOf[JList[D]]
   }
 
-  def getById(id: K): D = currentSession.get(domain, id).asInstanceOf[D]
-
-  protected def currentSession = sessionFactory.getCurrentSession()
-
-  def totalCount: Long = {
-    return criteria.setProjection(Projections.rowCount()).asInstanceOf[Long]
-  }
-
-  def size: Long = {
-    return criteria.setProjection(Projections.rowCount()).asInstanceOf[Long]
-  }
-
-  def save(d: D): Unit = currentSession.saveOrUpdate(d)
-
-  protected def domain: Class[D]
+  def delete(d: D) = currentSession.delete(d)
+  def getById(id: K):D = currentSession.get(domain,id).asInstanceOf[D]
+  def totalCount = criteria.setProjection(Projections.rowCount).asInstanceOf[Long]
+  def size = criteria.setProjection(Projections.rowCount).asInstanceOf[Long]
+  def save(d: D) = currentSession.saveOrUpdate(d)
 
 }

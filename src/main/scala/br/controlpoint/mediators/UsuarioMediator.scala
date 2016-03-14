@@ -9,25 +9,12 @@ import org.springframework.transaction.annotation.Transactional
 @Component
 @Transactional
 class UsuarioMediator {
-
   @Autowired var daoUsuario: DaoUsuario = _
 
-  def getDaoUsuario = daoUsuario
-
-  def setDaoUsuario(daoUsuario: DaoUsuario) = {
-    this.daoUsuario = daoUsuario
-  }
-
   def salvarUsuario(usuario: Usuario) = daoUsuario.save(usuario)
-
   def sizeUsuario = daoUsuario.size
-
   def fazerLogin(usuario: Usuario) = daoUsuario.buscarUsuarioPorLogin(usuario)
-
-  def buscarUsuarioPorLogin(login: String): Usuario = daoUsuario.buscarUsuarioPorLogin(login)
-
+  def buscarUsuarioPorLogin(login: String) = daoUsuario.buscarUsuarioPorLogin(login)
   def getUsuarioForId(id: Long) = daoUsuario.getById(id)
-
-  def listaUsuarios: java.util.List[Usuario] = daoUsuario.getAll()
-
+  def listaUsuarios = daoUsuario.getAll
 }

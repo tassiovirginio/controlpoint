@@ -13,8 +13,6 @@ import scala.collection.JavaConversions._
 @Component
 class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with Serializable {
 
-  override def domain = classOf[Ponto]
-
   def buscarPontos(p: Ponto, dataInicio: LocalDateTime, dataFim: LocalDateTime): jList[Ponto] = {
     var dHoraInicio = dataInicio.withTime(0, 0, 0, 0)
     var dHoraFim = dataInicio.withTime(23, 59, 59, 0)
@@ -46,6 +44,6 @@ class DaoPonto extends DaoAbstract[Ponto, java.lang.Long] with Serializable {
 
     lista.foreach(p => p.usuario.nome)
 
-    return lista
+    lista
   }
 }

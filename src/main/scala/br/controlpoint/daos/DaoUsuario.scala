@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component
 @Component
 class DaoUsuario extends DaoAbstract[Usuario, java.lang.Long] with Serializable {
 
-  def domain: Class[Usuario] = classOf[Usuario]
-
   def buscarUsuarioPorLogin(usuario: Usuario): Usuario = {
 
     var usuarioReturn: Usuario = null
